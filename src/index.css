@@ -1,0 +1,67 @@
+/* Font Family */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+nav a.active {
+  color: #4caf50;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+nav a.active::before {
+  content: '';
+  width: 100%;
+  background-color: #4caf50;
+  height: 2px;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+nav a {
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  color: #4caf50;
+  cursor: pointer;
+}
+
+nav a.active:hover {
+  text-decoration: none;
+}
+
+.rating svg {
+  display: inline;
+}
+
+.dark nav a.active {
+  color: #ff9800;
+}
+
+.dark nav a.active::before {
+  background-color: #ff9800;
+}
+
+.dark nav a:hover {
+  color: #ff9800;
+}
+
+@layer components {
+  .navBarLink {
+    @apply before:w-0 hover:before:w-full before:bg-color-accent before:dark:bg-color-accent-d before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-color-accent hover:dark:text-color-accent-d transition-all duration-300 before:left-0 cursor-pointer capitalize;
+  }
+
+  .inputField {
+    @apply py-3 dark:bg-color-primary-d font-medium px-4 border focus:outline-color-accent focus:dark:outline-color-accent-d border-gray-300 rounded-lg w-full;
+  }
+
+  .inputButton {
+    @apply w-full py-3 px-4 bg-color-accent dark:bg-color-accent-d text-white border-none font-bold outline-none rounded-lg mt-3;
+  }
+}
