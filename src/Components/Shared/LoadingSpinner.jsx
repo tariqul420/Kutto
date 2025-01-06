@@ -1,11 +1,14 @@
-import Lottie from 'lottie-react';
-import loading from '../../assets/Lottie/loading.json'
+import { ScaleLoader } from 'react-spinners';
 
 const LoadingSpinner = () => {
     return (
-        <div className='flex items-center justify-center gap-4'>
-            <Lottie animationData={loading} />
-            <p className='text-5xl font-bold text-[#5D68F8]'>Loading...</p>
+        <div className='flex items-center justify-center my-12'>
+            <ScaleLoader
+                height={60}
+                margin={2}
+                width={5}
+                color='#FF9800'
+            />
         </div>
     );
 };
