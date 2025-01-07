@@ -5,9 +5,10 @@ import toast from "react-hot-toast";
 import { MdCloudUpload, MdError } from "react-icons/md";
 import ImageUpload from "../../Api/ImageUpload";
 import { useState } from "react";
+import { ImSpinner9 } from "react-icons/im";
 
 const UpdateProfile = () => {
-    const { updateUserProfile, setUser } = useAuth();
+    const { updateUserProfile, setUser, loading, setLoading } = useAuth();
     const [photoPreview, setPhotoPreview] = useState("");
     const navigate = useNavigate()
 
@@ -32,6 +33,8 @@ const UpdateProfile = () => {
         } catch (error) {
             toast.error(error.code)
             reset()
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -98,10 +101,13 @@ const UpdateProfile = () => {
                     {/* Submit Button */}
                     <div className="w-full flex items-center justify-center">
                         <button
+                            disabled={loading}
                             type="submit"
-                            className="inputButton"
+                            className="inputButton disabled:cursor-not-allowed"
                         >
-                            Update Profile
+                            {
+                                loading ? <ImSpinner9 size={24} className="animate-spin m-auto" /> : 'Update Profile'
+                            }
                         </button>
                     </div>
                 </form>

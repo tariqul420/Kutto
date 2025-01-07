@@ -6,6 +6,7 @@ import Home from "../Pages/Home/Home";
 import ForgotPassword from "../Pages/Authentication/ForgotPassword";
 import Error404 from "../Pages/Error/Error404";
 import UpdateProfile from "../Pages/Authentication/UpdateProfile";
+import PrivateRouter from "../Private/PrivateRouter";
 
 const router = createBrowserRouter([
     {
@@ -31,7 +32,10 @@ const router = createBrowserRouter([
             },
             {
                 path: '/update-profile',
-                element: <UpdateProfile />
+                element:
+                    <PrivateRouter>
+                        <UpdateProfile />
+                    </PrivateRouter>
             }
         ]
     }

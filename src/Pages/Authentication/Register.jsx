@@ -9,13 +9,14 @@ import spaceRegister from '../../assets/Lottie/space_register.json'
 import toast from "react-hot-toast";
 import ImageUpload from "../../Api/ImageUpload";
 import SocialBtn from "../../Components/Auth/SocialBtn";
+import { ImSpinner9 } from "react-icons/im";
 
 const Register = () => {
     const [isEyeOpen, setIsEyeOpen] = useState(false);
     const [photoPreview, setPhotoPreview] = useState("");
     const [isEyeOpenRe, setIsEyeOpenRe] = useState(false);
     const { register, handleSubmit, reset, control, watch, formState: { errors } } = useForm()
-    const { createUser, updateUserProfile } = useAuth()
+    const { createUser, updateUserProfile, loading, setLoading } = useAuth()
     const navigate = useNavigate()
 
     const onSubmit = async (data) => {
@@ -39,6 +40,8 @@ const Register = () => {
             } else {
                 toast.error(error.code)
             }
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -183,10 +186,13 @@ const Register = () => {
                         {/* Register button */}
                         <div className="w-full flex items-center justify-center">
                             <button
+                                disabled={loading}
                                 type="submit"
-                                className="inputButton"
+                                className="inputButton disabled:cursor-not-allowed"
                             >
-                                Register
+                                {
+                                    loading ? <ImSpinner9 size={24} className="animate-spin m-auto" /> : 'Register'
+                                }
                             </button>
                         </div>
                         <div className="flex items-center justify-center w-full gap-1">

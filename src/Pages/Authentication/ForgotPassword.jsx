@@ -3,10 +3,11 @@ import useAuth from "../../Hook/useAuth";
 import forgotPassword from '../../assets/Lottie/forgot_password.json'
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { ImSpinner9 } from "react-icons/im";
 
 const ForgotPassword = () => {
     const navigate = useNavigate()
-    const { email, setEmail, resetPassword } = useAuth()
+    const { email, setEmail, resetPassword, loading, setLoading } = useAuth()
 
     const handelSendEmail = async (e) => {
         e.preventDefault()
@@ -20,6 +21,8 @@ const ForgotPassword = () => {
             navigate('/login')
         } catch (error) {
             toast.error(error.code)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -44,9 +47,13 @@ const ForgotPassword = () => {
                     />
 
                     <button
+                        disabled={loading}
                         type="submit"
-                        className="inputButton">
-                        Reset Password
+                        className="inputButton disabled:cursor-not-allowed"
+                    >
+                        {
+                            loading ? <ImSpinner9 size={24} className="animate-spin m-auto" /> : 'Forgot Password'
+                        }
                     </button>
                 </form>
             </div>

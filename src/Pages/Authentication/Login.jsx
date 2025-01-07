@@ -27,7 +27,6 @@ const Login = () => {
             toast.success('Login Successfully')
             navigate(location?.state ? location?.state : '/')
             reset()
-            setLoading(false)
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
                 toast.error('Invalid Email or Password')
