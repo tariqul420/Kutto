@@ -2,13 +2,20 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import toast from "react-hot-toast";
-import { MdError } from "react-icons/md";
+import { MdCloudUpload, MdError } from "react-icons/md";
+import ImageUpload from "../../Api/ImageUpload";
+import { useState } from "react";
 const UpdateProfile = () => {
     const { updateUserProfile, setUser } = useAuth();
+    const [photoPreview, setPhotoPreview] = useState("");
     const navigate = useNavigate()
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = async ({ fullName, photoUrl }) => {
+    const onSubmit = async ({ fullName, photo }) => {
+
+        const photoFile = photo[0]
+
+        const photoUrl = await ImageUpload(photoFile)
 
         // Update User Profile
         try {
@@ -41,12 +48,41 @@ const UpdateProfile = () => {
                         {errors.fullName && <p className="flex text-red-500 gap-1 items-center"><MdError /> {errors.fullName.message} </p>}
                     </div>
 
+                    {/* Photo */}
                     <div>
-                        <input
-                            className="inputField"
-                            placeholder="Photo Url"
-                            {...register("photoUrl", { required: 'Photo Url is required.', pattern: { value: new RegExp('^https?:\\/\\/.+\\.(png|jpg|jpeg|bmp|gif|webp)$', 'i'), message: 'Invalid URL (png, jpg, jpeg, bmp, gif, webp).' } })} />
-                        {errors.photoUrl && <p className="flex text-red-500 gap-1 items-center"><MdError /> {errors.photoUrl.message} </p>}
+                        <label
+                            htmlFor="photo"
+                            className="flex items-center justify-center w-full h-16 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-color-accent transition-all"
+                        >
+                            <span className="text-gray-500 flex items-center gap-2">
+                                <MdCloudUpload className="text-xl" /> Upload Photo
+                            </span>
+                            {photoPreview && (
+                                <img
+                                    src={photoPreview}
+                                    alt="Preview"
+                                    className="w-14 h-14 object-cover rounded-md border border-gray-300 ml-4"
+                                />
+                            )}
+                            <input
+                                id="photo"
+                                type="file"
+                                accept="image/*"
+                                className="hidden"
+                                {...register("photo", { required: 'Photo is required.' })}
+                                onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                        setPhotoPreview(URL.createObjectURL(file));
+                                    }
+                                }}
+                            />
+                        </label>
+                        {errors.photo && (
+                            <p className="flex text-red-500 gap-1 items-center mt-1">
+                                <MdError /> {errors.photo.message}
+                            </p>
+                        )}
                     </div>
 
                     <div className="w-full flex items-center justify-center">

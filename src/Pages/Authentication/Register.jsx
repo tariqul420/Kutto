@@ -12,6 +12,7 @@ import SocialBtn from "../../Components/Auth/SocialBtn";
 
 const Register = () => {
     const [isEyeOpen, setIsEyeOpen] = useState(false);
+    const [photoPreview, setPhotoPreview] = useState("");
     const [isEyeOpenRe, setIsEyeOpenRe] = useState(false);
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm()
     const { createUser, updateUserProfile } = useAuth()
@@ -138,16 +139,30 @@ const Register = () => {
                         <div>
                             <label
                                 htmlFor="photo"
-                                className="flex items-center justify-center w-full h-12 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-color-accent transition-all"
+                                className="flex items-center justify-center w-full h-16 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-color-accent transition-all"
                             >
                                 <span className="text-gray-500 flex items-center gap-2">
                                     <MdCloudUpload className="text-xl" /> Upload Photo
                                 </span>
+                                {photoPreview && (
+                                    <img
+                                        src={photoPreview}
+                                        alt="Preview"
+                                        className="w-14 h-14 object-cover rounded-md border border-gray-300 ml-4"
+                                    />
+                                )}
                                 <input
+                                    id="photo"
                                     type="file"
                                     accept="image/*"
                                     className="hidden"
                                     {...register("photo", { required: 'Photo is required.' })}
+                                    onChange={(e) => {
+                                        const file = e.target.files[0];
+                                        if (file) {
+                                            setPhotoPreview(URL.createObjectURL(file));
+                                        }
+                                    }}
                                 />
                             </label>
                             {errors.photo && (
