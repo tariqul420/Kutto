@@ -29,7 +29,7 @@ const Register = () => {
         try {
             await createUser(email, password)
             await updateUserProfile(fullName, photoUrl)
-            toast.success('Register Successfully.')
+            toast.success("Registration successfully ❤️")
             navigate('/')
             reset()
         } catch (error) {
@@ -214,7 +214,7 @@ const Register = () => {
                             <hr className="w-[45%] bg-gray-400 h-[2px]" />
                         </div>
 
-                        <SocialBtn redirectUrl="/" />
+                        <SocialBtn redirectUrl={"/"} />
                     </div>
                 </div>
 
