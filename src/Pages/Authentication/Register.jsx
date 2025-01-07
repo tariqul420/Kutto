@@ -1,24 +1,21 @@
-import { GoogleAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { FcGoogle } from "react-icons/fc";
 import { MdCloudUpload, MdError } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import spaceRegister from '../../assets/Lottie/space_register.json'
 import toast from "react-hot-toast";
 import ImageUpload from "../../Api/ImageUpload";
+import SocialBtn from "../../Components/Auth/SocialBtn";
 
 const Register = () => {
     const [isEyeOpen, setIsEyeOpen] = useState(false);
     const [isEyeOpenRe, setIsEyeOpenRe] = useState(false);
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm()
-    const { socialAuth, createUser, updateUserProfile } = useAuth()
+    const { createUser, updateUserProfile } = useAuth()
     const navigate = useNavigate()
-
-    const googleProvider = new GoogleAuthProvider();
 
     const onSubmit = async (data) => {
         const { fullName, email, password, photo } = data;
@@ -46,7 +43,7 @@ const Register = () => {
 
     return (
         <>
-            <section className="w-11/12 md:w-10/12 mx-auto h-auto flex flex-col-reverse lg:flex-row my-0 lg:my-12">
+            <section className="w-11/12 md:w-10/12 mx-auto h-auto flex flex-col-reverse lg:flex-row my-0 lg:mt-4 lg:mb-12">
                 {/* Register Form */}
                 <div className="shadow-md backdrop-blur-3xl rounded-lg sm:py-6 sm:px-8 p-4 flex flex-col gap-5 flex-1">
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-5">
@@ -137,8 +134,8 @@ const Register = () => {
                             )}
                         </div>
 
+                        {/* Photo */}
                         <div>
-                            {/* Photo */}
                             <label
                                 htmlFor="photo"
                                 className="flex items-center justify-center w-full h-12 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-color-accent transition-all"
@@ -180,19 +177,15 @@ const Register = () => {
                         </div>
                     </form>
 
-                    <div className="w-full my-1 flex items-center justify-center gap-3">
-                        <hr className="w-[45%] bg-gray-400 h-[2px]" />
-                        <p>or</p>
-                        <hr className="w-[45%] bg-gray-400 h-[2px]" />
-                    </div>
+                    <div className="flex flex-col items-center justify-center space-y-4">
+                        <div className="w-full flex items-center justify-center gap-3">
+                            <hr className="w-[45%] bg-gray-400 h-[2px]" />
+                            <p>or</p>
+                            <hr className="w-[45%] bg-gray-400 h-[2px]" />
+                        </div>
 
-                    <button
-                        onClick={() => socialAuth(googleProvider)}
-                        className="flex items-center justify-center py-2 px-4 gap-4 border border-gray-300 rounded-lg w-full text-[1rem] font-medium"
-                    >
-                        <FcGoogle className="text-[2rem]" />
-                        Sign Up with Google
-                    </button>
+                        <SocialBtn redirectUrl="/" />
+                    </div>
                 </div>
 
                 {/* Lottie image */}
