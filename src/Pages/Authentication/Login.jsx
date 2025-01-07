@@ -15,7 +15,7 @@ const Login = () => {
     const location = useLocation()
     const [isEyeOpen, setIsEyeOpen] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
-    const { setEmail, loginUser, loading } = useAuth()
+    const { setEmail, loginUser, loading, setLoading } = useAuth()
 
     const onSubmit = async (data) => {
         const { email, password } = data
@@ -27,6 +27,7 @@ const Login = () => {
             toast.success('Login Successfully')
             navigate(location?.state ? location?.state : '/')
             reset()
+            setLoading(false)
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
                 toast.error('Invalid Email or Password')
@@ -36,6 +37,8 @@ const Login = () => {
                 toast.error(error.code)
                 reset()
             }
+        } finally {
+            setLoading(false)
         }
     }
 

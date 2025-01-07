@@ -1,8 +1,25 @@
-# React + Vite
+## Installation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```bash
+git clone https://github.com/tariqul420/Full-Stack_Setup.git
+```
 
-Currently, two official plugins are available:
+```bash
+cd Full-Stack_Setup
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install
+```
+
+```bash
+code .
+```
+
+```bash
+npm run dev
+```
+
+## .env
+
+**When your work must be change .env file?**
