@@ -8,13 +8,14 @@ import spaceLogin from '../../assets/Lottie/space_login.json'
 import Lottie from "lottie-react";
 import toast from "react-hot-toast";
 import SocialBtn from "../../Components/Auth/SocialBtn";
+import { ImSpinner9 } from "react-icons/im";
 
 const Login = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const [isEyeOpen, setIsEyeOpen] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
-    const { setEmail, loginUser } = useAuth()
+    const { setEmail, loginUser, loading } = useAuth()
 
     const onSubmit = async (data) => {
         const { email, password } = data
@@ -101,10 +102,13 @@ const Login = () => {
 
                         <div className="w-full flex items-center justify-center">
                             <button
+                                disabled={loading}
                                 type="submit"
-                                className="inputButton"
+                                className="inputButton disabled:cursor-not-allowed"
                             >
-                                Login
+                                {
+                                    loading ? <ImSpinner9 size={24} className="animate-spin m-auto" /> : 'Login'
+                                }
                             </button>
                         </div>
                         <div className="flex items-center justify-center w-full gap-1">

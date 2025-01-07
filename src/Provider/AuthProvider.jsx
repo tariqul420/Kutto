@@ -50,9 +50,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser)
 
-
             if (currentUser && currentUser?.email) {
-
                 //save user in mongodb
                 await axios.post(`${import.meta.env.VITE_API_URL}/users`, {
                     name: currentUser?.displayName,
@@ -67,6 +65,8 @@ const AuthProvider = ({ children }) => {
                 await axios.get(`${import.meta.env.VITE_API_URL}/logout`, { withCredentials: true })
                 setLoading(false)
             }
+
+            setLoading(false)
         })
 
         return () => {
