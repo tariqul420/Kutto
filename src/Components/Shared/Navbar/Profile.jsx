@@ -30,18 +30,18 @@ const Profile = () => {
             <h1 className="text-[1.2rem] font-[700] sm:block hidden">{user?.displayName.substring(0, 10)}!</h1>
 
             <div
-                className={`${accountMenuOpen ? "translate-y-0 opacity-100 z-[1]" : "translate-y-[10px] opacity-0 z-[-1]"} bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px]`}>
-                <p className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-gray-600 hover:bg-gray-50">
+                className={`${accountMenuOpen ? "translate-y-0 opacity-100 z-[1]" : "translate-y-[10px] opacity-0 z-[-1]"} bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px] dark:bg-dark-lite`}>
+                <p className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-gray-600 dark:text-color-primary dark:hover:bg-color-primary-d hover:bg-gray-50">
                     <FiUser />
                     View Profile
                 </p>
-                <p className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-gray-600 hover:bg-gray-50">
+                <p className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-gray-600 hover:bg-gray-50 dark:text-color-primary dark:hover:bg-color-primary-d">
                     <IoSettingsOutline />
                     Settings
                 </p>
                 <p
                     onClick={() => navigate('/update-profile')}
-                    className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-gray-600 hover:bg-gray-50">
+                    className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-gray-600 hover:bg-gray-50 dark:text-color-primary dark:hover:bg-color-primary-d">
                     <FiUser />
                     Update Profile
                 </p>

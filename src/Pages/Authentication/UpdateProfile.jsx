@@ -12,6 +12,7 @@ const UpdateProfile = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async ({ fullName, photo }) => {
+        console.log(photo);
 
         const photoFile = photo[0]
 
@@ -69,13 +70,13 @@ const UpdateProfile = () => {
                                 type="file"
                                 accept="image/*"
                                 className="hidden"
-                                {...register("photo", { required: 'Photo is required.' })}
                                 onChange={(e) => {
                                     const file = e.target.files[0];
                                     if (file) {
                                         setPhotoPreview(URL.createObjectURL(file));
                                     }
                                 }}
+                                {...register("photo", { required: 'Photo is required.' })}
                             />
                         </label>
                         {errors.photo && (
