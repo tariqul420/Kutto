@@ -1,23 +1,20 @@
-import { GoogleAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { FcGoogle } from "react-icons/fc";
 import { MdError } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import spaceLogin from '../../assets/Lottie/space_login.json'
 import Lottie from "lottie-react";
 import toast from "react-hot-toast";
+import SocialBtn from "../../Components/Auth/SocialBtn";
 
 const Login = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const [isEyeOpen, setIsEyeOpen] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm()
-    const { socialAuth, setEmail, loginUser } = useAuth()
-
-    const googleProvider = new GoogleAuthProvider();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm()
+    const { setEmail, loginUser } = useAuth()
 
     const onSubmit = async (data) => {
         const { email, password } = data
@@ -28,11 +25,15 @@ const Login = () => {
             setEmail('')
             toast.success('Login Successfully')
             navigate(location?.state ? location?.state : '/')
+            reset()
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
                 toast.error('Invalid Email or Password')
+                reset()
+
             } else {
                 toast.error(error.code)
+                reset()
             }
         }
     }
@@ -42,7 +43,7 @@ const Login = () => {
             <section className="w-10/12 mx-auto h-auto flex flex-col-reverse lg:flex-row my-0 lg:my-12">
 
                 {/* Login Form */}
-                <div className="shadow-md backdrop-blur-3xl rounded-lg sm:py-6 sm:px-8 p-4 flex flex-col gap-5 flex-1">
+                <div className="shadow-md backdrop-blur-3xl rounded-lg sm:py-6 sm:px-8 p-4 flex flex-col gap-5 flex-1 dark:bg-dark-lite">
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-5">
                         <h3 className="text-[1.8rem] font-[700] text-center">
                             Login
@@ -118,19 +119,15 @@ const Login = () => {
                         </div>
                     </form>
 
-                    <div className="w-full my-1 flex items-center justify-center gap-3">
-                        <hr className="w-[45%] bg-gray-400 h-[2px]" />
-                        <p>or</p>
-                        <hr className="w-[45%] bg-gray-400 h-[2px]" />
-                    </div>
+                    <div className="flex flex-col items-center justify-center space-y-4">
+                        <div className="w-full flex items-center justify-center gap-3">
+                            <hr className="w-[45%] bg-gray-400 h-[2px]" />
+                            <p>or</p>
+                            <hr className="w-[45%] bg-gray-400 h-[2px]" />
+                        </div>
 
-                    <button
-                        onClick={() => { socialAuth(googleProvider), navigate('/') }}
-                        className="flex items-center justify-center py-2 px-4 gap-4 border border-gray-300 rounded-lg w-full text-[1rem] font-medium"
-                    >
-                        <FcGoogle className="text-[2rem]" />
-                        Sign In with Google
-                    </button>
+                        <SocialBtn redirectUrl={location.pathname ? location.pathname : '/'} />
+                    </div>
                 </div>
 
                 {/* Lottie image */}

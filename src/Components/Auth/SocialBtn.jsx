@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import useAuth from "../../Hook/useAuth";
 
 const SocialBtn = ({ redirectUrl }) => {
-    const { socialLogin } = useAuth();
+    const { socialAuth } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const SocialBtn = ({ redirectUrl }) => {
 
     const handelFacebook = async () => {
         try {
-            await socialLogin(facebookProvider)
+            await socialAuth(facebookProvider)
                 .then(() => {
                     toast.success(successMessage)
                     navigate(redirectUrl)
@@ -32,21 +32,23 @@ const SocialBtn = ({ redirectUrl }) => {
 
     const handelGoogle = async () => {
         try {
-            await socialLogin(googleProvider)
+            await socialAuth(googleProvider)
                 .then(() => {
                     toast.success(successMessage)
                     navigate(redirectUrl)
                 }).catch(error => {
                     toast.error(error.code)
+                    console.log(error);
                 })
         } catch (error) {
             toast.error(error.code)
+            console.log(error);
         }
     };
 
     const handelGithub = async () => {
         try {
-            await socialLogin(githubProvider)
+            await socialAuth(githubProvider)
             toast.success(successMessage)
             navigate(redirectUrl)
         } catch (error) {

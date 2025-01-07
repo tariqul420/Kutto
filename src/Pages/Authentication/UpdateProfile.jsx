@@ -27,7 +27,7 @@ const UpdateProfile = () => {
 
     return (
         <section className="w-full h-auto flex items-center justify-center sm:py-12 p-6">
-            <div className="w-full sm:w-[40%]  rounded-lg sm:py-6 sm:px-8 p-4 flex flex-col gap-5 shadow-md">
+            <div className="w-full sm:w-[40%]  rounded-lg sm:py-6 sm:px-8 p-4 flex flex-col gap-5 shadow-md dark:bg-dark-lite">
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-5">
                     <h3 className="text-[1.8rem] font-[700]  text-center">
                         Update Profile

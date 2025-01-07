@@ -27,7 +27,7 @@ const Profile = () => {
                     className="w-[10px] h-[10px] rounded-full bg-green-500 absolute bottom-[0px] right-0 border-2 border-white"></div>
             </div>
 
-            <h1 className="text-[1.2rem] font-[700] text-gray-600 sm:block hidden">{user?.displayName.substring(0, 10)}!</h1>
+            <h1 className="text-[1.2rem] font-[700] sm:block hidden">{user?.displayName.substring(0, 10)}!</h1>
 
             <div
                 className={`${accountMenuOpen ? "translate-y-0 opacity-100 z-[1]" : "translate-y-[10px] opacity-0 z-[-1]"} bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px]`}>
