@@ -4,24 +4,27 @@ import Lottie from "lottie-react";
 import { useForm } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import { MdError } from "react-icons/md";
+import { MdCloudUpload, MdError } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import spaceRegister from '../../assets/Lottie/space_register.json'
 import toast from "react-hot-toast";
+import ImageUpload from "../../Api/ImageUpload";
 
 const Register = () => {
     const [isEyeOpen, setIsEyeOpen] = useState(false);
     const [isEyeOpenRe, setIsEyeOpenRe] = useState(false);
-    const { register, handleSubmit, watch, formState: { errors } } = useForm()
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm()
     const { socialAuth, createUser, updateUserProfile } = useAuth()
     const navigate = useNavigate()
 
     const googleProvider = new GoogleAuthProvider();
 
     const onSubmit = async (data) => {
-        const { fullName, email, password, photoUrl } = data;
-        console.table({ fullName, email, password, photoUrl });
+        const { fullName, email, password, photo } = data;
+        const photoFile = photo[0]
+
+        const photoUrl = await ImageUpload(photoFile)
 
         // Register with email and password
         try {
@@ -29,10 +32,12 @@ const Register = () => {
             await updateUserProfile(fullName, photoUrl)
             toast.success('Register Successfully.')
             navigate('/')
+            reset()
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 toast.error('User already exists!')
                 navigate('/login')
+                reset()
             } else {
                 toast.error(error.code)
             }
@@ -59,18 +64,6 @@ const Register = () => {
                                 {...register("fullName", { required: 'Name is required', minLength: { value: 5, message: 'Name must be at least 5 characters long.' } })}
                             />
                             {errors.fullName && <p className="flex text-red-500 gap-1 items-center"><MdError /> {errors.fullName.message} </p>}
-                        </div>
-
-                        <div>
-                            {/* Photo Url */}
-                            <input
-                                type="text"
-                                name="photoUrl"
-                                placeholder="Photo Url"
-                                className="inputField"
-                                {...register("photoUrl", { required: 'Photo Url is required.', pattern: { value: new RegExp('^https?:\\/\\/.+\\.(png|jpg|jpeg|bmp|gif|webp)$', 'i'), message: 'Invalid URL (png, jpg, jpeg, bmp, gif, webp).' } })}
-                            />
-                            {errors.photoUrl && <p className="flex text-red-500 gap-1 items-center"><MdError /> {errors.photoUrl.message} </p>}
                         </div>
 
                         {/* Email */}
@@ -141,6 +134,29 @@ const Register = () => {
                                     className="absolute top-4 right-4 text-[1.2rem] text-[#777777] cursor-pointer"
                                     onClick={() => setIsEyeOpenRe(true)}
                                 />
+                            )}
+                        </div>
+
+                        <div>
+                            {/* Photo */}
+                            <label
+                                htmlFor="photo"
+                                className="flex items-center justify-center w-full h-12 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-color-accent transition-all"
+                            >
+                                <span className="text-gray-500 flex items-center gap-2">
+                                    <MdCloudUpload className="text-xl" /> Upload Photo
+                                </span>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    className="hidden"
+                                    {...register("photo", { required: 'Photo is required.' })}
+                                />
+                            </label>
+                            {errors.photo && (
+                                <p className="flex text-red-500 gap-1 items-center mt-1">
+                                    <MdError /> {errors.photo.message}
+                                </p>
                             )}
                         </div>
 

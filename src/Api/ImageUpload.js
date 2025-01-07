@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const ImageUpload = async (imageData) => {
     const formData = new FormData();
     formData.append('image', imageData);
