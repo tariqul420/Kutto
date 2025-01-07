@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Lottie from "lottie-react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { MdCloudUpload, MdError } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ const Register = () => {
     const [isEyeOpen, setIsEyeOpen] = useState(false);
     const [photoPreview, setPhotoPreview] = useState("");
     const [isEyeOpenRe, setIsEyeOpenRe] = useState(false);
-    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm()
+    const { register, handleSubmit, reset, control, watch, formState: { errors } } = useForm()
     const { createUser, updateUserProfile } = useAuth()
     const navigate = useNavigate()
 
@@ -151,18 +151,25 @@ const Register = () => {
                                         className="w-14 h-14 object-cover rounded-md border border-gray-300 ml-4"
                                     />
                                 )}
-                                <input
-                                    id="photo"
-                                    type="file"
-                                    accept="image/*"
-                                    className="hidden"
-                                    {...register("photo", { required: 'Photo is required.' })}
-                                    onChange={(e) => {
-                                        const file = e.target.files[0];
-                                        if (file) {
-                                            setPhotoPreview(URL.createObjectURL(file));
-                                        }
-                                    }}
+                                <Controller
+                                    name="photo"
+                                    control={control}
+                                    rules={{ required: 'Photo is required.' }}
+                                    render={({ field }) => (
+                                        <input
+                                            id="photo"
+                                            type="file"
+                                            accept="image/*"
+                                            className="hidden"
+                                            onChange={(e) => {
+                                                const file = e.target.files[0];
+                                                if (file) {
+                                                    setPhotoPreview(URL.createObjectURL(file));
+                                                }
+                                                field.onChange(e.target.files);
+                                            }}
+                                        />
+                                    )}
                                 />
                             </label>
                             {errors.photo && (
@@ -172,6 +179,8 @@ const Register = () => {
                             )}
                         </div>
 
+
+                        {/* Register button */}
                         <div className="w-full flex items-center justify-center">
                             <button
                                 type="submit"

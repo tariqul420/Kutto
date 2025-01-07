@@ -1,19 +1,19 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import toast from "react-hot-toast";
 import { MdCloudUpload, MdError } from "react-icons/md";
 import ImageUpload from "../../Api/ImageUpload";
 import { useState } from "react";
+
 const UpdateProfile = () => {
     const { updateUserProfile, setUser } = useAuth();
     const [photoPreview, setPhotoPreview] = useState("");
     const navigate = useNavigate()
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = async ({ fullName, photo }) => {
-        console.log(photo);
+    const { register, handleSubmit, reset, control, formState: { errors } } = useForm();
 
+    const onSubmit = async ({ fullName, photo }) => {
         const photoFile = photo[0]
 
         const photoUrl = await ImageUpload(photoFile)
@@ -28,8 +28,10 @@ const UpdateProfile = () => {
             }));
             toast.success('Profile Updated Successfully')
             navigate('/')
+            reset()
         } catch (error) {
             toast.error(error.code)
+            reset()
         }
     };
 
@@ -65,18 +67,25 @@ const UpdateProfile = () => {
                                     className="w-14 h-14 object-cover rounded-md border border-gray-300 ml-4"
                                 />
                             )}
-                            <input
-                                id="photo"
-                                type="file"
-                                accept="image/*"
-                                className="hidden"
-                                onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    if (file) {
-                                        setPhotoPreview(URL.createObjectURL(file));
-                                    }
-                                }}
-                                {...register("photo", { required: 'Photo is required.' })}
+                            <Controller
+                                name="photo"
+                                control={control}
+                                rules={{ required: 'Photo is required.' }}
+                                render={({ field }) => (
+                                    <input
+                                        id="photo"
+                                        type="file"
+                                        accept="image/*"
+                                        className="hidden"
+                                        onChange={(e) => {
+                                            const file = e.target.files[0];
+                                            if (file) {
+                                                setPhotoPreview(URL.createObjectURL(file));
+                                            }
+                                            field.onChange(e.target.files);
+                                        }}
+                                    />
+                                )}
                             />
                         </label>
                         {errors.photo && (
@@ -86,6 +95,7 @@ const UpdateProfile = () => {
                         )}
                     </div>
 
+                    {/* Submit Button */}
                     <div className="w-full flex items-center justify-center">
                         <button
                             type="submit"
