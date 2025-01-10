@@ -50,74 +50,85 @@ The repository contains two main directories:
 
 ---
 
-### Setup Instructions
-
-#### Frontend
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/tariqul420/Full-Stack_Setup.git
-
-   ```
-
-2. **Navigate to the project directory**:
-
-   ```bash
-   git clone Full-Stack_Setup
-
-   ```
-
-3. **Install dependencies**:
-
-   ```bash
-   npm install
-
-   ```
-
-4. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
-
-#### Backend/Server
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/tariqul420/Full-Stack_Server_Setup.git
-
-   ```
-
-2. **Navigate to the project directory**:
-
-   ```bash
-   git clone Full-Stack_Server_Setup
-
-   ```
-
-3. **Install dependencies**:
-
-   ```bash
-   npm install
-
-   ```
-
-4. **Start the development server**:
-   ```bash
-   node start
-   ```
-
-### or
-
-```bash
-nodemon start
-```
+- **Node.js** and **npm** installed
+- **MongoDB** connection string
 
 ---
 
-## .env (force)
+### Client Side Setup
 
-**When your work must be change .env file?**
+1. Clone the client-side repository:
 
-- **When you commit your repository .env add in .gitignore file**
+   ```bash
+   git clone https://github.com/tariqul420/Full-Stack_Setup.git
+   cd Full-Stack_Setup
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open the project in a code editor:
+   ```bash
+   code .
+   ```
+5. Add the `.env` file in the root directory and include the following environment variables:
+   ```bash
+   VITE_API_KEY=YOUR_VITE_API_KEY
+   VITE_AUTH_DOMAIN=YOUR_VITE_AUTH_DOMAIN
+   VITE_PROJECT_ID=YOUR_VITE_PROJECT_ID
+   VITE_STORAGE_BUCKET=YOUR_VITE_STORAGE_BUCKET
+   VITE_MESSAGE_SENDER_ID=YOUR_VITE_MESSAGE_SENDER_ID
+   VITE_APP_ID=YOUR_VITE_APP_ID
+   VITE_MEASUREMENT_ID=YOUR_VITE_MEASUREMENT_ID
+   VITE_IMGBB_API_KEY=VITE_IMGBB_API_KEY
+   VITE_API_URL=YOUR_VITE_API_URL
+   ```
+   > **Note:** Replace the `VITE_API_KEY` and `VITE_AUTH_DOMAIN`, along with other placeholders, with actual values.
+
+### Server Side Setup
+
+1. Clone the client-side repository:
+
+   ```bash
+   git clone https://github.com/tariqul420/Full-Stack_Server_Setup.git
+   cd Service-Orbit-Server
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the server:
+
+   ```bash
+   node index.js
+   ```
+
+   --- OR ---
+
+   > **Note** Note: Ensure `nodemon` is installed globally or locally in your project. To install it globally, run:
+
+   ```bash
+   nodemon index.js
+   ```
+
+4. Open the project in a code editor:
+   ```bash
+   code .
+   ```
+5. Add the `.env` file in the root directory and include the following environment variables:
+   ```bash
+   DATABASE_USERNAME=YOUR_DATABASE_USERNAME
+   DATABASE_PASSWORD=YOUR_DATABASE_PASSWORD
+   ACCESS_TOKEN_SECRET=YOUR_ACCESS_TOKEN_SECRET
+   ```
+   > **Note:** Replace the `index.js` file's `your_mongo_connection_string` and the `.env` file's `YOUR_DATABASE_USERNAME`, `YOUR_DATABASE_PASSWORD`, and `YOUR_ACCESS_TOKEN_SECRET` with actual values.
