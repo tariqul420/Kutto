@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
-import useRole from "../Hook/useRole";
-import useAuth from "../Hook/useAuth";
-import LoadingSpinner from "../Components/Shared/LoadingSpinner";
+import useAuth from "../../Hook/useAuth";
+import useRole from "../../Hook/useRole";
+import LoadingSpinner from "../../Components/Shared/LoadingSpinner";
+
 
 const AdminRoute = ({ children }) => {
     const [user, loading] = useAuth();
@@ -16,7 +17,7 @@ const AdminRoute = ({ children }) => {
         return children;
     }
 
-    return <Navigate to={'/dashboard'} replace />
+    return <Navigate to={'/dashboard'} replace={true} />
 };
 
 AdminRoute.propTypes = {

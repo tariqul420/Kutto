@@ -1,7 +1,7 @@
-import useAuth from "../Hook/useAuth";
 import PropTypes from "prop-types";
 import { Navigate, useLocation } from "react-router-dom";
-import LoadingSpinner from "../Components/Shared/LoadingSpinner";
+import useAuth from "../../Hook/useAuth";
+import LoadingSpinner from "../../Components/Shared/LoadingSpinner";
 
 const PrivateRouter = ({ children }) => {
     const { user, loading } = useAuth()
@@ -15,7 +15,7 @@ const PrivateRouter = ({ children }) => {
         return children
     }
 
-    return <Navigate state={{ from: location.pathname }} to='/login' replace />
+    return <Navigate state={{ from: location.pathname }} to='/login' replace={true} />
 };
 
 PrivateRouter.propTypes = {

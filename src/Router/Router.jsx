@@ -6,8 +6,8 @@ import Home from "../Pages/Home/Home";
 import ForgotPassword from "../Pages/Authentication/ForgotPassword";
 import Error404 from "../Pages/Error/Error404";
 import UpdateProfile from "../Pages/Authentication/UpdateProfile";
-import PrivateRoute from "../Private/PrivateRoute";
-import Dashboard from "../Pages/Dashboard/Dashboard";
+import PrivateRoute from "./Private/PrivateRoute";
+import Dashboard from "../Pages/Dashboard/Common/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -33,17 +33,19 @@ const router = createBrowserRouter([
             },
             {
                 path: '/update-profile',
-                element:
+                element: (
                     <PrivateRoute>
                         <UpdateProfile />
                     </PrivateRoute>
+                )
             },
             {
                 path: '/dashboard',
-                element:
+                element: (
                     <PrivateRoute>
                         <Dashboard />
                     </PrivateRoute>
+                )
             }
         ]
     }
