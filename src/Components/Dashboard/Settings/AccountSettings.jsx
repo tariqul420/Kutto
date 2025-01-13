@@ -6,11 +6,13 @@ import { useState, useEffect } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../../../Hook/useAuth";
 import ImageUpload from "../../../Api/ImageUpload";
+import useAxiosPublic from "../../../Hook/useAxiosPublic";
 
 const AccountSettings = () => {
     const { updateUserProfile, user, setUser, loading, setLoading } = useAuth();
     const [photoPreview, setPhotoPreview] = useState(user?.photoURL || "");
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic()
 
     const { register, handleSubmit, reset, control, setValue, formState: { errors } } = useForm();
 
@@ -34,6 +36,12 @@ const AccountSettings = () => {
                 displayName: fullName,
                 photoURL: photoUrl,
             }));
+
+            await axiosPublic.patch(`/users/${user?.email}`, {
+                displayName: fullName,
+                photoURL: photoUrl,
+            })
+
             toast.success("Profile Updated Successfully");
             navigate("/");
             reset();

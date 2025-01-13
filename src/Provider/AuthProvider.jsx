@@ -49,7 +49,6 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser)
-            console.log(currentUser);
             setLoading(false)
             if (currentUser && currentUser?.email) {
                 //save user in mongodb
