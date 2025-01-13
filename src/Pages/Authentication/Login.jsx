@@ -20,6 +20,8 @@ const Login = () => {
     const onSubmit = async (data) => {
         const { email, password } = data
 
+        setLoading(true)
+
         // Login with email and password
         try {
             await loginUser(email, password)

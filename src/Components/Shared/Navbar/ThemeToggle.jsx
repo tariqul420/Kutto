@@ -28,7 +28,7 @@ const ThemeToggle = () => {
             className="p-2 rounded-full bg-white dark:bg-gray-700"
         >
             {theme === "dark" ? (
-                <IoMdSunny size={30} color="#FFA500" />
+                <IoMdSunny size={30} color="#F04335" />
             ) : (
                 <MdDarkMode size={30} color="#1E1E1E" />
             )}

@@ -6,13 +6,13 @@
 @tailwind utilities;
 
 nav a.active {
-  color: #38BD67;
+  color: #F04335;
   position: relative;
   transition: all 0.3s ease;
 }
 
 .dashboard a.active {
-  color: #38BD67;
+  color: #F04335;
   background-color: rgba(9, 16, 26, 0.1);
   padding-left: 8px;
   padding-right: 8px;
@@ -20,7 +20,7 @@ nav a.active {
 }
 
 .dark .dashboard a.active {
-  color: #38BD67;
+  color: #F04335;
   background-color: #09101a;
   padding-left: 8px;
   padding-right: 8px;
@@ -30,7 +30,7 @@ nav a.active {
 nav a.active::before {
   content: '';
   width: 100%;
-  background-color: #38BD67;
+  background-color: #F04335;
   height: 2px;
   position: absolute;
   bottom: -2px;
@@ -44,7 +44,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #38BD67;
+  color: #F04335;
   cursor: pointer;
 }
 
@@ -57,15 +57,15 @@ nav a.active:hover {
 }
 
 .dark nav a.active {
-  color: #38BD67;
+  color: #F04335;
 }
 
 .dark nav a.active::before {
-  background-color: #38BD67;
+  background-color: #F04335;
 }
 
 .dark nav a:hover {
-  color: #38BD67;
+  color: #F04335;
 }
 
 .no-scrollbar {

@@ -23,6 +23,8 @@ const Register = () => {
         const { fullName, email, password, photo } = data;
         const photoFile = photo[0]
 
+        setLoading(true)
+
         const photoUrl = await ImageUpload(photoFile)
 
         // Register with email and password

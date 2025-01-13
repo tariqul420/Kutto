@@ -39,7 +39,7 @@ const Navbar = () => {
                 <div>
                     <Link to="/">
                         <h2 className="font-bold text-4xl font-Montserrat max-sm:hidden">
-                            Web-Name
+                            Kutto
                         </h2>
                         <img
                             className="sm:hidden w-[3rem]"
@@ -54,7 +54,7 @@ const Navbar = () => {
                                 <NavLink to="/">Home</NavLink>
                             </li>
                             <li className="navBarLink">
-                                <NavLink to="/services">Services</NavLink>
+                                <NavLink to="/services">Pet Listing</NavLink>
                             </li>
                             <li className="navBarLink">
                                 <NavLink to="/contact-us">Contact Us</NavLink>

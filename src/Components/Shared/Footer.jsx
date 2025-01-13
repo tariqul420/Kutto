@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="pt-4 w-full bg-gray-100 dark:bg-dark-lite">
             <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-8">
                 <div className="space-y-4">
-                    <h2 className="font-extrabold text-2xl">Film Fusion</h2>
+                    <h2 className="font-extrabold text-2xl">Kutto</h2>
                     <p className="font-medium text-xl">Subscribe</p>
                     <div>
                         <p className="font-medium mb-2">Get 10% off your order</p>
@@ -50,7 +50,7 @@ const Footer = () => {
                     <p className="dark:text-color-text-d/50 ">Save $3 app new user only</p>
                     <div className="flex gap-4">
                         <div>
-                            <img className="w-full h-full" src="https://i.postimg.cc/7h3hyqZC/download.png" alt="" />
+                            <img className="w-full h-full rounded-md" src="https://i.postimg.cc/7h3hyqZC/download.png" alt="" />
                         </div>
                         <div>
                             <img className="w-full h-full" src="https://i.postimg.cc/0js5nh09/play-apple.png" alt="" />
@@ -64,7 +64,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <p className="dark:text-white/70 text-center py-4 border-t border-solid border-color-primary-d dark:border-white">&copy; Copyright FilmFusion {new Date().getFullYear()}. All Right Reserved</p>
+            <p className="dark:text-white/70 text-center py-4 border-t border-solid border-color-primary-d dark:border-white">&copy; Copyright Kutto {new Date().getFullYear()}. All Right Reserved</p>
         </div>
     );
 };
