@@ -59,13 +59,6 @@ const Navbar = () => {
                             <li className="navBarLink">
                                 <NavLink to="/contact-us">Contact Us</NavLink>
                             </li>
-                            {
-                                user && (
-                                    <li className="navBarLink">
-                                        <NavLink to="/dashboard">Dashboard</NavLink>
-                                    </li>
-                                )
-                            }
                         </ul>
                     </div>
 
@@ -95,13 +88,6 @@ const Navbar = () => {
                         <li className="navBarLink">
                             <NavLink to="/contact-us">Contact Us</NavLink>
                         </li>
-                        {
-                            user && (
-                                <li className="navBarLink">
-                                    <NavLink to="/dashboard">Dashboard</NavLink>
-                                </li>
-                            )
-                        }
                     </ul>
                 </aside>
             </div>
