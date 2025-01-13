@@ -1,6 +1,7 @@
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoSend } from "react-icons/io5";
+import { Link } from "react-router-dom"
 
 const Footer = () => {
     return (
@@ -33,10 +34,10 @@ const Footer = () => {
                 </div>
                 <div className="space-y-4">
                     <h2 className="font-semibold text-2xl">Support</h2>
-                    <p>My account</p>
-                    <p>Login/Register</p>
-                    <p>All movies</p>
-                    <p>Add Movies</p>
+                    <p><Link to='/'>Home</Link></p>
+                    <p><Link to={'/login'}>Login</Link>/<Link to={'/register'}>Register</Link></p>
+                    <p><Link to={'/pet-listing'}>Pet Listing</Link></p>
+                    <p><Link to={'/donation-campaigns'}>Donation Campaigns</Link></p>
                 </div>
                 <div className="space-y-4">
                     <h2 className="font-semibold text-2xl">Quick Link</h2>
@@ -47,10 +48,9 @@ const Footer = () => {
                 </div>
                 <div className="space-y-4">
                     <h2 className="font-semibold text-2xl">Download App</h2>
-                    <p className="dark:text-color-text-d/50 ">Save $3 app new user only</p>
                     <div className="flex gap-4">
                         <div>
-                            <img className="w-full h-full rounded-md" src="https://i.postimg.cc/7h3hyqZC/download.png" alt="" />
+                            <img className="w-full h-full" src="https://i.postimg.cc/7h3hyqZC/download.png" alt="" />
                         </div>
                         <div>
                             <img className="w-full h-full" src="https://i.postimg.cc/0js5nh09/play-apple.png" alt="" />

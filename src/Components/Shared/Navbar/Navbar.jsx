@@ -54,10 +54,10 @@ const Navbar = () => {
                                 <NavLink to="/">Home</NavLink>
                             </li>
                             <li className="navBarLink">
-                                <NavLink to="/services">Pet Listing</NavLink>
+                                <NavLink to="/pet-listing">Pet Listing</NavLink>
                             </li>
                             <li className="navBarLink">
-                                <NavLink to="/contact-us">Contact Us</NavLink>
+                                <NavLink to="/donation-campaigns">Donation Campaigns</NavLink>
                             </li>
                         </ul>
                     </div>
@@ -83,10 +83,10 @@ const Navbar = () => {
                             <NavLink to="/">Home</NavLink>
                         </li>
                         <li className="navBarLink">
-                            <NavLink to="/services">Services</NavLink>
+                            <NavLink to="/pet-listing">Pet Listing</NavLink>
                         </li>
                         <li className="navBarLink">
-                            <NavLink to="/contact-us">Contact Us</NavLink>
+                            <NavLink to="/donation-campaigns">Donation Campaigns</NavLink>
                         </li>
                     </ul>
                 </aside>

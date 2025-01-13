@@ -6,7 +6,7 @@ const Root = () => {
     return (
         <div className="font-Montserrat bg-color-primary text-color-text dark:bg-color-primary-d dark:text-color-text-d">
             <Navbar />
-            <div className="min-h-[calc(100vh-403px)]">
+            <div className="min-h-[calc(100vh-391px)]">
                 <Outlet />
             </div>
             <Footer />

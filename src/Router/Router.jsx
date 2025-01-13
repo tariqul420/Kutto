@@ -18,6 +18,8 @@ import AllUsers from "../Pages/Dashboard/Admin/Users/AllUsers";
 import AllPets from "../Pages/Dashboard/Admin/AddPets/AllPets";
 import AllDonation from "../Pages/Dashboard/Admin/AllDonation/AllDonation";
 import AdminRoute from "./Private/AdminRoute";
+import PetListing from "../Pages/PetListing/PetListing";
+import DonationCampaigns from "../Pages/DonationCampaigns/DonationCampaigns";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
             {
                 path: '/login/forgot-password',
                 element: <ForgotPassword />
+            },
+            {
+                path: '/pet-listing',
+                element: <PetListing />
+            },
+            {
+                path: '/donation-campaigns',
+                element: <DonationCampaigns />
             },
             {
                 path: '/dashboard',
