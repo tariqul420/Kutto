@@ -46,14 +46,14 @@ const AccountSettings = () => {
     };
 
     return (
-        <section className="mt-10 p-6 border rounded bg-white shadow">
-            <h2 className="mb-4 text-2xl font-medium">Account Settings</h2>
-            <div className="flex items-center gap-20">
-                <div className="w-[40%]">
+        <section className="p-6 border rounded bg-white shadow dark:bg-dark-lite">
+            <h2 className="mb-4 text-2xl font-semibold">Account Settings</h2>
+            <div className="flex flex-col md:flex-row items-center gap-20">
+                <div className="w-full md:w-[40%]">
                     <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-5">
                         {/* Full Name */}
                         <div>
-                            <label className="block text-gray-700 mb-1">Full Name</label>
+                            <label className="block text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
                             <input
                                 className="inputField"
                                 {...register("fullName", {
@@ -70,7 +70,7 @@ const AccountSettings = () => {
 
                         {/* Email (Disabled) */}
                         <div>
-                            <label className="block text-gray-700 mb-1">Email</label>
+                            <label className="block text-gray-700 dark:text-gray-300 mb-1">Email</label>
                             <input
                                 className="inputField cursor-not-allowed bg-gray-100 dark:bg-gray-800"
                                 placeholder="Email"
@@ -81,7 +81,7 @@ const AccountSettings = () => {
 
                         {/* Photo Upload */}
                         <div>
-                            <label className="block text-gray-700 mb-1">Photo</label>
+                            <label className="block text-gray-700 dark:text-gray-300 mb-1">Photo</label>
                             <label
                                 htmlFor="photo"
                                 className="flex items-center justify-center w-full h-16 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-color-accent transition-all"
@@ -130,8 +130,8 @@ const AccountSettings = () => {
                         </div>
                     </form>
                 </div>
-                <div>
-                    <img className="w-52" src={user?.photoURL} alt="profile photo" />
+                <div className="mt-4 md:mt-0">
+                    <img className="w-52 border-2 border-solid border-color-accent-d rounded-full p-1" src={user?.photoURL} alt="profile photo" />
                 </div>
             </div>
         </section>

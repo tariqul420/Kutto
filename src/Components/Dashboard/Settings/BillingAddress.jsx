@@ -11,13 +11,13 @@ const BillingAddress = () => {
     };
 
     return (
-        <div className="w-full mt-10 p-6 bg-white border rounded shadow">
+        <div className="w-full mt-10 p-6 bg-white border rounded shadow dark:bg-dark-lite">
             <h2 className="text-2xl font-bold mb-6">Billing Address</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div className="flex gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Full Name */}
                     <div className="flex-1">
-                        <label className="block text-gray-700 mb-1">Full Name</label>
+                        <label className="block text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
                         <input
                             type="text"
                             className="inputField"
@@ -36,7 +36,7 @@ const BillingAddress = () => {
 
                     {/* Company Name (Optional) */}
                     <div className="flex-1">
-                        <label className="block text-gray-700 mb-1">Company Name (Optional)</label>
+                        <label className="block text-gray-700 dark:text-gray-300 mb-1">Company Name (Optional)</label>
                         <input
                             type="text"
                             className="inputField"
@@ -47,7 +47,7 @@ const BillingAddress = () => {
 
                 {/* Street Address */}
                 <div>
-                    <label className="block text-gray-700 mb-1">Street Address</label>
+                    <label className="block text-gray-700 dark:text-gray-300 mb-1">Street Address</label>
                     <input
                         type="text"
                         className="inputField"
@@ -60,10 +60,10 @@ const BillingAddress = () => {
                     )}
                 </div>
 
-                <div className="flex gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {/* City */}
-                    <div className="flex-1">
-                        <label className="block text-gray-700 mb-1">City</label>
+                    <div>
+                        <label className="block text-gray-700 dark:text-gray-300 mb-1">City</label>
                         <input
                             type="text"
                             className="inputField"
@@ -77,8 +77,8 @@ const BillingAddress = () => {
                     </div>
 
                     {/* State */}
-                    <div className="flex-1">
-                        <label className="block text-gray-700 mb-1">State</label>
+                    <div>
+                        <label className="block text-gray-700 dark:text-gray-300 mb-1">State</label>
                         <input
                             type="text"
                             className="inputField"
@@ -92,8 +92,8 @@ const BillingAddress = () => {
                     </div>
 
                     {/* Postal Code */}
-                    <div className="flex-1">
-                        <label className="block text-gray-700 mb-1">Postal Code</label>
+                    <div>
+                        <label className="block text-gray-700 dark:text-gray-300 mb-1">Postal Code</label>
                         <input
                             type="text"
                             className="inputField"
@@ -111,10 +111,9 @@ const BillingAddress = () => {
                     </div>
                 </div>
 
-
                 {/* Country */}
                 <div>
-                    <label className="block text-gray-700 mb-1">Country</label>
+                    <label className="block text-gray-700 dark:text-gray-300 mb-1">Country</label>
                     <select
                         className="inputField"
                         {...register("country", {

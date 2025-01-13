@@ -32,12 +32,12 @@ const ChangePassword = () => {
     };
 
     return (
-        <div className="w-8/12 mt-10 p-6 border rounded bg-white shadow">
+        <div className="w-full md:w-8/12 mt-10 p-6 border rounded bg-white shadow dark:bg-dark-lite">
             <h2 className="text-xl font-bold mb-6">Change Password</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* Current Password */}
                 <div>
-                    <label className="block text-gray-700 mb-1">Current Password</label>
+                    <label className="block text-gray-700 dark:text-gray-300 mb-1">Current Password</label>
                     <input
                         type="password"
                         className="inputField"
@@ -50,10 +50,10 @@ const ChangePassword = () => {
                     )}
                 </div>
 
-                <div className="flex gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* New Password */}
-                    <div className="flex-1">
-                        <label className="block text-gray-700 mb-1">New Password</label>
+                    <div>
+                        <label className="block text-gray-700 dark:text-gray-300 mb-1">New Password</label>
                         <input
                             type="password"
                             className="inputField"
@@ -71,8 +71,8 @@ const ChangePassword = () => {
                     </div>
 
                     {/* Confirm Password */}
-                    <div className="flex-1">
-                        <label className="block text-gray-700 mb-1">Confirm Password</label>
+                    <div>
+                        <label className="block text-gray-700 dark:text-gray-300 mb-1">Confirm Password</label>
                         <input
                             type="password"
                             className="inputField"
@@ -91,7 +91,7 @@ const ChangePassword = () => {
                 {/* Submit Button */}
                 <button
                     type="submit"
-                    className="inputButton"
+                    className="inputButton w-full"
                     disabled={loading}
                 >
                     {loading ? "Updating..." : "Update Password"}
