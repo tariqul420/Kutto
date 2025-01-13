@@ -11,6 +11,22 @@ nav a.active {
   transition: all 0.3s ease;
 }
 
+.dashboard a.active {
+  color: #38BD67;
+  background-color: rgba(9, 16, 26, 0.1);
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 6px;
+}
+
+.dark .dashboard a.active {
+  color: #38BD67;
+  background-color: #09101a;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 6px;
+}
+
 nav a.active::before {
   content: '';
   width: 100%;
@@ -52,6 +68,15 @@ nav a.active:hover {
   color: #38BD67;
 }
 
+.no-scrollbar {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @layer components {
   .navBarLink {
     @apply before:w-0 hover:before:w-full before:bg-color-accent before:dark:bg-color-accent-d before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-color-accent hover:dark:text-color-accent-d transition-all duration-300 before:left-0 cursor-pointer capitalize;
@@ -63,5 +88,9 @@ nav a.active:hover {
 
   .inputButton {
     @apply w-full py-3 px-4 bg-color-accent dark:bg-color-accent-d text-white border-none font-bold outline-none rounded-lg mt-3;
+  }
+
+  .dashboardLink {
+    @apply hover:bg-color-primary-d/10 rounded-md transition-all duration-300 cursor-pointer dark:hover:bg-color-primary-d;
   }
 }
