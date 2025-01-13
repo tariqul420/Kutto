@@ -88,7 +88,7 @@ The repository contains two main directories:
    VITE_APP_ID=YOUR_VITE_APP_ID
    VITE_MEASUREMENT_ID=YOUR_VITE_MEASUREMENT_ID
    VITE_IMGBB_API_KEY=VITE_IMGBB_API_KEY
-   VITE_API_URL=YOUR_VITE_API_URL
+   VITE_SERVER_API_URL=YOUR_VITE_API_URL
    ```
    > **Note:** Replace the `VITE_API_KEY` and `VITE_AUTH_DOMAIN`, along with other placeholders, with actual values.
 

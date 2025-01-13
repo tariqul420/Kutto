@@ -99,6 +99,9 @@ const AccountSettings = () => {
                                 <Controller
                                     name="photo"
                                     control={control}
+                                    rules={{
+                                        required: "Photo is required."
+                                    }}
                                     render={({ field }) => (
                                         <input
                                             id="photo"
@@ -116,6 +119,11 @@ const AccountSettings = () => {
                                     )}
                                 />
                             </label>
+                            {errors.photo && (
+                                <p className="flex text-red-500 gap-1 items-center mt-1">
+                                    <MdError /> {errors.photo.message}
+                                </p>
+                            )}
                         </div>
 
                         {/* Submit Button */}
