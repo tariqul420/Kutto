@@ -14,6 +14,9 @@ import AdoptionRequest from "../Pages/Dashboard/User/AdoptionReq/AdoptionRequest
 import CreateDonationCampaign from "../Pages/Dashboard/User/CreateDonateCamp/CreateDonationCampaign";
 import MyDonationCampaign from "../Pages/Dashboard/User/MyDonateCamp/MyDonationCampaign";
 import MyDonations from "../Pages/Dashboard/User/MyDonations/MyDonations";
+import AllUsers from "../Pages/Dashboard/Admin/Users/AllUsers";
+import AllPets from "../Pages/Dashboard/Admin/AddPets/AllPets";
+import AllDonation from "../Pages/Dashboard/Admin/AllDonation/AllDonation";
 
 const router = createBrowserRouter([
     {
@@ -45,7 +48,6 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
                 children: [
-
                     {
                         path: 'setting',
                         element: <Settings />
@@ -73,6 +75,18 @@ const router = createBrowserRouter([
                     {
                         path: '/dashboard/my-donations',
                         element: <MyDonations />
+                    },
+                    {
+                        path: '/dashboard/all-users',
+                        element: <AllUsers />
+                    },
+                    {
+                        path: '/dashboard/all-pets',
+                        element: <AllPets />
+                    },
+                    {
+                        path: '/dashboard/all-donation',
+                        element: <AllDonation />
                     },
                 ]
             }

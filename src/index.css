@@ -93,4 +93,8 @@ nav a.active:hover {
   .dashboardLink {
     @apply hover:bg-color-primary-d/10 rounded-md transition-all duration-300 cursor-pointer dark:hover:bg-color-primary-d;
   }
+
+  .dashboardIcon {
+    @apply flex items-center gap-1 text-lg font-medium;
+  }
 }
