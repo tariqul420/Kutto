@@ -33,6 +33,7 @@
     "react-router-dom": "^7.0.2",
     "react-select": "^5.9.0",
     "react-spinners": "^0.15.0",
+    "swiper": "^11.2.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },

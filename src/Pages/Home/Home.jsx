@@ -3,6 +3,7 @@ import { Banner } from "@/Components/Home/Banner/Banner";
 import CallToAction from "@/Components/Home/CallToAction/CallToAction";
 import FAQ from "@/Components/Home/FAQ/FAQ";
 import PetCategory from "@/Components/Home/PetCategory/PetCategory";
+import Testimonials from "@/Components/Home/Testimonials/Testimonials";
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
             <CallToAction />
             <AboutUs />
             <FAQ />
+            <Testimonials />
         </div>
     );
 };

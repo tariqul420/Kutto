@@ -4,7 +4,7 @@ import { Accordion, AccordionAction, AccordionContent, AccordionIcon, AccordionI
 const FAQ = () => {
     return (
         <section className="w-full py-16">
-            <div className="max-w-6xl mx-auto px-6">
+            <div className="max-w-6xl mx-auto">
                 <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
                     {/* YouTube Video Section */}
                     <div className="w-full lg:w-1/2">
