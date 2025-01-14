@@ -1,6 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { MdCloudUpload, MdError } from "react-icons/md";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,14 +26,13 @@ const options = [
 ];
 
 const UpdatePet = () => {
-    const { register, handleSubmit, control, reset, formState: { errors } } = useForm({
-        mode: "onChange",
-    });
+    const { register, handleSubmit, control, formState: { errors } } = useForm();
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const { theme } = useTheme();
     const { id } = useParams();
+    const queryClient = useQueryClient()
 
     useEffect(() => {
         document.title = "Update Pet || Kutto";
@@ -41,10 +40,11 @@ const UpdatePet = () => {
 
     const { isPending, mutateAsync } = useMutation({
         mutationFn: async (petData) => {
-            await axiosSecure.put("/update-p", petData);
+            await axiosSecure.put(`/update-pets/${id}`, petData);
         },
         onSuccess: () => {
             toast.success("Data Updated Successfully!!!");
+            queryClient.invalidateQueries(["myPets"]);
             navigate("/dashboard");
         },
         onError: (error) => {
@@ -98,9 +98,6 @@ const UpdatePet = () => {
             console.table(petData);
 
             await mutateAsync(petData);
-            reset();
-            setPhotoPreview("");
-            setSelectedOption(null);
         } catch (error) {
             toast.error(error.message || "Image upload failed.");
         }
