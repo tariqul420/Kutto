@@ -4,6 +4,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "keep-react/css";
 
 nav a.active {
   color: #F04335;
@@ -17,6 +18,11 @@ nav a.active {
   padding-left: 8px;
   padding-right: 8px;
   border-radius: 6px;
+}
+
+.clip-trapezoid {
+  clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
+  border-radius: 30px;
 }
 
 .dark .dashboard a.active {
@@ -127,6 +133,7 @@ nav a.active:hover {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -159,6 +166,7 @@ nav a.active:hover {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
