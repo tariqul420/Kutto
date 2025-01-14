@@ -4,13 +4,16 @@ import { CiMenuFries } from "react-icons/ci";
 import AuthBtn from "./AuthBtn";
 import useAuth from "../../../Hook/useAuth";
 import Profile from "./Profile";
-import ThemeToggle from "./ThemeToggle";
+import { IoMdSunny } from "react-icons/io";
+import { MdDarkMode } from "react-icons/md";
+import useTheme from "@/Hook/useTheme";
 
 const Navbar = () => {
     const { user } = useAuth();
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const { theme, toggleTheme } = useTheme()
 
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
@@ -62,7 +65,16 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    <ThemeToggle />
+                    <button
+                        onClick={toggleTheme}
+                        className="p-2 rounded-full bg-white dark:bg-gray-700"
+                    >
+                        {theme === "dark" ? (
+                            <IoMdSunny size={30} color="#F04335" />
+                        ) : (
+                            <MdDarkMode size={30} color="#1E1E1E" />
+                        )}
+                    </button>
 
                     {user ? <Profile /> : <AuthBtn />}
 

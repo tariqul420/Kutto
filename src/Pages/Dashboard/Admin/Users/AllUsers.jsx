@@ -55,7 +55,7 @@ const AllUsers = () => {
                             </td>
                             <td className="border border-gray-300 px-4 py-2">{user?.name}</td>
                             <td className="border border-gray-300 px-4 py-2">{user?.email}</td>
-                            <td className={`border border-gray-300 px-4 py-2 ${user?.role === 'admin' ? 'text-blue-500' : 'text-gray-700'}`}>{user?.role}</td>
+                            <td className={`border border-gray-300 px-4 py-2 ${user?.role === 'admin' ? 'text-blue-500' : 'text-gray-700 dark:text-gray-200'}`}>{user?.role}</td>
                             <td className="border border-gray-300 px-4 py-2 text-green-500">{user?.status}</td>
                             <td className="border border-gray-300 px-4 py-2">
                                 <button
