@@ -103,7 +103,7 @@ const MyAddedPets = () => {
                     <div className="flex gap-2 flex-wrap justify-center">
                         <button
                             className="bg-orange-600 p-1 rounded-md text-white"
-                            onClick={() => navigate(`/update-pet/${info.row.original._id}`)}
+                            onClick={() => navigate(`/dashboard/update-pet/${info.row.original._id}`)}
                         >
                             Update
                         </button>
