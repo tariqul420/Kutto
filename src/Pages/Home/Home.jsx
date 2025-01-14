@@ -1,4 +1,5 @@
 import { Banner } from "@/Components/Home/Banner/Banner";
+import CallToAction from "@/Components/Home/CallToAction/CallToAction";
 import PetCategory from "@/Components/Home/PetCategory/PetCategory";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
         <div>
             <Banner />
             <PetCategory />
+            <CallToAction />
         </div>
     );
 };
