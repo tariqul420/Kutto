@@ -34,6 +34,10 @@ const UpdatePet = () => {
     const { id } = useParams();
     const queryClient = useQueryClient()
 
+    const [selectedOption, setSelectedOption] = useState(null);
+    const [longDesc, setLongDesc] = useState("");
+    const [photoPreview, setPhotoPreview] = useState("");
+
     useEffect(() => {
         document.title = "Update Pet || Kutto";
     }, []);
@@ -60,14 +64,18 @@ const UpdatePet = () => {
         },
     });
 
-    const [selectedOption, setSelectedOption] = useState({
-        value: pet?.petCategories,
-        label: pet?.petCategories
-            ? pet?.petCategories.charAt(0).toUpperCase() + pet?.petCategories.slice(1)
-            : "",
-    });
-    const [longDesc, setLongDesc] = useState(pet?.longDescription || "");
-    const [photoPreview, setPhotoPreview] = useState(pet?.petImage || "");
+    useEffect(() => {
+        if (!isLoading && pet) {
+            setSelectedOption({
+                value: pet.petCategories,
+                label: pet.petCategories
+                    ? pet.petCategories.charAt(0).toUpperCase() + pet.petCategories.slice(1)
+                    : "",
+            });
+            setLongDesc(pet.longDescription || "");
+            setPhotoPreview(pet.petImage || "");
+        }
+    }, [pet, isLoading]);
 
     const onSubmit = async (data) => {
         const { petImage, petName, petAge, petLocation, shortDescription } = data;
@@ -144,7 +152,7 @@ const UpdatePet = () => {
         }),
     });
 
-    if (isLoading) return <p>Loading</p>
+    if (isLoading) return <p>Loading...</p>
 
     return (
         <section className="w-11/12 mx-auto my-4">
