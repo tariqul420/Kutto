@@ -5,7 +5,7 @@ import AuthBtn from "./AuthBtn";
 import useAuth from "../../../Hook/useAuth";
 import Profile from "./Profile";
 import { IoMdSunny } from "react-icons/io";
-import { MdDarkMode } from "react-icons/md";
+import { MdDarkMode, MdOutlinePets } from "react-icons/md";
 import useTheme from "@/Hook/useTheme";
 
 const Navbar = () => {
@@ -41,12 +41,15 @@ const Navbar = () => {
             <div className="w-11/12 mx-auto flex items-center justify-between">
                 <div>
                     <Link to="/">
-                        <h2 className="font-bold text-4xl font-Montserrat max-sm:hidden">
+                        <h2 className="font-bold text-4xl font-Montserrat max-sm:hidden flex gap-1">
                             Kutto
+                            <span className="text-color-accent">
+                                <MdOutlinePets />
+                            </span>
                         </h2>
-                        <img
-                            className="sm:hidden w-[3rem]"
-                            src="/service-logo.png" alt="Logo" />
+                        <div className="sm:hidden text-4xl text-color-accent">
+                            <MdOutlinePets />
+                        </div>
                     </Link>
                 </div>
 

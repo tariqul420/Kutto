@@ -53,7 +53,7 @@ const Testimonials = () => {
                                     <img
                                         src={review.image}
                                         alt={`Customer ${review.name}`}
-                                        className="w-44 h-44 rounded-full object-cover"
+                                        className="w-44 max-sm:w-24 max-sm:h-24 h-44 rounded-full object-cover"
                                     />
                                 </div>
                                 <div className="w-2/3">
