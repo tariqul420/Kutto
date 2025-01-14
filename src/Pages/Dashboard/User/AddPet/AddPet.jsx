@@ -9,6 +9,7 @@ import useAxiosSecure from "@/Hook/useAxiosSecure";
 import Select from "react-select";
 import useTheme from "@/Hook/useTheme";
 import ImageUpload from "@/Api/ImageUpload";
+import ReactQuill from "react-quill";
 
 const options = [
     { value: "dog", label: "Dog" },
@@ -27,6 +28,7 @@ const options = [
 const AddPet = () => {
     const [photoPreview, setPhotoPreview] = useState("");
     const [selectedOption, setSelectedOption] = useState(null);
+    const [longDesc, setLongDesc] = useState('');
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm();
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
@@ -63,15 +65,15 @@ const AddPet = () => {
                 petAge,
                 petLocation,
                 shortDescription,
+                longDescription: longDesc,
                 petCategories: selectedOption?.value,
+                adopted: false,
                 petOwner: {
                     name: user?.displayName,
                     email: user?.email,
                     photoURL: user?.photoURL,
                 },
             };
-
-            console.table(petData);
 
             await mutateAsync(petData);
             reset();
@@ -210,7 +212,7 @@ const AddPet = () => {
                     {/* Short Description */}
                     <div>
                         <textarea
-                            rows={4}
+                            rows={2}
                             placeholder="Short Description"
                             className="inputField w-full"
                             {...register("shortDescription", { required: "Short description is required." })}
@@ -220,6 +222,16 @@ const AddPet = () => {
                                 <MdError /> {errors.shortDescription.message}
                             </p>
                         )}
+                    </div>
+
+                    {/* Long Description */}
+                    <div>
+                        <ReactQuill
+                            theme="snow"
+                            value={longDesc}
+                            onChange={setLongDesc}
+                            className=""
+                        />
                     </div>
 
                     {/* Pet Photo */}
