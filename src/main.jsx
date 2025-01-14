@@ -5,6 +5,7 @@ import { RouterProvider } from 'react-router-dom'
 import router from './Router/Router'
 import AuthProvider from './Provider/AuthProvider'
 import { Toaster } from 'react-hot-toast'
+import 'react-loading-skeleton/dist/skeleton.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()

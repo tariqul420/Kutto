@@ -7,7 +7,7 @@ const LoadingSpinner = () => {
                 height={60}
                 margin={2}
                 width={5}
-                color='#FF9800'
+                color='#F04335'
             />
         </div>
     );

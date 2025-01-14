@@ -7,12 +7,14 @@ import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../../../Hook/useAuth";
 import ImageUpload from "../../../Api/ImageUpload";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
+import useRole from "@/Hook/useRole";
 
 const AccountSettings = () => {
     const { updateUserProfile, user, setUser, loading, setLoading } = useAuth();
     const [photoPreview, setPhotoPreview] = useState(user?.photoURL || "");
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic()
+    const [role] = useRole()
 
     const { register, handleSubmit, reset, control, setValue, formState: { errors } } = useForm();
 
@@ -146,8 +148,10 @@ const AccountSettings = () => {
                         </div>
                     </form>
                 </div>
-                <div className="mt-4 md:mt-0">
-                    <img className="w-52 border-2 border-solid border-color-accent-d rounded-full p-1" src={user?.photoURL} alt="profile photo" />
+                <div className="mt-4 md:mt-0 flex items-center justify-center flex-col gap-4">
+                    <img className="w-52 h-52 border-2 border-solid border-color-accent-d rounded-full p-1 object-cover" src={user?.photoURL} alt="profile photo" />
+
+                    <p className="bg-color-accent px-3 rounded-lg text-white">{role}</p>
                 </div>
             </div>
         </section>

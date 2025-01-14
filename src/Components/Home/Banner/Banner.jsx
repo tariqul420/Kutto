@@ -41,7 +41,7 @@ export const Banner = () => {
                 {carouselData.map((slide, index) => (
                     <CarouselItem key={index}>
                         <div
-                            className="relative flex items-center rounded-xl h-[30rem] bg-cover bg-center"
+                            className="relative flex items-center rounded-xl h-[26rem] bg-cover bg-center"
                             style={{ backgroundImage: `url(${slide.img})` }}
                         >
                             {/* Overlay for better text visibility */}
