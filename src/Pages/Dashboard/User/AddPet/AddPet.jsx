@@ -45,7 +45,7 @@ const AddPet = () => {
         },
         onSuccess: () => {
             toast.success("Data Added Successfully!!!");
-            navigate("/manage-pet");
+            navigate("/dashboard");
         },
         onError: (error) => {
             toast.error(error.message || "Failed to add pet data.");
