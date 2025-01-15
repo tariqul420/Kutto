@@ -5,12 +5,15 @@ import useAuth from "@/Hook/useAuth";
 import { LineProgress, LineProgressBar, LineProgressText, Modal, ModalAction, ModalContent, ModalDescription, ModalHeader, ModalTitle, } from "keep-react";
 'use client'
 import { BiSolidDonateHeart } from "react-icons/bi";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const MyDonationCampaign = () => {
+    const [status, setStatus] = useState(true)
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth()
 
-    const { data: myDonationCamp = [], isLoading } = useQuery({
+    const { data: myDonationCamp = [], isLoading, refetch } = useQuery({
         queryKey: ['myDonationCamp', user?.email],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/my-donation/${user?.email}`);
@@ -24,6 +27,18 @@ const MyDonationCampaign = () => {
 
     if (myDonationCamp?.length === 0) {
         return <p className="text-center">No request found.</p>;
+    }
+
+    const handelStatusUpdate = async (id, camStatus) => {
+        setStatus(!status)
+
+        try {
+            await axiosSecure.patch(`/donation-status/${id}?status=${camStatus}`)
+            refetch()
+            toast.success('Status Update Successfully!')
+        } catch (error) {
+            toast.error(error.code)
+        }
     }
 
     return (
@@ -64,8 +79,11 @@ const MyDonationCampaign = () => {
                             <td className={`border border-gray-300 px-4 py-2 ${donation?.status === "Running" ? 'text-green-500' : 'text-red-500'}`}> {donation?.status}</td>
                             <td className="border border-gray-300 px-4 py-2 flex flex-col gap-2">
                                 <button
+                                    onClick={() => handelStatusUpdate(donation?._id, status)}
                                     className="px-2 py-0 rounded-md bg-red-500 text-white">
-                                    Pause
+                                    {
+                                        status ? 'Pause' : 'Running'
+                                    }
                                 </button>
                                 <button
                                     className="px-2 py-0 rounded-md bg-red-500 text-white">

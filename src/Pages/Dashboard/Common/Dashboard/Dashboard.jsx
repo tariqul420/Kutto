@@ -35,7 +35,7 @@ const Dashboard = () => {
                                         </NavLink>
                                     </li>
                                     <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to={''}>
+                                        <NavLink className={`dashboardIcon`} to={'/dashboard/my-add-pets'}>
                                             <MdPets />
                                             <span>My added pets</span>
                                         </NavLink>

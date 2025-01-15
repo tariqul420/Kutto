@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { TbLogout2 } from "react-icons/tb";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdDashboard } from "react-icons/md";
+import useRole from "@/Hook/useRole";
 
 const Profile = () => {
     const [accountMenuOpen, setAccountMenuOpen] = useState(false)
     const navigate = useNavigate()
-
     const { user, logOutUser } = useAuth()
+    const [role] = useRole()
 
     return (
         <div className="flex items-center gap-[10px] cursor-pointer relative"
@@ -27,7 +28,7 @@ const Profile = () => {
             <div
                 className={`${accountMenuOpen ? "translate-y-0 opacity-100 z-[1000]" : "translate-y-[10px] opacity-0 z-[-1] hidden"} bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px] dark:bg-gray-700 shadow-md`}>
                 <p
-                    onClick={() => navigate('/dashboard')}
+                    onClick={() => navigate(`${role === "admin" ? '/dashboard/all-users' : 'dashboard/my-add-pets'}`)}
                     className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] hover:bg-gray-50 dark:hover:bg-gray-600/30">
                     <MdDashboard />
                     Dashboard
