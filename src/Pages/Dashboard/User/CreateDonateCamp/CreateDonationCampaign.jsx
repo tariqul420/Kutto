@@ -14,7 +14,7 @@ const CreateDonationCampaign = () => {
     const [photoPreview, setPhotoPreview] = useState("");
     const [longDesc, setLongDesc] = useState('');
     const [longDescError, setLongDescError] = useState(false);
-    const [lastDate, setLastDate] = useState(null);
+    const [lastDate, setLastDate] = useState(new Date());
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
@@ -26,7 +26,7 @@ const CreateDonationCampaign = () => {
 
     const { isPending, mutateAsync } = useMutation({
         mutationFn: async (donationData) => {
-            await axiosSecure.post("/add-donation", donationData);
+            await axiosSecure.post("/create-donation", donationData);
         },
         onSuccess: () => {
             toast.success("Data Added Successfully!!!");
@@ -36,8 +36,6 @@ const CreateDonationCampaign = () => {
             toast.error(error.message || "Failed to add donation data.");
         },
     });
-
-    console.log(lastDate);
 
     const onSubmit = async (data) => {
         const { donationName, maxAmount, shortDescription, donationImg } = data;
@@ -51,6 +49,13 @@ const CreateDonationCampaign = () => {
 
         if (!lastDate) {
             toast.error("Last donation date is required.");
+            return;
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (!lastDate || lastDate < today) {
+            toast.error("Last donation date cannot be in the past.");
             return;
         }
 
