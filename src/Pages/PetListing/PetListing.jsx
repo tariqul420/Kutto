@@ -10,10 +10,8 @@ const PetListing = () => {
     const [category, setCategory] = useState('')
     const [sort, setSort] = useState('');
     const axiosPublic = useAxiosPublic()
-
     const { ref, inView } = useInView();
-
-    const { data: pets = [], fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+    const { data: pets, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
         queryKey: ["petListingAllPet", search, category, sort],
         queryFn: async ({ pageParam = 1 }) => {
             const { data } = await axiosPublic.get("/all-pet", {
@@ -31,27 +29,20 @@ const PetListing = () => {
             return lastPage.length === 6 ? allPages.length + 1 : undefined;
         },
     });
-
+    console.log(pets?.pages);
     useEffect(() => {
         if (inView && hasNextPage) {
             fetchNextPage()
         }
     }, [fetchNextPage, hasNextPage, inView]);
-
     const handelSearch = (e) => {
         setSearch(e.target.value)
     };
-
     const handleCategoryChange = (e) => {
         setCategory(e.target.value);
     };
-
     const handelSortChange = (e) => {
         setSort(e.target.value)
-    }
-
-    if (pets?.pages[0]?.length === 0) {
-        return <p className="text-center my-6">No request found.</p>;
     }
 
     return (
