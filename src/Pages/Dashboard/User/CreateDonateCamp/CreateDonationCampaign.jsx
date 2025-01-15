@@ -37,11 +37,13 @@ const CreateDonationCampaign = () => {
         },
     });
 
+    console.log(lastDate);
+
     const onSubmit = async (data) => {
         const { donationName, maxAmount, shortDescription, donationImg } = data;
         const photoFile = donationImg[0];
 
-        if (!longDesc || longDesc.trim().length === 0) {
+        if (longDesc.trim() === "" || longDesc === "<p><br></p>") {
             setLongDescError(true);
             return;
         }

@@ -28,6 +28,7 @@ const options = [
 const AddPet = () => {
     const [photoPreview, setPhotoPreview] = useState("");
     const [selectedOption, setSelectedOption] = useState(null);
+    const [longDescError, setLongDescError] = useState(false);
     const [longDesc, setLongDesc] = useState('');
     const { register, handleSubmit, control, reset, formState: { errors } } = useForm();
     const { user } = useAuth();
@@ -56,6 +57,13 @@ const AddPet = () => {
         const { petImage, petName, petAge, petLocation, shortDescription } = data;
         const photoFile = petImage[0];
         const { value, unit } = petAge;
+
+
+        if (longDesc.trim() === "" || longDesc === "<p><br></p>") {
+            setLongDescError(true);
+            return;
+        }
+        setLongDescError(false);
 
         if (!value || !unit) {
             toast.error("Pet age and unit are required.");
@@ -259,8 +267,13 @@ const AddPet = () => {
                             theme="snow"
                             value={longDesc}
                             onChange={setLongDesc}
-                            className=""
+                            className={longDescError ? "border border-red-500" : ""}
                         />
+                        {longDescError && (
+                            <p className="flex text-red-500 gap-1 items-center mt-1">
+                                <MdError /> Long description is required.
+                            </p>
+                        )}
                     </div>
 
                     {/* Pet Photo */}
