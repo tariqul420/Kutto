@@ -27,12 +27,13 @@ const UpdateDonationCampaign = () => {
 
     const { isPending, mutateAsync } = useMutation({
         mutationFn: async (petData) => {
-            await axiosSecure.put(`/update-pe/${id}`, petData);
+            await axiosSecure.put(`/update-donation-campaign/${id}`, petData);
         },
         onSuccess: () => {
             toast.success("Data Updated Successfully!!!");
             queryClient.invalidateQueries(["myDonationCamp"]);
             navigate("/dashboard/my-donation-campaign");
+            reset()
         },
         onError: (error) => {
             toast.error(error.message || "Failed to update pet data.");
@@ -84,9 +85,9 @@ const UpdateDonationCampaign = () => {
                 maxAmount: parseFloat(maxAmount),
                 lastDate: lastDate.toISOString(),
                 shortDescription,
-                totalDonateUser: parseInt(0),
-                totalDonateAmount: parseInt(0),
-                status: "Running",
+                totalDonateUser: donation?.totalDonateUser,
+                totalDonateAmount: donation?.totalDonateAmount,
+                status: donation?.status,
                 longDescription: longDesc,
                 donationOwner: {
                     name: user?.displayName,
@@ -249,7 +250,7 @@ const UpdateDonationCampaign = () => {
 
                     <div className="w-full flex items-center justify-center">
                         <button type="submit" className="inputButton">
-                            {isPending ? "Adding..." : "Add Donation"}
+                            {isPending ? "Updating..." : "Update Donation"}
                         </button>
                     </div>
                 </form>
