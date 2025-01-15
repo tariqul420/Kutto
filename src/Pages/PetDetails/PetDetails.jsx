@@ -1,19 +1,24 @@
 'use client'
 import { Button, Modal, ModalAction, ModalContent, ModalHeader, ModalTitle } from 'keep-react'
 import useAuth from "@/Hook/useAuth";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/Hook/useAxiosPublic";
 import DOMPurify from 'dompurify';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '@/Hook/useAxiosSecure';
 import toast from 'react-hot-toast';
+import { useState } from 'react';
 
 const PetDetails = () => {
     const { user } = useAuth();
+    const navigate = useNavigate();
     const { id } = useParams();
     const axiosPublic = useAxiosPublic();
-    const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
+    const location = useLocation()
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -25,8 +30,17 @@ const PetDetails = () => {
         },
     });
 
+    const handleAdoptClick = () => {
+        if (user) {
+            setIsModalOpen(true);
+        } else {
+            toast.error("You need to log in to adopt a pet!");
+            navigate('/login', { state: { from: location.pathname }, replace: true });
+        }
+    };
+
     const onSubmit = async (data) => {
-        const { location, phone } = data
+        const { location, phone } = data;
 
         const petData = {
             petId: pet?._id,
@@ -35,17 +49,17 @@ const PetDetails = () => {
                 displayName: user?.displayName,
                 photoURL: user?.photoURL,
                 location: location,
-                phone: phone
-            }
-        }
+                phone: phone,
+            },
+        };
 
         try {
-            await axiosSecure.post('/adoption-request', petData)
-            reset()
-            toast.success('Successfully added!')
+            await axiosSecure.post('/adoption-request', petData);
+            reset();
+            setIsModalOpen(false);
+            toast.success('Successfully adopted!');
         } catch (error) {
-            toast.error(error?.response?.data)
-            console.log(error);
+            toast.error(error?.response?.data || 'Failed to adopt!');
         }
     };
 
@@ -53,7 +67,7 @@ const PetDetails = () => {
 
     return (
         <section>
-            {/* banner section */}
+            {/* Banner Section */}
             <div className="relative flex items-center h-[30vh] bg-cover bg-center"
                 style={{ backgroundImage: `url(https://img.freepik.com/free-photo/beautiful-domestic-cat-lying-fence_181624-30590.jpg?t=st=1736911879~exp=1736915479~hmac=48f8ad1c40a987291db211d282c6a46cc7e0c8a8c522abee2f77012be4dbf3d0&w=740)` }}>
                 <div className="relative w-11/12 text-center text-white z-10">
@@ -67,8 +81,8 @@ const PetDetails = () => {
                 </div>
             </div>
 
+            {/* Pet Details Section */}
             <div className="pet-details w-11/12 mx-auto flex flex-col lg:flex-row gap-8 my-16">
-                {/* Pet Image on Left Side */}
                 <div className="flex-1">
                     <img
                         src={pet?.petImage}
@@ -77,7 +91,6 @@ const PetDetails = () => {
                     />
                 </div>
 
-                {/* Pet Details on Right Side */}
                 <div className="flex-1 space-y-4">
                     <h2 className="text-2xl font-bold">{pet.petName}</h2>
                     <p><strong>Age:</strong> {pet?.petAge?.value} {pet?.petAge?.unit}</p>
@@ -85,9 +98,13 @@ const PetDetails = () => {
                     <p><strong>Category:</strong> {pet?.petCategories}</p>
                     <p><strong>Description:</strong> {pet?.shortDescription}</p>
 
-                    <Modal>
+                    <Modal open={isModalOpen} onOpenChange={setIsModalOpen}>
                         <ModalAction asChild>
-                            <Button className="bg-color-accent hover:bg-color-accent">Adopt</Button>
+                            <Button
+                                onClick={handleAdoptClick}
+                                className="bg-color-accent hover:bg-color-accent">
+                                Adopt
+                            </Button>
                         </ModalAction>
 
                         <ModalContent>
