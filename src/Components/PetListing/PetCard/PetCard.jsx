@@ -1,24 +1,26 @@
+import PropTypes from "prop-types";
 import { FaGetPocket } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdAddReaction } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-const PetCard = () => {
+const PetCard = ({ pet = {} }) => {
+    console.log(pet);
+    const { petImage, petName, petAge, petLocation } = pet
+
     return (
         <div>
             <Link href="#" className="block rounded-lg p-4 shadow-sm shadow-indigo-100">
                 <img
                     alt=""
-                    src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                    src={petImage}
                     className="h-56 w-full rounded-md object-cover"
                 />
 
                 <div className="mt-3">
                     <dl>
                         <div>
-                            <dt className="sr-only">Address</dt>
-
-                            <dd className="font-medium">123 Wallaby Avenue, Park Road</dd>
+                            <dd className="font-medium">{petName}</dd>
                         </div>
                     </dl>
 
@@ -29,7 +31,7 @@ const PetCard = () => {
                             <div className="mt-1.5 sm:mt-0">
                                 <p className="text-gray-500">Age</p>
 
-                                <p className="font-medium"> 10 Years</p>
+                                <p className="font-medium"> {petAge}</p>
                             </div>
                         </div>
 
@@ -39,7 +41,7 @@ const PetCard = () => {
                             <div className="mt-1.5 sm:mt-0">
                                 <p className="text-gray-500">Location</p>
 
-                                <p className="font-medium">Bangladesh</p>
+                                <p className="font-medium">{petLocation?.length < 10 ? petLocation : `${petLocation?.slice(0, 7)}...`}</p>
                             </div>
                         </div>
 
@@ -58,5 +60,9 @@ const PetCard = () => {
         </div>
     );
 };
+
+PetCard.propTypes = {
+    pet: PropTypes.object.isRequired,
+}
 
 export default PetCard;

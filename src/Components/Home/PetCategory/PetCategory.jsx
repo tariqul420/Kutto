@@ -2,7 +2,6 @@ import { FaFishFins } from "react-icons/fa6";
 import { MdOutlinePets } from "react-icons/md";
 import { PiDogFill, PiRabbitFill } from "react-icons/pi";
 import { GiEgyptianBird, GiGoat, GiParrotHead, GiSeatedMouse, GiTropicalFish, GiTurtle } from "react-icons/gi";
-import { SiFerretdb } from "react-icons/si";
 import { Link } from "react-router-dom";
 
 const PetCategory = () => {
@@ -17,7 +16,6 @@ const PetCategory = () => {
         { slug: "gold fish", name: "Gold Fish", icon: <GiTropicalFish /> },
         { slug: "mouse", name: "Mouse", icon: <GiSeatedMouse /> },
         { slug: "goat", name: "Goat", icon: <GiGoat /> },
-        { slug: "ferret", name: "Ferret", icon: <SiFerretdb /> },
     ];
 
     return (

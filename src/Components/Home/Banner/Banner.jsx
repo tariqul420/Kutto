@@ -10,8 +10,11 @@ import {
     CarouselPrevButton,
     CarouselSlides,
 } from 'keep-react'
+import { useNavigate } from 'react-router-dom'
 
 export const Banner = () => {
+    const navigate = useNavigate()
+
     const carouselData = [
         {
             img: "https://images.unsplash.com/photo-1498336179775-9836baef8fdf?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -62,7 +65,8 @@ export const Banner = () => {
                                     Human shampoo for dogs after six days of delicate care.
                                     Ensure your pet’s <br /> happiness with quality grooming products.
                                 </p>
-                                <button className='bg-color-accent p-3 px-4 text-lg font-medium'>View More</button>
+                                <button
+                                    onClick={() => navigate('/pet-listing')} className='bg-color-accent p-3 px-4 text-lg font-medium'>View More</button>
                             </div>
                         </div>
                     </CarouselItem>
