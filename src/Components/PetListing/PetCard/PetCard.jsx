@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const PetCard = ({ pet = {} }) => {
     console.log(pet);
-    const { petImage, petName, petAge, petLocation } = pet
+    const { _id, petImage, petName, petAge, petLocation } = pet
 
     return (
         <div>
@@ -51,7 +51,7 @@ const PetCard = ({ pet = {} }) => {
                             <div className="mt-1.5 sm:mt-0">
                                 <p className="text-gray-500">Action</p>
 
-                                <Link className="font-medium underline">Details</Link>
+                                <Link to={`/pet-details/${_id}`} className="font-medium underline">Details</Link>
                             </div>
                         </div>
                     </div>
