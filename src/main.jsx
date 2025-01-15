@@ -8,6 +8,7 @@ import { Toaster } from 'react-hot-toast'
 import 'react-loading-skeleton/dist/skeleton.css'
 import 'react-quill/dist/quill.snow.css';
 import 'swiper/swiper-bundle.css';
+import "react-datepicker/dist/react-datepicker.css";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ThemeProvider from './Provider/ThemeProvider'
 

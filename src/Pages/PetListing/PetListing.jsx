@@ -13,7 +13,7 @@ const PetListing = () => {
 
     const { ref, inView } = useInView();
 
-    const { data: pets, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+    const { data: pets = [], fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
         queryKey: ["petListingAllPet", search, category, sort],
         queryFn: async ({ pageParam = 1 }) => {
             const { data } = await axiosPublic.get("/all-pet", {
@@ -48,6 +48,10 @@ const PetListing = () => {
 
     const handelSortChange = (e) => {
         setSort(e.target.value)
+    }
+
+    if (pets?.pages[0]?.length === 0) {
+        return <p className="text-center my-6">No request found.</p>;
     }
 
     return (

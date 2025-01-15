@@ -83,6 +83,17 @@ nav a.active:hover {
   display: none;
 }
 
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+}
+
 @layer components {
   .navBarLink {
     @apply before:w-0 hover:before:w-full before:bg-color-accent before:dark:bg-color-accent-d before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-color-accent hover:dark:text-color-accent-d transition-all duration-300 before:left-0 cursor-pointer capitalize;

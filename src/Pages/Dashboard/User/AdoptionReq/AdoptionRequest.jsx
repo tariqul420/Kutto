@@ -30,7 +30,7 @@ const AdoptionRequest = () => {
         return <Skeleton height={28} count={15} />;
     }
 
-    if (adoptionReq.length === 0) {
+    if (adoptionReq?.length === 0) {
         return <p className="text-center">No request found.</p>;
     }
 
@@ -67,13 +67,15 @@ const AdoptionRequest = () => {
                             <td className="border border-gray-300 px-4 py-2">{pet?.status}</td>
                             <td className="border border-gray-300 px-4 py-2 space-y-2">
                                 <button
+                                    disabled={!pet?.status}
                                     onClick={() => handleAdopt(pet?.petId, "accept")}
-                                    className="px-2 py-1 rounded-md bg-red-500 text-white">
+                                    className="px-2 py-1 rounded-md bg-red-500 text-white disabled:bg-gray-700 disabled:cursor-not-allowed">
                                     Accept
                                 </button>
                                 <button
+                                    disabled={!pet?.status}
                                     onClick={() => handleAdopt(pet?.petId, "rejected")}
-                                    className="px-2 py-1 rounded-md bg-green-500 text-white">
+                                    className="px-2 py-1 rounded-md bg-green-500 text-white disabled:bg-gray-700 disabled:cursor-not-allowed">
                                     Reject
                                 </button>
                             </td>
