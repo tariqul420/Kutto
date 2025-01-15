@@ -13,7 +13,7 @@ const MyAddedPets = () => {
     const navigate = useNavigate();
 
     const { data: myPets = [], isLoading, refetch } = useQuery({
-        queryKey: ["myPets"],
+        queryKey: ["myPets", user?.email],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/my-pets/${user?.email}`);
             return data;

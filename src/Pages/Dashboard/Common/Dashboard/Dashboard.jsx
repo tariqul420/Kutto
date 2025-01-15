@@ -49,13 +49,13 @@ const Dashboard = () => {
                                     <li className="dashboardLink">
                                         <NavLink className={`dashboardIcon`} to={'/dashboard/create-donation'}>
                                             <FaDonate />
-                                            <span>Create Donate</span>
+                                            <span>Create Donate C...</span>
                                         </NavLink>
                                     </li>
                                     <li className="dashboardLink">
                                         <NavLink className={`dashboardIcon`} to={'/dashboard/my-donation-campaign'}>
                                             <BiSolidDonateHeart />
-                                            <span>My Donation</span>
+                                            <span>My Donation C...</span>
                                         </NavLink>
                                     </li>
                                     <li className="dashboardLink">

@@ -30,7 +30,7 @@ const CreateDonationCampaign = () => {
         },
         onSuccess: () => {
             toast.success("Data Added Successfully!!!");
-            navigate("/dashboard");
+            navigate("/my-donation-campaign");
         },
         onError: (error) => {
             toast.error(error.message || "Failed to add donation data.");
@@ -68,6 +68,9 @@ const CreateDonationCampaign = () => {
                 maxAmount: parseFloat(maxAmount),
                 lastDate: lastDate.toISOString(),
                 shortDescription,
+                totalDonateUser: parseInt(0),
+                totalDonateAmount: parseInt(0),
+                status: "Running",
                 longDescription: longDesc,
                 donationOwner: {
                     name: user?.displayName,
@@ -127,12 +130,19 @@ const CreateDonationCampaign = () => {
                         </div>
                     </div>
 
+                    {/* Max Donation Amount */}
                     <div className="flex-1">
                         <input
                             type="number"
                             placeholder="Max Donation Amount"
                             className="inputField"
-                            {...register("maxAmount", { required: "Max Donation Amount is Required" })}
+                            {...register("maxAmount", {
+                                required: "Max Donation Amount is required.",
+                                min: {
+                                    value: 1,
+                                    message: "Minium Donation Amount must be at least 1."
+                                }
+                            })}
                         />
                         {errors.maxAmount && (
                             <p className="flex text-red-500 gap-1 items-center">
