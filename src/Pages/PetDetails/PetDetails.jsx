@@ -1,18 +1,21 @@
-import { useState } from "react";
+'use client'
+import { Button, Modal, ModalAction, ModalContent, ModalHeader, ModalTitle } from 'keep-react'
 import useAuth from "@/Hook/useAuth";
-import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/Hook/useAxiosPublic";
 import DOMPurify from 'dompurify';
+import { useForm } from 'react-hook-form';
+import useAxiosSecure from '@/Hook/useAxiosSecure';
+import toast from 'react-hot-toast';
 
 const PetDetails = () => {
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [address, setAddress] = useState("");
     const { user } = useAuth();
     const { id } = useParams();
     const axiosPublic = useAxiosPublic();
-    console.log(id);
+    const axiosSecure = useAxiosSecure()
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const { data: pet = {} } = useQuery({
         queryKey: ["pet", id],
@@ -22,48 +25,31 @@ const PetDetails = () => {
         },
     });
 
-    const sanitizedDescription = DOMPurify.sanitize(pet?.longDescription);
+    const onSubmit = async (data) => {
+        const { location, phone } = data
 
-
-    const handleSubmitAdoptionRequest = async (e) => {
-        e.preventDefault();
-
-        // Prepare adoption data
-        const adoptionData = {
-            petId: pet._id,
-            petName: pet.petName,
-            petImage: pet.petImage,
-            petOwner: {
-                name: user.displayName,
-                email: user.email,
-            },
-            phoneNumber,
-            address,
-        };
+        const petData = {
+            petId: pet?._id,
+            petAdopter: {
+                email: user?.email,
+                displayName: user?.displayName,
+                photoURL: user?.photoURL,
+                location: location,
+                phone: phone
+            }
+        }
 
         try {
-            // Send adoption data to the backend API (POST request)
-            const response = await fetch("/api/adopt-pet", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(adoptionData),
-            });
-
-            if (response.ok) {
-                toast.success("Adoption request submitted successfully!");
-                // Reset the form fields
-                setPhoneNumber("");
-                setAddress("");
-            } else {
-                toast.error("Failed to submit adoption request.");
-            }
+            await axiosSecure.post('/adoption-request', petData)
+            reset()
+            toast.success('Successfully added!')
         } catch (error) {
-            console.error("Error submitting adoption request:", error);
-            toast.error("Something went wrong.");
+            toast.error(error?.response?.data)
+            console.log(error);
         }
     };
+
+    const sanitizedDescription = DOMPurify.sanitize(pet?.longDescription);
 
     return (
         <section>
@@ -85,8 +71,8 @@ const PetDetails = () => {
                 {/* Pet Image on Left Side */}
                 <div className="flex-1">
                     <img
-                        src={pet.petImage}
-                        alt={pet.petName}
+                        src={pet?.petImage}
+                        alt={pet?.petName}
                         className="w-full h-[400px] object-cover rounded-md"
                     />
                 </div>
@@ -99,11 +85,79 @@ const PetDetails = () => {
                     <p><strong>Category:</strong> {pet?.petCategories}</p>
                     <p><strong>Description:</strong> {pet?.shortDescription}</p>
 
-                    <button className="px-4 py-2 rounded-md bg-color-accent">Adopt</button>
+                    <Modal>
+                        <ModalAction asChild>
+                            <Button className="bg-color-accent hover:bg-color-accent">Adopt</Button>
+                        </ModalAction>
 
-                    {/* <button onClick={handleAdoptClick} className="adopt-button bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600">
-                    Adopt
-                </button> */}
+                        <ModalContent>
+                            <ModalHeader className="mb-6 flex flex-col justify-center">
+                                <div className="space-y-1 text-center">
+                                    <ModalTitle className='mb-4'>{pet?.petName}</ModalTitle>
+                                    <div>
+                                        <form onSubmit={handleSubmit(onSubmit)}>
+                                            <div className="space-y-4 w-full">
+                                                <div>
+                                                    <input
+                                                        id="name"
+                                                        name="name"
+                                                        type="text"
+                                                        disabled
+                                                        value={user?.displayName}
+                                                        {...register('name')}
+                                                        className="inputField disabled:cursor-not-allowed"
+                                                    />
+                                                </div>
+
+                                                <div>
+                                                    <input
+                                                        id="email"
+                                                        name="email"
+                                                        type="email"
+                                                        disabled
+                                                        value={user?.email}
+                                                        {...register('email')}
+                                                        className="inputField disabled:cursor-not-allowed"
+                                                    />
+                                                </div>
+
+                                                <div>
+                                                    <input
+                                                        id="phone"
+                                                        placeholder='Phone Number'
+                                                        name="phone"
+                                                        type="number"
+                                                        {...register('phone', { required: 'Phone number is required' })}
+                                                        className="inputField"
+                                                    />
+                                                    {errors.phone && <span className="text-red-500 text-xs">{errors.phone.message}</span>}
+                                                </div>
+
+                                                <div>
+                                                    <input
+                                                        id="location"
+                                                        name="location"
+                                                        placeholder='Location'
+                                                        type="text"
+                                                        {...register('location', { required: 'Location is required' })}
+                                                        className="inputField"
+                                                    />
+                                                    {errors.location && <span className="text-red-500 text-xs">{errors.location.message}</span>}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button
+                                                    className="px-4 py-2 bg-color-accent rounded-md mt-4"
+                                                    type="submit">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </ModalHeader>
+                        </ModalContent>
+                    </Modal>
                 </div>
             </div>
 
