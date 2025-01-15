@@ -49,7 +49,7 @@ const UpdatePet = () => {
         onSuccess: () => {
             toast.success("Data Updated Successfully!!!");
             queryClient.invalidateQueries(["myPets"]);
-            navigate("/dashboard");
+            navigate("/dashboard/my-add-pets");
         },
         onError: (error) => {
             toast.error(error.message || "Failed to update pet data.");
@@ -112,8 +112,6 @@ const UpdatePet = () => {
                     photoURL: user?.photoURL,
                 },
             };
-
-            console.table(petData);
 
             await mutateAsync(petData);
         } catch (error) {
