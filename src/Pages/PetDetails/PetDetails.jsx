@@ -44,6 +44,9 @@ const PetDetails = () => {
 
         const petData = {
             petId: pet?._id,
+            petName: pet?.petName,
+            petImage: pet?.petImage,
+            petOwner: pet?.petOwner,
             petAdopter: {
                 email: user?.email,
                 displayName: user?.displayName,
