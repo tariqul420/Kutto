@@ -31,7 +31,7 @@ const PetCard = ({ pet = {} }) => {
                             <div className="mt-1.5 sm:mt-0">
                                 <p className="text-gray-500">Age</p>
 
-                                <p className="font-medium"> {petAge}</p>
+                                <p className="font-medium"> {petAge?.value} {petAge?.unit}</p>
                             </div>
                         </div>
 

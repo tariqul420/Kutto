@@ -81,6 +81,13 @@ const UpdatePet = () => {
         const { petImage, petName, petAge, petLocation, shortDescription } = data;
         const photoFile = petImage?.[0];
 
+        const { value, unit } = petAge;
+
+        if (!value || !unit) {
+            toast.error("Pet age and unit are required.");
+            return;
+        }
+
         try {
             let imgUrl = pet?.petImage;
             if (photoFile) {
@@ -90,7 +97,10 @@ const UpdatePet = () => {
             const petData = {
                 petImage: imgUrl,
                 petName,
-                petAge,
+                petAge: {
+                    value: parseInt(value),
+                    unit: unit,
+                },
                 petLocation,
                 shortDescription,
                 longDescription: longDesc,
@@ -176,19 +186,41 @@ const UpdatePet = () => {
                             )}
                         </div>
 
-                        <div className="flex-1">
-                            <input
-                                type="text"
-                                defaultValue={pet?.petAge}
-                                placeholder="Pet Age"
-                                {...register("petAge", { required: "Pet age is required." })}
-                                className="inputField"
-                            />
-                            {errors.petAge && (
-                                <p className="text-red-500 flex items-center gap-2">
-                                    <MdError /> {errors.petAge.message}
-                                </p>
-                            )}
+                        {/* Pet Age */}
+                        <div className="flex gap-4 flex-1">
+                            {/* Numeric Input for Age */}
+                            <div className="flex-1">
+                                <input
+                                    type="number"
+                                    placeholder="Pet Age"
+                                    className="inputField"
+                                    defaultValue={pet?.petAge?.value}
+                                    {...register("petAge.value", { required: "Pet age is required." })}
+                                />
+                                {errors.petAge?.value && (
+                                    <p className="flex text-red-500 gap-1 items-center">
+                                        <MdError /> {errors.petAge.value.message}
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Dropdown for Months/Years */}
+                            <div>
+                                <select
+                                    className="inputField"
+                                    defaultValue={pet?.petAge?.unit}
+                                    {...register("petAge.unit", { required: "Pet age unit is required." })}
+                                >
+                                    <option value="">Select Unit</option>
+                                    <option value="months">Months</option>
+                                    <option value="years">Years</option>
+                                </select>
+                                {errors.petAge?.unit && (
+                                    <p className="flex text-red-500 gap-1 items-center">
+                                        <MdError /> {errors.petAge.unit.message}
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     </div>
 
