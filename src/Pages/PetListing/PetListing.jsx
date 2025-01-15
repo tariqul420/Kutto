@@ -3,6 +3,7 @@ import useAxiosPublic from "@/Hook/useAxiosPublic";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const PetListing = () => {
     const [search, setSearch] = useState('')
@@ -30,8 +31,6 @@ const PetListing = () => {
             return lastPage.length === 6 ? allPages.length + 1 : undefined;
         },
     });
-
-    console.log(pets?.pages);
 
     useEffect(() => {
         if (inView && hasNextPage) {
@@ -105,7 +104,7 @@ const PetListing = () => {
 
             {/* Infinite Scroll Loader */}
             <div ref={ref} className="h-4 mt-4">
-                {isFetchingNextPage && <p>Loading more pets...</p>}
+                {isFetchingNextPage && <CgSpinnerTwo color="#6b7280" size={20} />}
             </div>
 
             {!hasNextPage && pets?.pages.flat().length > 0 && (

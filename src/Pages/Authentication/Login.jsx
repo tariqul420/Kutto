@@ -27,7 +27,7 @@ const Login = () => {
             await loginUser(email, password)
             setEmail('')
             toast.success('Login Successfully ❤️')
-            navigate(location?.state?.from ? location?.state?.from : '/')
+            navigate(location?.state?.from ? location?.state?.from : '/', { replace: true })
             reset()
         } catch (error) {
             if (error.code === "auth/invalid-credential") {
@@ -134,7 +134,7 @@ const Login = () => {
                             <hr className="w-[45%] bg-gray-400 h-[2px]" />
                         </div>
 
-                        <SocialBtn redirectUrl={location?.state ? location?.state : '/'} />
+                        <SocialBtn redirectUrl={location?.state?.from ? location?.state?.from : '/'} />
                     </div>
                 </div>
 
