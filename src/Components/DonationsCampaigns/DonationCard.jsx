@@ -5,12 +5,11 @@ import { MdAddReaction } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const DonationCard = ({ donation = {} }) => {
-    console.log(donation);
     const { _id, donationImage, donationName, maxAmount, totalDonateAmount } = donation
 
     return (
         <div>
-            <Link to={`/pet-details/${_id}`} className="block rounded-lg p-4 shadow-sm shadow-indigo-100">
+            <Link to={`/donation-details/${_id}`} className="block rounded-lg p-4 shadow-sm shadow-indigo-100">
                 <img
                     alt=""
                     src={donationImage}
@@ -53,7 +52,7 @@ const DonationCard = ({ donation = {} }) => {
                             <div className="mt-1.5 sm:mt-0">
                                 <p className="text-gray-500">Action</p>
 
-                                <Link to={`/pet-details/${_id}`} className="font-medium underline">Details</Link>
+                                <Link to={`/donation-details/${_id}`} className="font-medium underline">Details</Link>
                             </div>
                         </div>
                     </div>
