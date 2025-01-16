@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import useAxiosSecure from '@/Hook/useAxiosSecure';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
+import LoadingSpinner from '@/Components/Shared/LoadingSpinner';
 
 const DonationDetails = () => {
     const { user } = useAuth();
@@ -22,7 +23,7 @@ const DonationDetails = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    const { data: donation = {} } = useQuery({
+    const { data: donation = {}, isLoading } = useQuery({
         queryKey: ["donationDetails", id],
         queryFn: async () => {
             const { data } = await axiosPublic.get(`/donation-details/${id}`);
@@ -68,6 +69,8 @@ const DonationDetails = () => {
 
     const sanitizedDescription = DOMPurify.sanitize(donation?.longDescription);
 
+    if (isLoading) return <LoadingSpinner />
+
     return (
         <section>
             {/* Banner Section */}
@@ -97,7 +100,7 @@ const DonationDetails = () => {
                 <div className="flex-1 space-y-4">
                     <div className='flex items-center justify-between'>
                         <div>
-                            <h2 className="text-2xl font-bold">{donation.donationName}</h2>
+                            <h2 className="text-2xl font-bold mb-2">{donation.donationName}</h2>
                             <p><strong>maxAmount:</strong> $ {donation?.maxAmount}</p>
                             <p><strong>Donated Amount:</strong> $ {donation?.totalDonateAmount}</p>
                             <p><strong>Last Date:</strong> {new Date(donation?.lastDate).toLocaleDateString('en-US', {
@@ -105,6 +108,11 @@ const DonationDetails = () => {
                                 month: 'long',
                                 year: 'numeric'
                             })}
+                            </p>
+                            <p>
+                                <strong>Status:</strong> <span className={`${donation?.status === 'Running' && 'text-green-600'} ${donation?.status === 'Pause' && 'text-red-600'}`}>
+                                    {donation?.status}
+                                </span>
                             </p>
                         </div>
                         <div>
@@ -123,8 +131,9 @@ const DonationDetails = () => {
                     <Modal open={isModalOpen} onOpenChange={setIsModalOpen}>
                         <ModalAction asChild>
                             <Button
+                                disabled={donation?.status === 'Pause' || donation?.maxAmount === donation?.totalDonateAmount}
                                 onClick={handleAdoptClick}
-                                className="bg-color-accent hover:bg-color-accent">
+                                className="bg-color-accent hover:bg-color-accent disabled:cursor-not-allowed">
                                 Donate Now
                             </Button>
                         </ModalAction>
@@ -134,64 +143,7 @@ const DonationDetails = () => {
                                 <div className="space-y-1 text-center">
                                     <ModalTitle className='mb-4'>{donation?.donationName}</ModalTitle>
                                     <div>
-                                        <form onSubmit={handleSubmit(onSubmit)}>
-                                            <div className="space-y-4 w-full">
-                                                <div>
-                                                    <input
-                                                        id="name"
-                                                        name="name"
-                                                        type="text"
-                                                        disabled
-                                                        value={user?.displayName}
-                                                        {...register('name')}
-                                                        className="inputField disabled:cursor-not-allowed"
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    <input
-                                                        id="email"
-                                                        name="email"
-                                                        type="email"
-                                                        disabled
-                                                        value={user?.email}
-                                                        {...register('email')}
-                                                        className="inputField disabled:cursor-not-allowed"
-                                                    />
-                                                </div>
-
-                                                <div>
-                                                    <input
-                                                        id="phone"
-                                                        placeholder='Phone Number'
-                                                        name="phone"
-                                                        type="number"
-                                                        {...register('phone', { required: 'Phone number is required' })}
-                                                        className="inputField"
-                                                    />
-                                                    {errors.phone && <span className="text-red-500 text-xs">{errors.phone.message}</span>}
-                                                </div>
-
-                                                <div>
-                                                    <input
-                                                        id="location"
-                                                        name="location"
-                                                        placeholder='Location'
-                                                        type="text"
-                                                        {...register('location', { required: 'Location is required' })}
-                                                        className="inputField"
-                                                    />
-                                                    {errors.location && <span className="text-red-500 text-xs">{errors.location.message}</span>}
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <button
-                                                    className="px-4 py-2 bg-color-accent rounded-md mt-4"
-                                                    type="submit">
-                                                    Submit
-                                                </button>
-                                            </div>
-                                        </form>
+                                        Hello Developer. How Are Your?
                                     </div>
                                 </div>
                             </ModalHeader>
