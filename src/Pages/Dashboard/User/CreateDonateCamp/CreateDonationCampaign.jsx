@@ -30,7 +30,7 @@ const CreateDonationCampaign = () => {
         },
         onSuccess: () => {
             toast.success("Data Added Successfully!!!");
-            navigate("/my-donation-campaign");
+            navigate("/dashboard/my-donation-campaign");
         },
         onError: (error) => {
             toast.error(error.message || "Failed to add donation data.");

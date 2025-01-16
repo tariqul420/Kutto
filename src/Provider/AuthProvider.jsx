@@ -48,16 +48,10 @@ const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-            setUser(currentUser)
             setLoading(false)
-            if (currentUser && currentUser?.email) {
-                //save user in mongodb
-                await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/users`, {
-                    name: currentUser?.displayName,
-                    image: currentUser?.photoURL,
-                    email: currentUser?.email,
-                })
+            setUser(currentUser)
 
+            if (currentUser?.email) {
                 const userInformation = { email: currentUser?.email }
                 await axios.post(`${import.meta.env.VITE_SERVER_API_URL}/jwt`, userInformation, { withCredentials: true })
 

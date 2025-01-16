@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import ImageUpload from "../../Api/ImageUpload";
 import SocialBtn from "../../Components/Auth/SocialBtn";
 import { ImSpinner9 } from "react-icons/im";
+import saveUser from "@/Api/saveUser";
 
 const Register = () => {
     const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -29,8 +30,9 @@ const Register = () => {
 
         // Register with email and password
         try {
-            await createUser(email, password)
+            const result = await createUser(email, password)
             await updateUserProfile(fullName, photoUrl)
+            await saveUser({ ...result?.user, displayName: fullName, photoURL: photoUrl })
             toast.success("Registration successfully ❤️")
             navigate('/')
             reset()

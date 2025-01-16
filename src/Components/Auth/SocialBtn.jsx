@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import useAuth from "../../Hook/useAuth";
+import saveUser from "@/Api/saveUser";
 
 const SocialBtn = ({ redirectUrl }) => {
     const { socialAuth } = useAuth();
@@ -18,13 +19,10 @@ const SocialBtn = ({ redirectUrl }) => {
 
     const handelFacebook = async () => {
         try {
-            await socialAuth(facebookProvider)
-                .then(() => {
-                    toast.success(successMessage)
-                    navigate(redirectUrl)
-                }).catch(error => {
-                    toast.error(error.code)
-                })
+            const data = await socialAuth(facebookProvider)
+            await saveUser(data?.user)
+            toast.success(successMessage)
+            navigate(redirectUrl)
         } catch (error) {
             toast.error(error.code)
         }
@@ -32,14 +30,10 @@ const SocialBtn = ({ redirectUrl }) => {
 
     const handelGoogle = async () => {
         try {
-            await socialAuth(googleProvider)
-                .then(() => {
-                    toast.success(successMessage)
-                    navigate(redirectUrl)
-                }).catch(error => {
-                    toast.error(error.code)
-                    console.log(error);
-                })
+            const data = await socialAuth(googleProvider)
+            await saveUser(data?.user)
+            toast.success(successMessage)
+            navigate(redirectUrl)
         } catch (error) {
             toast.error(error.code)
             console.log(error);
@@ -48,7 +42,8 @@ const SocialBtn = ({ redirectUrl }) => {
 
     const handelGithub = async () => {
         try {
-            await socialAuth(githubProvider)
+            const data = await socialAuth(githubProvider)
+            await saveUser(data?.user)
             toast.success(successMessage)
             navigate(redirectUrl)
         } catch (error) {
