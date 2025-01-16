@@ -12,6 +12,10 @@ const Profile = () => {
     const { user, logOutUser } = useAuth()
     const [role] = useRole()
 
+    const handelLogout = async () => {
+        await logOutUser()
+    };
+
     return (
         <div className="flex items-center gap-[10px] cursor-pointer relative"
             onClick={() => setAccountMenuOpen(!accountMenuOpen)}>
@@ -36,7 +40,7 @@ const Profile = () => {
 
                 <div className="mt-3 border-t border-gray-200 pt-[5px]">
                     <p
-                        onClick={() => logOutUser()}
+                        onClick={handelLogout}
                         className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-red-500 hover:bg-red-50">
                         <TbLogout2 />
                         Logout

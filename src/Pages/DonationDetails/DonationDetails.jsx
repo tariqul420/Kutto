@@ -1,5 +1,5 @@
 'use client'
-import { Button, CircleProgress, CircleProgressLine, CircleProgressText, Modal, ModalAction, ModalContent, ModalHeader, ModalTitle } from 'keep-react'
+import { Button, CircleProgress, CircleProgressLine, CircleProgressText, Modal, ModalAction, ModalContent, ModalDescription, ModalHeader, ModalTitle } from 'keep-react'
 import useAuth from "@/Hook/useAuth";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -8,6 +8,12 @@ import DOMPurify from 'dompurify';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import LoadingSpinner from '@/Components/Shared/LoadingSpinner';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import CheckoutForm from '../Payment/CheckoutForm';
+import { BiSolidDonateHeart } from 'react-icons/bi';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_CLIENT_SECRET);
 
 const DonationDetails = () => {
     const { user } = useAuth();
@@ -96,27 +102,39 @@ const DonationDetails = () => {
 
                     <p><strong>Description:</strong> {donation?.shortDescription}</p>
 
-                    <Modal open={isModalOpen} onOpenChange={setIsModalOpen}>
-                        <ModalAction asChild>
-                            <Button
-                                disabled={donation?.status === 'Pause' || donation?.maxAmount === donation?.totalDonateAmount}
-                                onClick={handleDonateNowClick}
-                                className="bg-color-accent hover:bg-color-accent disabled:cursor-not-allowed">
-                                Donate Now
-                            </Button>
-                        </ModalAction>
+                    <Elements stripe={stripePromise}>
+                        <Modal open={isModalOpen} onOpenChange={setIsModalOpen}>
+                            <ModalAction asChild>
+                                <Button
+                                    disabled={donation?.status === 'Pause' || donation?.maxAmount === donation?.totalDonateAmount}
+                                    onClick={handleDonateNowClick}
+                                    className="bg-color-accent hover:bg-color-accent disabled:cursor-not-allowed">
+                                    Donate Now
+                                </Button>
+                            </ModalAction>
 
-                        <ModalContent>
-                            <ModalHeader className="mb-6 flex flex-col justify-center">
-                                <div className="space-y-1 text-center">
-                                    <ModalTitle className='mb-4'>{donation?.donationName}</ModalTitle>
-                                    <div>
-                                        Hello Developer. How Are Your?
+                            <ModalContent className="max-w-[20rem] lg:max-w-[26rem]">
+                                <ModalHeader className="mb-6 flex flex-col justify-center space-y-3">
+                                    <div className='flex items-center justify-center flex-col gap-1'>
+                                        <div className="flex h-20 w-20 items-center justify-center rounded-full border border-metal-100 bg-metal-50 text-metal-600 dark:border-metal-800 dark:bg-metal-800 dark:text-white">
+                                            <BiSolidDonateHeart size={50} />
+                                        </div>
+                                        <ModalTitle>Donate Now</ModalTitle>
                                     </div>
-                                </div>
-                            </ModalHeader>
-                        </ModalContent>
-                    </Modal>
+                                    <div className="space-y-1 text-center">
+
+                                        <ModalDescription>
+                                            <CheckoutForm
+                                                donationId={donation?._id}
+                                                donationName={donation?.donationName}
+                                                donationImage={donation?.donationImage}
+                                            />
+                                        </ModalDescription>
+                                    </div>
+                                </ModalHeader>
+                            </ModalContent>
+                        </Modal>
+                    </Elements>
                 </div>
             </div>
 
