@@ -68,7 +68,6 @@ const AllPets = () => {
         }
     };
 
-
     const columns = useMemo(
         () => [
             {
