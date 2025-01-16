@@ -5,8 +5,6 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/Hook/useAxiosPublic";
 import DOMPurify from 'dompurify';
-import { useForm } from 'react-hook-form';
-import useAxiosSecure from '@/Hook/useAxiosSecure';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import LoadingSpinner from '@/Components/Shared/LoadingSpinner';
@@ -16,12 +14,9 @@ const DonationDetails = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const axiosPublic = useAxiosPublic();
-    const axiosSecure = useAxiosSecure();
     const location = useLocation()
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const { data: donation = {}, isLoading } = useQuery({
         queryKey: ["donationDetails", id],
@@ -31,39 +26,12 @@ const DonationDetails = () => {
         },
     });
 
-    const handleAdoptClick = () => {
+    const handleDonateNowClick = () => {
         if (user) {
             setIsModalOpen(true);
         } else {
             toast.error("You need to log in to adopt a donation!");
             navigate('/login', { state: { from: location.pathname }, replace: true });
-        }
-    };
-
-    const onSubmit = async (data) => {
-        const { location, phone } = data;
-
-        const donationData = {
-            donationId: donation?._id,
-            donationName: donation?.donationName,
-            donationImage: donation?.donationImage,
-            donationOwner: donation?.donationOwner,
-            donationAdopter: {
-                email: user?.email,
-                displayName: user?.displayName,
-                photoURL: user?.photoURL,
-                location: location,
-                phone: phone,
-            },
-        };
-
-        try {
-            await axiosSecure.post('/adoption-request', donationData);
-            reset();
-            setIsModalOpen(false);
-            toast.success('Successfully adopted!');
-        } catch (error) {
-            toast.error(error?.response?.data || 'Failed to adopt!');
         }
     };
 
@@ -132,7 +100,7 @@ const DonationDetails = () => {
                         <ModalAction asChild>
                             <Button
                                 disabled={donation?.status === 'Pause' || donation?.maxAmount === donation?.totalDonateAmount}
-                                onClick={handleAdoptClick}
+                                onClick={handleDonateNowClick}
                                 className="bg-color-accent hover:bg-color-accent disabled:cursor-not-allowed">
                                 Donate Now
                             </Button>

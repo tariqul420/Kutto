@@ -15,7 +15,7 @@ import CreateDonationCampaign from "../Pages/Dashboard/User/CreateDonateCamp/Cre
 import MyDonationCampaign from "../Pages/Dashboard/User/MyDonateCamp/MyDonationCampaign";
 import MyDonations from "../Pages/Dashboard/User/MyDonations/MyDonations";
 import AllUsers from "../Pages/Dashboard/Admin/Users/AllUsers";
-import AllPets from "../Pages/Dashboard/Admin/AddPets/AllPets";
+import AllPets from "../Pages/Dashboard/Admin/AllPets/AllPets";
 import AllDonation from "../Pages/Dashboard/Admin/AllDonation/AllDonation";
 import AdminRoute from "./Private/AdminRoute";
 import PetListing from "../Pages/PetListing/PetListing";
