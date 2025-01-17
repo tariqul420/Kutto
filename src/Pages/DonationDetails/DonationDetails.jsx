@@ -128,6 +128,8 @@ const DonationDetails = () => {
                                                 donationId={donation?._id}
                                                 donationName={donation?.donationName}
                                                 donationImage={donation?.donationImage}
+                                                maxAmount={donation?.maxAmount}
+                                                totalDonateAmount={donation?.totalDonateAmount}
                                             />
                                         </ModalDescription>
                                     </div>
