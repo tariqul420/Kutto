@@ -27,7 +27,7 @@ const AdoptionRequest = () => {
     };
 
     if (isLoading) {
-        return <Skeleton height={28} count={15} />;
+        return <Skeleton height={80} count={6} />;
     }
 
     if (adoptionReq?.length === 0) {

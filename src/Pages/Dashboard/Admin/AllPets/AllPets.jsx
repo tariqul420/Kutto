@@ -152,7 +152,7 @@ const AllPets = () => {
     });
 
     if (isLoading) {
-        return <Skeleton height={20} count={15} />;
+        return <Skeleton height={60} count={8} />;
     }
 
     if (myPets?.length === 0) {

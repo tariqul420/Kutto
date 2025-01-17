@@ -25,7 +25,7 @@ const AllUsers = () => {
     };
 
     if (isLoading) {
-        return <Skeleton height={28} count={15} />;
+        return <Skeleton height={50} count={9} />;
     }
 
     if (users.length === 0) {

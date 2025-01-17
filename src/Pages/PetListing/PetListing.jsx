@@ -4,6 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { CgSpinnerTwo } from "react-icons/cg";
+import Skeleton from "react-loading-skeleton";
 
 const PetListing = () => {
     const [search, setSearch] = useState('')
@@ -11,7 +12,8 @@ const PetListing = () => {
     const [sort, setSort] = useState('');
     const axiosPublic = useAxiosPublic()
     const { ref, inView } = useInView();
-    const { data: pets, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+
+    const { data: pets, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
         queryKey: ["petListingAllPet", search, category, sort],
         queryFn: async ({ pageParam = 1 }) => {
             const { data } = await axiosPublic.get("/all-pet", {
@@ -92,7 +94,15 @@ const PetListing = () => {
                 {/* Pet Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {
-                        pets?.pages[0]?.map(pet => <PetCard key={pet?._id} pet={pet} />)
+                        isLoading
+                            ? Array.from({ length: 6 }).map((_, index) => (
+                                <div key={index} className="p-4">
+                                    <Skeleton height={200} />
+                                    <Skeleton height={20} width="80%" className="mt-2" />
+                                    <Skeleton height={20} width="60%" className="mt-2" />
+                                </div>
+                            )) :
+                            pets?.pages[0]?.map(pet => <PetCard key={pet?._id} pet={pet} />)
                     }
                 </div>
             </div>

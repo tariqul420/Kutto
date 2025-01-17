@@ -75,6 +75,9 @@ const MyDonations = () => {
             {
                 accessorKey: "amount",
                 header: "Amount 💵",
+                cell: (info) => (
+                    <p>$ {info.row.original.amount}</p>
+                )
             },
             {
                 accessorKey: "paymentId",
@@ -113,7 +116,7 @@ const MyDonations = () => {
     });
 
     if (isLoading) {
-        return <Skeleton height={20} count={15} />;
+        return <Skeleton height={60} count={8} />;
     }
 
     if (myDonations?.length === 0) {

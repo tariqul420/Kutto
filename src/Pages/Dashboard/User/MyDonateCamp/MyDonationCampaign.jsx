@@ -24,7 +24,7 @@ const MyDonationCampaign = () => {
     });
 
     if (isLoading) {
-        return <Skeleton height={28} count={15} />;
+        return <Skeleton height={100} count={5} />;
     }
 
     if (myDonationCamp?.length === 0) {
