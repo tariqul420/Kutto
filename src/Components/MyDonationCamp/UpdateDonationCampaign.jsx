@@ -167,8 +167,8 @@ const UpdateDonationCampaign = () => {
                             {...register("maxAmount", {
                                 required: "Max Donation Amount is required.",
                                 min: {
-                                    value: 1,
-                                    message: "Minium Donation Amount must be at least 1."
+                                    value: donation?.totalDonateAmount,
+                                    message: `Minium Donation Amount must be at least $${donation?.totalDonateAmount + 1}.`
                                 }
                             })}
                         />
