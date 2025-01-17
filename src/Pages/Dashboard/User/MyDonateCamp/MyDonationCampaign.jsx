@@ -5,12 +5,10 @@ import useAuth from "@/Hook/useAuth";
 import { LineProgress, LineProgressBar, LineProgressText, Modal, ModalAction, ModalContent, ModalDescription, ModalHeader, ModalTitle, } from "keep-react";
 'use client'
 import { BiSolidDonateHeart } from "react-icons/bi";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const MyDonationCampaign = () => {
-    const [status, setStatus] = useState(true)
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth()
     const navigate = useNavigate()
@@ -31,17 +29,17 @@ const MyDonationCampaign = () => {
         return <p className="text-center">No request found.</p>;
     }
 
-    const handelStatusUpdate = async (id, camStatus) => {
-        setStatus(!status)
+    const handelStatusUpdate = async (id, currentStatus) => {
+        const newStatus = currentStatus === 'Running' ? 'Pause' : 'Running';
 
         try {
-            await axiosSecure.patch(`/donation-status/${id}?status=${camStatus}`)
-            refetch()
-            toast.success('Status Update Successfully!')
+            await axiosSecure.patch(`/donation-status/${id}?status=${newStatus}`);
+            refetch(); // Re-fetch the data to reflect changes
+            toast.success('Status updated successfully!');
         } catch (error) {
-            toast.error(error.code)
+            toast.error(`Error: ${error.message}`);
         }
-    }
+    };
 
     return (
         <div className="overflow-x-auto">
@@ -81,10 +79,14 @@ const MyDonationCampaign = () => {
                             <td className={`border border-gray-300 px-4 py-2 ${donation?.status === "Running" ? 'text-green-500' : 'text-red-500'}`}> {donation?.status}</td>
                             <td className="border border-gray-300 px-4 py-2 flex flex-col gap-2">
                                 <button
-                                    disabled={donation?.status === "Complete" || donation?.maxAmount === donation?.totalDonateAmount}
-                                    onClick={() => handelStatusUpdate(donation?._id, status)}
-                                    className="px-2 py-0 rounded-md bg-red-500 text-white disabled:bg-gray-700 disabled:cursor-not-allowed">
-                                    {donation?.status === "Complete" ? "Completed" : status ? "Pause" : "Running"}
+                                    disabled={
+                                        donation?.status === "Complete" ||
+                                        donation?.maxAmount === donation?.totalDonateAmount
+                                    }
+                                    onClick={() => handelStatusUpdate(donation?._id, donation.status)}
+                                    className="px-2 py-0 rounded-md bg-red-500 text-white disabled:bg-gray-700 disabled:cursor-not-allowed"
+                                >
+                                    {donation?.status === "Complete" ? "Completed" : donation.status === "Running" ? "Pause" : "Running"}
                                 </button>
                                 <button
                                     onClick={() => navigate(`/dashboard/update-donation-campaign/${donation?._id}`)}

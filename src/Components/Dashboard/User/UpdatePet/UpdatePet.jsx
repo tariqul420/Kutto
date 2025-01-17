@@ -4,12 +4,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useAuth from "@/Hook/useAuth";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import Select from "react-select";
 import useTheme from "@/Hook/useTheme";
 import ImageUpload from "@/Api/ImageUpload";
 import ReactQuill from "react-quill";
+import useRole from "@/Hook/useRole";
 
 const options = [
     { value: "dog", label: "Dog" },
@@ -27,16 +27,15 @@ const options = [
 
 const UpdatePet = () => {
     const { register, handleSubmit, control, formState: { errors } } = useForm();
-    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const { theme } = useTheme();
     const { id } = useParams();
     const queryClient = useQueryClient()
-
     const [selectedOption, setSelectedOption] = useState(null);
     const [longDesc, setLongDesc] = useState("");
     const [photoPreview, setPhotoPreview] = useState("");
+    const [role] = useRole()
 
     useEffect(() => {
         document.title = "Update Pet || Kutto";
@@ -49,7 +48,7 @@ const UpdatePet = () => {
         onSuccess: () => {
             toast.success("Data Updated Successfully!!!");
             queryClient.invalidateQueries(["myPets"]);
-            navigate("/dashboard/my-add-pets");
+            navigate(role === 'admin' ? '/dashboard/all-pets' : '/dashboard/my-add-pets');
         },
         onError: (error) => {
             toast.error(error.message || "Failed to update pet data.");
@@ -106,11 +105,7 @@ const UpdatePet = () => {
                 longDescription: longDesc,
                 petCategories: selectedOption?.value,
                 adopted: false,
-                petOwner: {
-                    name: user?.displayName,
-                    email: user?.email,
-                    photoURL: user?.photoURL,
-                },
+                petOwner: pet?.petOwner
             };
 
             await mutateAsync(petData);

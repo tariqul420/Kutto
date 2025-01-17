@@ -1,4 +1,3 @@
-import useAuth from "@/Hook/useAuth";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
@@ -11,11 +10,10 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const AllPets = () => {
     const axiosSecure = useAxiosSecure();
-    const { user } = useAuth();
     const navigate = useNavigate();
 
     const { data: myPets = [], isLoading, refetch } = useQuery({
-        queryKey: ["myPets", user?.email],
+        queryKey: ["allPets"],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/all-pet-admin`);
             return data;

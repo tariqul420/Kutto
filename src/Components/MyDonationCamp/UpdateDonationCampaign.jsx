@@ -4,22 +4,22 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useAuth from "@/Hook/useAuth";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import ImageUpload from "@/Api/ImageUpload";
 import ReactQuill from "react-quill";
 import DatePicker from "react-datepicker";
+import useRole from "@/Hook/useRole";
 
 const UpdateDonationCampaign = () => {
     const [photoPreview, setPhotoPreview] = useState("");
     const [longDesc, setLongDesc] = useState('');
     const [longDescError, setLongDescError] = useState(false);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const { id } = useParams();
     const queryClient = useQueryClient()
     const navigate = useNavigate()
+    const [role] = useRole()
 
     useEffect(() => {
         document.title = "Update a Donation || Kutto";
@@ -32,7 +32,7 @@ const UpdateDonationCampaign = () => {
         onSuccess: () => {
             toast.success("Data Updated Successfully!!!");
             queryClient.invalidateQueries(["myDonationCamp"]);
-            navigate("/dashboard/my-donation-campaign");
+            navigate(role === 'admin' ? '/dashboard/all-donation' : '/dashboard/my-donation-campaign');
             reset()
         },
         onError: (error) => {
@@ -89,11 +89,7 @@ const UpdateDonationCampaign = () => {
                 totalDonateAmount: donation?.totalDonateAmount,
                 status: donation?.status,
                 longDescription: longDesc,
-                donationOwner: {
-                    name: user?.displayName,
-                    email: user?.email,
-                    photoURL: user?.photoURL,
-                },
+                donationOwner: donation?.donationOwner
             };
 
             await mutateAsync(donationData);
