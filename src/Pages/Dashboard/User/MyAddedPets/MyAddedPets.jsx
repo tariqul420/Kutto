@@ -6,6 +6,7 @@ import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowMode
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const MyAddedPets = () => {
     const axiosSecure = useAxiosSecure();
@@ -26,33 +27,36 @@ const MyAddedPets = () => {
         pageSize: 10,
     });
 
-    const handelDeleteUI = (id) => {
-        toast.custom(
-            <div className="backdrop-blur-lg p-3 flex gap-4 rounded-md dark:bg-dark-lite bg-gray-200 items-center">
-                <p className="text-lg font-medium">Are you sure delete it!</p>
-                <button
-                    onClick={() => handleDelete(id)}
-                    className="px-2 py-1 rounded-md bg-red-500 font-medium">Delete</button>
-                <button
-                    onClick={() => toast.dismiss()}
-                    className="px-2 py-1 rounded-md bg-green-500 font-medium">Cancel</button>
-            </div>
-            , {
-                position: "top-center",
-            }
-        )
-    }
-
     const handleDelete = async (id) => {
-        try {
-            await axiosSecure.delete(`/delete-pet/${id}`);
-            toast.success("Pet deleted successfully!");
-            toast.dismiss()
-            refetch()
-        } catch (error) {
-            toast.error(error.code);
-            toast.dismiss()
-        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const response = await axiosSecure.delete(`/delete-pet/${id}`);
+                if (response?.status === 200) {
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your donation campaign has been deleted.",
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                    });
+                    refetch();
+                } else {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Failed to delete ❗",
+                        icon: "error",
+                        confirmButtonColor: "#d33",
+                    });
+                }
+            }
+        });
     };
 
     const handleAdopt = async (id) => {
@@ -109,7 +113,7 @@ const MyAddedPets = () => {
                         </button>
                         <button
                             className="bg-red-500 p-1 rounded-md text-white"
-                            onClick={() => handelDeleteUI(info.row.original._id)}
+                            onClick={() => handleDelete(info.row.original._id)}
                         >
                             Delete
                         </button>
