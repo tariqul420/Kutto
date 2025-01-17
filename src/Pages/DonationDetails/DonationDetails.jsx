@@ -84,7 +84,7 @@ const DonationDetails = () => {
                             })}
                             </p>
                             <p>
-                                <strong>Status:</strong> <span className={`${donation?.status === 'Running' && 'text-green-600'} ${donation?.status === 'Pause' && 'text-red-600'}`}>
+                                <strong>Status:</strong> <span className={`${donation?.status === 'Running' && 'text-green-600'} ${donation?.status === 'Pause' && 'text-red-600'} ${donation?.status === 'Complete' && 'text-blue-600 font-semibold'}`}>
                                     {donation?.status}
                                 </span>
                             </p>

@@ -81,13 +81,10 @@ const MyDonationCampaign = () => {
                             <td className={`border border-gray-300 px-4 py-2 ${donation?.status === "Running" ? 'text-green-500' : 'text-red-500'}`}> {donation?.status}</td>
                             <td className="border border-gray-300 px-4 py-2 flex flex-col gap-2">
                                 <button
-                                    disabled={donation?.
-                                        maxAmount === donation?.totalDonateAmount}
+                                    disabled={donation?.status === "Complete" || donation?.maxAmount === donation?.totalDonateAmount}
                                     onClick={() => handelStatusUpdate(donation?._id, status)}
                                     className="px-2 py-0 rounded-md bg-red-500 text-white disabled:bg-gray-700 disabled:cursor-not-allowed">
-                                    {
-                                        status ? 'Pause' : 'Running'
-                                    }
+                                    {donation?.status === "Complete" ? "Completed" : status ? "Pause" : "Running"}
                                 </button>
                                 <button
                                     onClick={() => navigate(`/dashboard/update-donation-campaign/${donation?._id}`)}
