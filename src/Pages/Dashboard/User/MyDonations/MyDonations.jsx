@@ -22,12 +22,12 @@ const MyDonations = () => {
         pageSize: 10,
     });
 
-    const handelRefundUI = (id) => {
+    const handelRefundUI = (id, amount) => {
         toast.custom(
             <div className="backdrop-blur-lg p-3 flex gap-4 rounded-md dark:bg-dark-lite bg-gray-200 items-center">
                 <p className="text-lg font-medium">Are you sure refund it!</p>
                 <button
-                    onClick={() => handleRefund(id)}
+                    onClick={() => handleRefund(id, amount)}
                     className="px-2 py-1 rounded-md bg-red-500 font-medium">Refund</button>
                 <button
                     onClick={() => toast.dismiss()}
@@ -39,9 +39,9 @@ const MyDonations = () => {
         )
     }
 
-    const handleRefund = async (id) => {
+    const handleRefund = async (id, amount) => {
         try {
-            await axiosSecure.delete(`/delete-pet/${id}`);
+            await axiosSecure.patch(`/refund-donation/${id}`, { amount });
             toast.success("Donation Refund Successfully!");
             toast.dismiss()
             refetch()
@@ -87,7 +87,7 @@ const MyDonations = () => {
                     <div className="flex gap-2 flex-wrap justify-center">
                         <button
                             className="bg-red-500 p-1 rounded-md text-white"
-                            onClick={() => handelRefundUI(info.row.original._id)}
+                            onClick={() => handelRefundUI(info.row.original.donationId, info.row.original.amount)}
                         >
                             Refund
                         </button>
