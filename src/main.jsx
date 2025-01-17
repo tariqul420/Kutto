@@ -11,6 +11,7 @@ import 'swiper/swiper-bundle.css';
 import "react-datepicker/dist/react-datepicker.css";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ThemeProvider from './Provider/ThemeProvider'
+import 'sweetalert2/src/sweetalert2.scss'
 
 const queryClient = new QueryClient()
 
