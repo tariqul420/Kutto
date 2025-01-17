@@ -54,7 +54,7 @@ const DonationDetails = () => {
 
     const sanitizedDescription = DOMPurify.sanitize(donation?.longDescription);
 
-    if (isLoading) return (
+    if (isLoading && isLoadingSuggested) return (
         <div className="w-11/12 mx-auto flex flex-col lg:flex-row gap-8 my-16">
             <div className="flex-1">
                 <Skeleton height={400} />

@@ -15,7 +15,7 @@ const PetListing = () => {
     const { ref, inView } = useInView();
 
     const { data: pets, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
-        queryKey: ["petListingAllPet", search, category, sort], // Key includes search, category, and sort
+        queryKey: ["petListingAllPet", search, category, sort],
         queryFn: async ({ pageParam = 1 }) => {
             const { data } = await axiosPublic.get("/all-pet", {
                 params: {

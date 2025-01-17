@@ -24,6 +24,7 @@ import UpdatePet from "@/Components/Dashboard/User/UpdatePet/UpdatePet";
 import UpdateDonationCampaign from "@/Components/MyDonationCamp/UpdateDonationCampaign";
 import PetDetails from "@/Pages/PetDetails/PetDetails";
 import DonationDetails from "@/Pages/DonationDetails/DonationDetails";
+import PetCategories from "@/Pages/PetCategories/PetCategories";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path: '/pet-listing',
                 element: <PetListing />
+            },
+            {
+                path: 'pets/:category',
+                element: <PetCategories />
             },
             {
                 path: '/donation-campaigns',
