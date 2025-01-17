@@ -8,15 +8,17 @@ import DonationCard from "@/Components/DonationsCampaigns/DonationCard";
 import EmptyComponent from "@/Components/Shared/EmptyComponent/EmptyComponent";
 
 const DonationCampaigns = () => {
+    const [search, setSearch] = useState('');
     const [sort, setSort] = useState('');
     const axiosPublic = useAxiosPublic();
     const { ref, inView } = useInView();
 
     const { data: pets, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
-        queryKey: ["petListingAllPet", sort],
+        queryKey: ["allDonationCampaigns", search, sort],
         queryFn: async ({ pageParam = 1 }) => {
             const { data } = await axiosPublic.get("/donation-campaign", {
                 params: {
+                    search,
                     sort,
                     page: pageParam,
                     limit: 6,
@@ -45,9 +47,17 @@ const DonationCampaigns = () => {
         <div className="my-20">
             <div className="w-11/12 mx-auto">
                 {/* Sort by date */}
-                <div className="mb-6 flex w-1/4 ml-auto">
+                <div className="mb-6 flex justify-between items-center">
+                    <input
+                        type="text"
+                        placeholder="Search by name..."
+                        className="inputField p-2 w-1/3"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                    />
+
                     <select
-                        className="inputField p-2"
+                        className="inputField p-2 w-1/3"
                         value={sort}
                         onChange={handelSortChange}
                     >
