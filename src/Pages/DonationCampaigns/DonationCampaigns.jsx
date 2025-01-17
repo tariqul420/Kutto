@@ -55,7 +55,6 @@ const DonationCampaigns = () => {
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                     />
-
                     <select
                         className="inputField p-2 w-1/3"
                         value={sort}
@@ -67,7 +66,7 @@ const DonationCampaigns = () => {
                     </select>
                 </div>
 
-                {/* Pet Cards or Skeleton */}
+                {/* Donation Cards or Skeleton */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {isLoading
                         ? Array.from({ length: 6 }).map((_, index) => (
@@ -77,24 +76,23 @@ const DonationCampaigns = () => {
                                 <Skeleton height={20} width="60%" className="mt-2" />
                             </div>
                         ))
-                        : noData ?
+                        : noData ? (
                             <EmptyComponent />
-                            :
-                            pets?.pages[0]?.map((donation) => (
+                        ) : (
+                            pets?.pages.flat().map((donation) => (
                                 <DonationCard key={donation?._id} donation={donation} />
-                            ))}
+                            ))
+                        )}
                 </div>
             </div>
 
             {/* Infinite Scroll Loader */}
-            <div ref={ref} className="h-4 mt-4">
-                {isFetchingNextPage && <CgSpinnerTwo color="#6b7280" size={20} />}
+            <div ref={ref} className="flex items-center justify-center mt-8">
+                {isFetchingNextPage && <CgSpinnerTwo color="#F04335" size={25} />}
             </div>
 
             {!hasNextPage && pets?.pages.flat().length > 0 && (
-                <p className="text-center text-gray-500 mt-4">
-                    No more pets to load.
-                </p>
+                <p className="text-center text-gray-500 mt-4">No more donations to load.</p>
             )}
         </div>
     );

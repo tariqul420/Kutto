@@ -15,7 +15,7 @@ const PetListing = () => {
     const { ref, inView } = useInView();
 
     const { data: pets, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
-        queryKey: ["petListingAllPet", search, category, sort],
+        queryKey: ["petListingAllPet", search, category, sort], // Key includes search, category, and sort
         queryFn: async ({ pageParam = 1 }) => {
             const { data } = await axiosPublic.get("/all-pet", {
                 params: {
@@ -116,8 +116,8 @@ const PetListing = () => {
             </div>
 
             {/* Infinite Scroll Loader */}
-            <div ref={ref} className="h-4 mt-4">
-                {isFetchingNextPage && <CgSpinnerTwo color="#6b7280" size={20} />}
+            <div ref={ref} className="flex items-center justify-center mt-8">
+                {isFetchingNextPage && <CgSpinnerTwo color="#F04335" size={25} />}
             </div>
 
             {!hasNextPage && pets?.pages.flat().length > 0 && (
