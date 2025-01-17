@@ -24,7 +24,7 @@ const DonationDetails = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const { data: donation = {}, isLoading } = useQuery({
+    const { data: donation = {}, isLoading, refetch } = useQuery({
         queryKey: ["donationDetails", id],
         queryFn: async () => {
             const { data } = await axiosPublic.get(`/donation-details/${id}`);
@@ -130,6 +130,8 @@ const DonationDetails = () => {
                                                 donationImage={donation?.donationImage}
                                                 maxAmount={donation?.maxAmount}
                                                 totalDonateAmount={donation?.totalDonateAmount}
+                                                refetch={refetch}
+                                                setIsModalOpen={setIsModalOpen}
                                             />
                                         </ModalDescription>
                                     </div>

@@ -1,3 +1,4 @@
+import useAuth from "@/Hook/useAuth";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import useTheme from "@/Hook/useTheme";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
@@ -5,14 +6,14 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-const CheckoutForm = ({ donationId, donationName, donationImage, refetch, maxAmount, totalDonateAmount }) => {
+const CheckoutForm = ({ donationId, donationName, donationImage, refetch, maxAmount, totalDonateAmount, setIsModalOpen }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [amount, setAmount] = useState("");
     const [loading, setLoading] = useState(false);
-    const [cardError, setCardError] = useState(null);
     const axiosSecure = useAxiosSecure();
     const { theme } = useTheme()
+    const { user } = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,11 +38,6 @@ const CheckoutForm = ({ donationId, donationName, donationImage, refetch, maxAmo
 
         const cardElement = elements.getElement(CardElement);
 
-        if (!cardElement || cardError || !cardElement?.length) {
-            toast.error("Please check your card details.");
-            return;
-        }
-
         setLoading(true);
 
         try {
@@ -52,6 +48,10 @@ const CheckoutForm = ({ donationId, donationName, donationImage, refetch, maxAmo
             const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card: cardElement,
+                    billing_details: {
+                        name: user?.displayName,
+                        email: user?.email
+                    },
                 },
             });
 
@@ -64,25 +64,19 @@ const CheckoutForm = ({ donationId, donationName, donationImage, refetch, maxAmo
                 donationId,
                 donationName,
                 donationImage,
-                userEmail: "user@example.com",
+                name: user?.displayName,
+                email: user?.email,
                 amount: donationAmount,
                 paymentId: paymentIntent.id,
             });
 
             toast.success("Payment successful!");
             refetch();
+            setIsModalOpen(false)
         } catch (error) {
             toast.error(error.message || "Something went wrong!");
         } finally {
             setLoading(false);
-        }
-    };
-
-    const handleCardChange = (event) => {
-        if (event.error) {
-            setCardError(event.error.message);
-        } else {
-            setCardError(null);
         }
     };
 
@@ -96,6 +90,7 @@ const CheckoutForm = ({ donationId, donationName, donationImage, refetch, maxAmo
                     className="border-b border-gray-500 p-2 text-black dark:text-white mb-5 bg-transparent focus:outline-none"
                     placeholder="Donate Amount"
                 />
+
                 <CardElement
                     options={{
                         style: {
@@ -111,10 +106,7 @@ const CheckoutForm = ({ donationId, donationName, donationImage, refetch, maxAmo
                             },
                         },
                     }}
-                    onChange={handleCardChange}
                 />
-
-                {cardError && <p className="text-red-500 mt-2">{cardError}</p>}
 
                 <button
                     type="submit"
@@ -135,6 +127,7 @@ CheckoutForm.propTypes = {
     maxAmount: PropTypes.string.isRequired,
     totalDonateAmount: PropTypes.string.isRequired,
     refetch: PropTypes.func.isRequired,
+    setIsModalOpen: PropTypes.func.isRequired,
 };
 
 export default CheckoutForm;
