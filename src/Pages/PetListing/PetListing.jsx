@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { CgSpinnerTwo } from "react-icons/cg";
 import Skeleton from "react-loading-skeleton";
+import EmptyComponent from "@/Components/Shared/EmptyComponent/EmptyComponent";
 
 const PetListing = () => {
-    const [search, setSearch] = useState('')
-    const [category, setCategory] = useState('')
+    const [search, setSearch] = useState('');
+    const [category, setCategory] = useState('');
     const [sort, setSort] = useState('');
-    const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic();
     const { ref, inView } = useInView();
 
     const { data: pets, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
@@ -31,21 +32,26 @@ const PetListing = () => {
             return lastPage.length === 6 ? allPages.length + 1 : undefined;
         },
     });
-    console.log(pets?.pages);
+
     useEffect(() => {
         if (inView && hasNextPage) {
-            fetchNextPage()
+            fetchNextPage();
         }
     }, [fetchNextPage, hasNextPage, inView]);
+
     const handelSearch = (e) => {
-        setSearch(e.target.value)
+        setSearch(e.target.value);
     };
+
     const handleCategoryChange = (e) => {
         setCategory(e.target.value);
     };
+
     const handelSortChange = (e) => {
-        setSort(e.target.value)
-    }
+        setSort(e.target.value);
+    };
+
+    const noData = !isLoading && pets?.pages.flat().length === 0;
 
     return (
         <div className="my-20">
@@ -91,19 +97,21 @@ const PetListing = () => {
                     </div>
                 </div>
 
-                {/* Pet Cards */}
+                {/* Pet Cards or Skeleton */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {
-                        isLoading
-                            ? Array.from({ length: 6 }).map((_, index) => (
-                                <div key={index} className="p-4">
-                                    <Skeleton height={200} />
-                                    <Skeleton height={20} width="80%" className="mt-2" />
-                                    <Skeleton height={20} width="60%" className="mt-2" />
-                                </div>
-                            )) :
-                            pets?.pages[0]?.map(pet => <PetCard key={pet?._id} pet={pet} />)
-                    }
+                    {isLoading
+                        ? Array.from({ length: 6 }).map((_, index) => (
+                            <div key={index} className="p-4">
+                                <Skeleton height={200} />
+                                <Skeleton height={20} width="80%" className="mt-2" />
+                                <Skeleton height={20} width="60%" className="mt-2" />
+                            </div>
+                        ))
+                        : noData
+                            ? <EmptyComponent />
+                            : pets?.pages.flat().map((pet) => (
+                                <PetCard key={pet?._id} pet={pet} />
+                            ))}
                 </div>
             </div>
 
@@ -117,7 +125,7 @@ const PetListing = () => {
                     No more pets to load.
                 </p>
             )}
-        </div >
+        </div>
     );
 };
 

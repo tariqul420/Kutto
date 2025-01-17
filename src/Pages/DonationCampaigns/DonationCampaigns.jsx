@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { CgSpinnerTwo } from "react-icons/cg";
 import Skeleton from "react-loading-skeleton";
 import DonationCard from "@/Components/DonationsCampaigns/DonationCard";
+import EmptyComponent from "@/Components/Shared/EmptyComponent/EmptyComponent";
 
 const DonationCampaigns = () => {
     const [sort, setSort] = useState('');
@@ -38,6 +39,8 @@ const DonationCampaigns = () => {
         setSort(e.target.value);
     };
 
+    const noData = !isLoading && pets?.pages.flat().length === 0;
+
     return (
         <div className="my-20">
             <div className="w-11/12 mx-auto">
@@ -64,9 +67,12 @@ const DonationCampaigns = () => {
                                 <Skeleton height={20} width="60%" className="mt-2" />
                             </div>
                         ))
-                        : pets?.pages[0]?.map((donation) => (
-                            <DonationCard key={donation?._id} donation={donation} />
-                        ))}
+                        : noData ?
+                            <EmptyComponent />
+                            :
+                            pets?.pages[0]?.map((donation) => (
+                                <DonationCard key={donation?._id} donation={donation} />
+                            ))}
                 </div>
             </div>
 
