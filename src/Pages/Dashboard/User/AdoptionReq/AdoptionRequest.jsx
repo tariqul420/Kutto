@@ -3,11 +3,16 @@ import { useQuery } from "@tanstack/react-query";
 import Skeleton from 'react-loading-skeleton'
 import toast from "react-hot-toast";
 import useAuth from "@/Hook/useAuth";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 
 const AdoptionRequest = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth()
+
+    useEffect(() => {
+        document.title = 'Adoption Request || Kutto'
+    }, []);
 
     const { data: adoptionReq = [], isLoading, refetch } = useQuery({
         queryKey: ['adoptionReq'],
@@ -17,9 +22,11 @@ const AdoptionRequest = () => {
         },
     });
 
-    useEffect(() => {
-        document.title = 'Adoption Request || Kutto'
-    }, []);
+    const [sorting, setSorting] = useState([])
+    const [pagination, setPagination] = useState({
+        pageIndex: 0,
+        pageSize: 6,
+    })
 
     const handleAdopt = async (id, status) => {
         try {
@@ -30,6 +37,82 @@ const AdoptionRequest = () => {
             toast.error(`Failed to update pet adoption: ${error?.response?.data?.error || error.message}`);
         }
     };
+
+    const columns = useMemo(() => [
+        {
+            accessorKey: "serialNumber",
+            header: "#",
+            cell: (info) => info.row.index + 1,
+        },
+        {
+            accessorKey: 'petImage',
+            header: 'Pet Image',
+            cell: (info) => (
+                <img
+                    src={info.getValue()}
+                    alt={info.row.original.petName}
+                    className="w-12 h-12 object-cover rounded-md"
+                />
+            )
+        },
+        {
+            accessorKey: 'petAdopter.displayName',
+            header: 'Name'
+        },
+        {
+            accessorKey: 'petAdopter.email',
+            header: 'Email'
+        },
+        {
+            accessorKey: 'petAdopter.phone',
+            header: 'Phone Number'
+        },
+        {
+            accessorKey: 'petAdopter.location',
+            header: 'Location'
+        },
+        {
+            accessorKey: 'status',
+            header: 'Status'
+        },
+        {
+            accessorKey: 'actions',
+            header: 'Actions',
+            cell: (info) => (
+                <div className="space-y-2">
+                    <button
+                        disabled={!info.row.original.status}
+                        onClick={() => handleAdopt(info.row.original.petId, "accept")}
+                        className="px-2 py-1 rounded-md bg-red-500 text-white disabled:bg-gray-700 disabled:cursor-not-allowed">
+                        Accept
+                    </button>
+                    <button
+                        disabled={!info.row.original.status}
+                        onClick={() => handleAdopt(info.row.original.petId, "rejected")}
+                        className="px-2 py-1 rounded-md bg-green-500 text-white disabled:bg-gray-700 disabled:cursor-not-allowed">
+                        Reject
+                    </button>
+                </div>
+            )
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    ], [])
+
+    const table = useReactTable({
+        data: adoptionReq,
+        columns,
+        state: {
+            sorting,
+            pagination
+        },
+        onSortingChange: setSorting,
+        onPaginationChange: setPagination,
+        getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        manualGrouping: false,
+        pageCount: Math.ceil(adoptionReq.length / pagination.pageSize),
+    })
 
     if (isLoading) {
         return <Skeleton height={80} count={6} />;
@@ -43,51 +126,65 @@ const AdoptionRequest = () => {
         <div className="overflow-x-auto">
             <table className="table-auto w-full border-collapse border border-gray-300">
                 <thead className="bg-gray-100 dark:bg-dark-lite">
-                    <tr>
-                        <th className="border border-gray-300 px-4 py-2">#</th>
-                        <th className="border border-gray-300 px-4 py-2">Pet Image</th>
-                        <th className="border border-gray-300 px-4 py-2">Name</th>
-                        <th className="border border-gray-300 px-4 py-2">Email</th>
-                        <th className="border border-gray-300 px-4 py-2">Phone Number</th>
-                        <th className="border border-gray-300 px-4 py-2">Location</th>
-                        <th className="border border-gray-300 px-4 py-2">Status</th>
-                        <th className="border border-gray-300 px-4 py-2">Action</th>
-                    </tr>
+                    {
+                        table.getHeaderGroups().map(headerGroup => (
+                            <tr key={headerGroup.id}>
+                                {
+                                    headerGroup.headers.map(header => (
+                                        <th
+                                            key={header.id}
+                                            className="border border-gray-300 px-4 py-2 cursor-pointer"
+                                            onClick={header.column.getToggleSortingHandler()}
+                                        >
+                                            {flexRender(header.column.columnDef.header, header.getContext())}
+                                            {header.column.getIsSorted() ? (
+                                                header.column.getIsSorted() === "asc" ? " 🔼" : " 🔽"
+                                            ) : null}
+                                        </th>
+                                    ))
+                                }
+                            </tr>
+                        ))
+                    }
                 </thead>
                 <tbody>
-                    {adoptionReq.map((pet, index) => (
-                        <tr key={user?._id} className="hover:bg-gray-200 dark:hover:bg-dark-lite">
-                            <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
-                            <td className="border border-gray-300 px-4 py-2">
-                                <img
-                                    src={pet?.petImage}
-                                    alt={pet?.petName}
-                                    className="w-12 h-12 object-cover rounded-md"
-                                />
-                            </td>
-                            <td className="border border-gray-300 px-4 py-2">{pet?.petAdopter?.displayName}</td>
-                            <td className="border border-gray-300 px-4 py-2">{pet?.petAdopter?.email}</td>
-                            <td className="border border-gray-300 px-4 py-2">{pet?.petAdopter?.phone}</td>
-                            <td className="border border-gray-300 px-4 py-2">{pet?.petAdopter?.location}</td>
-                            <td className="border border-gray-300 px-4 py-2">{pet?.status}</td>
-                            <td className="border border-gray-300 px-4 py-2 space-y-2">
-                                <button
-                                    disabled={!pet?.status}
-                                    onClick={() => handleAdopt(pet?.petId, "accept")}
-                                    className="px-2 py-1 rounded-md bg-red-500 text-white disabled:bg-gray-700 disabled:cursor-not-allowed">
-                                    Accept
-                                </button>
-                                <button
-                                    disabled={!pet?.status}
-                                    onClick={() => handleAdopt(pet?.petId, "rejected")}
-                                    className="px-2 py-1 rounded-md bg-green-500 text-white disabled:bg-gray-700 disabled:cursor-not-allowed">
-                                    Reject
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    {
+                        table.getRowModel().rows.map(row => (
+                            <tr key={row.id} className="hover:bg-gray-100 dark:hover:bg-dark-lite">
+                                {
+                                    row.getVisibleCells().map(cell => (
+                                        <td key={cell.id} className="border border-gray-300 px-4 py-2">
+                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                        </td>
+                                    ))
+                                }
+                            </tr>
+                        ))
+                    }
                 </tbody>
             </table>
+
+            <div className="flex justify-between items-center mt-4 flex-wrap">
+                <button
+                    className="bg-color-accent px-2 py-1 rounded-md text-white disabled:cursor-not-allowed disabled:bg-gray-600"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    Previous
+                </button>
+
+                <span className="my-2 sm:my-0">
+                    Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+                </span>
+
+                <button
+                    className="bg-color-accent px-2 py-1 rounded-md text-white disabled:cursor-not-allowed disabled:bg-gray-600"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    Next
+                </button>
+            </div>
         </div>
     );
 };

@@ -168,7 +168,7 @@ const AllPets = () => {
     return (
         <div className="overflow-x-auto">
             <table className="table-auto w-full border-collapse border border-gray-300">
-                <thead>
+                <thead className="bg-gray-100 dark:bg-dark-lite">
                     {table.getHeaderGroups().map((headerGroup) => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map((header) => (
