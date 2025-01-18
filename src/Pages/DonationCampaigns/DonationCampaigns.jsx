@@ -44,19 +44,19 @@ const DonationCampaigns = () => {
     const noData = !isLoading && pets?.pages.flat().length === 0;
 
     return (
-        <div className="my-20">
+        <div className="mb-20 mt-6">
             <div className="w-11/12 mx-auto">
                 {/* Sort by date */}
-                <div className="mb-6 flex justify-between items-center">
+                <div className="mb-6 flex gap-4 justify-between items-center">
                     <input
                         type="text"
                         placeholder="Search by name..."
-                        className="inputField p-2 w-1/3"
+                        className="inputField p-2 w-1/3 max-sm:w-full"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                     />
                     <select
-                        className="inputField p-2 w-1/3"
+                        className="inputField p-2 w-1/3 max-sm:w-full"
                         value={sort}
                         onChange={handelSortChange}
                     >
@@ -88,7 +88,7 @@ const DonationCampaigns = () => {
 
             {/* Infinite Scroll Loader */}
             <div ref={ref} className="flex items-center justify-center mt-8">
-                {isFetchingNextPage && <CgSpinnerTwo color="#F04335" size={25} />}
+                {isFetchingNextPage && <CgSpinnerTwo className="animate-spin" color="#F04335" size={25} />}
             </div>
 
             {!hasNextPage && pets?.pages.flat().length > 0 && (

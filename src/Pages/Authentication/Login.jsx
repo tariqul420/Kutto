@@ -45,7 +45,7 @@ const Login = () => {
 
     return (
         <>
-            <section className="w-10/12 mx-auto h-auto flex flex-col-reverse lg:flex-row my-0 lg:my-12">
+            <section className="w-10/12 mx-auto h-auto flex flex-col-reverse max-sm:mb-8 lg:flex-row my-0 lg:my-12">
 
                 {/* Login Form */}
                 <div className="shadow-md backdrop-blur-3xl rounded-lg sm:py-6 sm:px-8 p-4 flex flex-col gap-5 flex-1 dark:bg-dark-lite">

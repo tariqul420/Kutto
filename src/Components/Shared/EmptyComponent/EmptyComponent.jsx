@@ -14,7 +14,7 @@ const EmptyComponent = () => {
                     alt="No results illustration"
                 />
             </EmptyImage>
-            <EmptyTitle className="mb-[14px] mt-5">Sorry, No result found!</EmptyTitle>
+            <EmptyTitle className="mb-[14px] mt-5 text-center">Sorry, No result found!</EmptyTitle>
             <EmptyDescription className="mb-8">
                 We couldn’t find any results for your search. Please try adjusting your search criteria or check back later.
             </EmptyDescription>

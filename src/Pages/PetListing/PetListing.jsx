@@ -54,21 +54,21 @@ const PetListing = () => {
     const noData = !isLoading && pets?.pages.flat().length === 0;
 
     return (
-        <div className="my-20">
+        <div className="mb-20 mt-6">
             <div className="w-11/12 mx-auto">
                 {/* Search and Filter */}
-                <div className="mb-6 flex justify-between items-center">
+                <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <input
                         type="text"
                         placeholder="Search by name..."
-                        className="inputField p-2 w-1/3"
+                        className="inputField p-2 w-full md:w-1/3"
                         value={search}
                         onChange={handelSearch}
                     />
 
-                    <div className="flex gap-4 w-1/3">
+                    <div className="flex md:gap-4 gap-2 w-full md:w-1/3">
                         <select
-                            className="inputField p-2"
+                            className="inputField p-2 w-full"
                             value={sort}
                             onChange={handelSortChange}
                         >
@@ -77,7 +77,7 @@ const PetListing = () => {
                             <option value="old">Old Date</option>
                         </select>
                         <select
-                            className="inputField p-2"
+                            className="inputField p-2 w-full"
                             value={category}
                             onChange={handleCategoryChange}
                         >
@@ -117,7 +117,7 @@ const PetListing = () => {
 
             {/* Infinite Scroll Loader */}
             <div ref={ref} className="flex items-center justify-center mt-8">
-                {isFetchingNextPage && <CgSpinnerTwo color="#F04335" size={25} />}
+                {isFetchingNextPage && <CgSpinnerTwo className="animate-spin" color="#F04335" size={25} />}
             </div>
 
             {!hasNextPage && pets?.pages.flat().length > 0 && (

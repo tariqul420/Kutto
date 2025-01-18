@@ -4,7 +4,7 @@ const AuthBtn = () => {
     return (
         <div className="flex gap-4">
             <Link to='/register'>
-                <button className="bg-color-accent px-4 py-2 text-lg font-medium rounded-md text-white">
+                <button className="bg-color-accent px-4 py-2 text-lg font-medium rounded-md text-white max-sm:hidden">
                     Register
                 </button>
             </Link>
