@@ -13,6 +13,13 @@ Welcome to **Kutto**, a modern web application designed to facilitate the adopti
 
 ---
 
+## 🛡️ Admin email & password
+
+- **Email:** admin@gmail.com
+- **Password:** Ad1212..
+
+---
+
 ## 🚀 Live Links
 
 - **Client Repo:** [_github/tariqul420/kutto-client_](https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-tariqul420.git)
