@@ -36,7 +36,6 @@ const SocialBtn = ({ redirectUrl }) => {
             navigate(redirectUrl)
         } catch (error) {
             toast.error(error.code)
-            console.log(error);
         }
     };
 

@@ -21,8 +21,8 @@ const Dashboard = () => {
         <div className="flex flex-col md:flex-row gap-6 dashboard overflow-hidden">
             {/* Sidebar */}
             <div
-                className={`p-6 bg-white dark:bg-dark-lite shadow-md rounded-md transition-all ${isSidebarOpen
-                    ? "max-h-[80vh] w-full md:w-[350px] flex flex-row justify-between gap-8  md:flex-col overflow-x-auto items-center md:items-start"
+                className={`p-6 md:m-4 bg-white dark:bg-dark-lite shadow-md rounded-md transition-all ${isSidebarOpen
+                    ? "max-h-[100vh] w-full md:w-[350px] flex flex-row justify-between gap-8  md:flex-col overflow-x-auto items-center md:items-start"
                     : "w-0 overflow-hidden"
                     }`}
             >

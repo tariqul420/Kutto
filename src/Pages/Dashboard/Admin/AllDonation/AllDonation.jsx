@@ -1,7 +1,7 @@
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { useReactTable, getCoreRowModel, getPaginationRowModel, flexRender } from "@tanstack/react-table";
+import { useReactTable, getCoreRowModel, getPaginationRowModel, flexRender, getSortedRowModel } from "@tanstack/react-table";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -25,9 +25,10 @@ const AllDonation = () => {
         document.title = 'All Donations || Kutto'
     }, []);
 
+    const [sorting, setSorting] = useState([])
     const [pagination, setPagination] = useState({
         pageIndex: 0,
-        pageSize: 10,
+        pageSize: 7,
     });
 
     const handleDelete = async (id) => {
@@ -166,17 +167,20 @@ const AllDonation = () => {
         data: allDonation,
         columns,
         state: {
+            sorting,
             pagination,
         },
+        onSortingChange: setSorting,
         onPaginationChange: setPagination,
         getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         manualPagination: false,
         pageCount: Math.ceil(allDonation.length / pagination.pageSize),
     });
 
     if (isLoading) {
-        return <Skeleton height={60} count={8} />;
+        return <Skeleton height={75} count={7} />;
     }
 
     if (allDonation?.length === 0) {
@@ -193,8 +197,14 @@ const AllDonation = () => {
                                 <th
                                     key={header.id}
                                     className="border border-gray-300 px-4 py-2"
+                                    onClick={header.column.getToggleSortingHandler()}
                                 >
                                     {flexRender(header.column.columnDef.header, header.getContext())}
+                                    {
+                                        header.column.getIsSorted() ? (
+                                            header.column.getIsSorted() === "asc" ? " 🔼" : " 🔽"
+                                        ) : null
+                                    }
                                 </th>
                             ))}
                         </tr>

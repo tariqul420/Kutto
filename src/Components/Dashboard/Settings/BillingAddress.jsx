@@ -4,8 +4,8 @@ import toast from "react-hot-toast";
 const BillingAddress = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
+    // eslint-disable-next-line no-unused-vars
     const onSubmit = (data) => {
-        console.log("Billing Address Submitted: ", data);
         toast.success("Billing address saved successfully!");
         reset();
     };

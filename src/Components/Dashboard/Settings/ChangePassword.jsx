@@ -23,9 +23,9 @@ const ChangePassword = () => {
             await updatePassword(user, newPassword);
             toast.success("Password updated successfully.");
             reset();
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             toast.error("Current Password Not Valid");
-            console.log(error);
         } finally {
             setLoading(false);
         }

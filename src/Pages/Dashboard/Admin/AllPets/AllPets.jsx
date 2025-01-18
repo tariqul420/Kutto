@@ -28,7 +28,7 @@ const AllPets = () => {
     const [sorting, setSorting] = useState([]);
     const [pagination, setPagination] = useState({
         pageIndex: 0,
-        pageSize: 10,
+        pageSize: 8,
     });
 
     const handleDelete = async (id) => {
@@ -70,7 +70,7 @@ const AllPets = () => {
             toast.success(`Pet status updated to ${newStatus ? "Adopted" : "Not Adopted"}`);
             refetch();
         } catch (error) {
-            console.log(error.code);
+            toast.error(error.code);
         }
     };
 
