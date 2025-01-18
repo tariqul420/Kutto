@@ -104,6 +104,11 @@ const DonationDetails = () => {
                                     {donation?.status}
                                 </span>
                             </p>
+                            {
+                                new Date() > new Date(donation?.lastDate) && (
+                                    <p className='text-red-500'>The donation campaign has ended.</p>
+                                )
+                            }
                         </div>
                         <div>
                             <CircleProgress progress={(donation?.totalDonateAmount / donation?.maxAmount) * 100 || 0}>
@@ -121,9 +126,14 @@ const DonationDetails = () => {
                         <Modal open={isModalOpen} onOpenChange={setIsModalOpen}>
                             <ModalAction asChild>
                                 <Button
-                                    disabled={donation?.status === 'Pause' || donation?.maxAmount === donation?.totalDonateAmount}
+                                    disabled={
+                                        donation?.status === 'Pause' ||
+                                        donation?.maxAmount === donation?.totalDonateAmount ||
+                                        new Date() > new Date(donation?.lastDate)
+                                    }
                                     onClick={handleDonateNowClick}
-                                    className="bg-color-accent hover:bg-color-accent disabled:cursor-not-allowed">
+                                    className="bg-color-accent hover:bg-color-accent disabled:cursor-not-allowed"
+                                >
                                     Donate Now
                                 </Button>
                             </ModalAction>
