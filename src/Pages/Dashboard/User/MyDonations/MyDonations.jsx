@@ -2,9 +2,9 @@ import useAuth from "@/Hook/useAuth";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
-import { useReactTable, getCoreRowModel, getPaginationRowModel, flexRender } from "@tanstack/react-table";
+import { useReactTable, getCoreRowModel, getPaginationRowModel, flexRender, getSortedRowModel } from "@tanstack/react-table";
 import Skeleton from "react-loading-skeleton";
-import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const MyDonations = () => {
     const axiosSecure = useAxiosSecure();
@@ -22,37 +22,48 @@ const MyDonations = () => {
         document.title = 'My Donations || Kutto'
     }, []);
 
+    const [refunding, setRefunding] = useState(false)
+    const [sorting, setSorting] = useState([])
     const [pagination, setPagination] = useState({
         pageIndex: 0,
-        pageSize: 10,
+        pageSize: 8,
     });
 
-    const handelRefundUI = (id, amount) => {
-        toast.custom(
-            <div className="backdrop-blur-lg p-3 flex gap-4 rounded-md dark:bg-dark-lite bg-gray-200 items-center">
-                <p className="text-lg font-medium">Are you sure refund it!</p>
-                <button
-                    onClick={() => handleRefund(id, amount)}
-                    className="px-2 py-1 rounded-md bg-red-500 font-medium">Refund</button>
-                <button
-                    onClick={() => toast.dismiss()}
-                    className="px-2 py-1 rounded-md bg-green-500 font-medium">Cancel</button>
-            </div>
-            , {
-                position: "top-center",
-            }
-        )
-    }
-
     const handleRefund = async (id, amount) => {
-        try {
-            await axiosSecure.patch(`/refund-donation/${id}`, { amount });
-            toast.success("Donation Refund Successfully!");
-            toast.dismiss()
-            refetch()
-        } catch (error) {
-            toast.error(error.code);
-        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Refund!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                setRefunding(true)
+                try {
+                    await axiosSecure.patch(`/refund-donation/${id}`, { amount });
+
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your donation campaign has been deleted.",
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                    });
+                    refetch();
+                    // eslint-disable-next-line no-unused-vars
+                } catch (error) {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Failed to Refund ❗",
+                        icon: "error",
+                        confirmButtonColor: "#d33",
+                    });
+                } finally {
+                    setRefunding(false)
+                }
+            }
+        });
     };
 
     const columns = useMemo(
@@ -79,7 +90,7 @@ const MyDonations = () => {
             },
             {
                 accessorKey: "amount",
-                header: "Amount 💵",
+                header: "Amount",
                 cell: (info) => (
                     <p>$ {info.row.original.amount}</p>
                 )
@@ -95,9 +106,9 @@ const MyDonations = () => {
                     <div className="flex gap-2 flex-wrap justify-center">
                         <button
                             className="bg-red-500 p-1 rounded-md text-white"
-                            onClick={() => handelRefundUI(info.row.original.donationId, info.row.original.amount)}
+                            onClick={() => handleRefund(info.row.original.donationId, info.row.original.amount)}
                         >
-                            Refund
+                            {refunding ? 'Refunding...' : 'Refund'}
                         </button>
                     </div>
                 ),
@@ -111,12 +122,15 @@ const MyDonations = () => {
         data: myDonations,
         columns,
         state: {
-            pagination,
+            sorting,
+            pagination
         },
+        onSortingChange: setSorting,
         onPaginationChange: setPagination,
         getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
-        manualPagination: false,
+        manualGrouping: false,
         pageCount: Math.ceil(myDonations.length / pagination.pageSize),
     });
 
@@ -141,6 +155,9 @@ const MyDonations = () => {
                                     onClick={header.column.getToggleSortingHandler()}
                                 >
                                     {flexRender(header.column.columnDef.header, header.getContext())}
+                                    {header.column.getIsSorted() ? (
+                                        header.column.getIsSorted() === "asc" ? " 🔼" : " 🔽"
+                                    ) : null}
                                 </th>
                             ))}
                         </tr>
