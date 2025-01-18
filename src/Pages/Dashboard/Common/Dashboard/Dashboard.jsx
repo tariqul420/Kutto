@@ -18,97 +18,101 @@ const Dashboard = () => {
     const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
     return (
-        <div className="flex flex-col md:flex-row gap-6 dashboard">
+        <div className="flex flex-col md:flex-row gap-6 dashboard overflow-hidden">
             {/* Sidebar */}
-            <div className={`p-6 m-4 flex flex-col justify-between bg-white dark:bg-dark-lite shadow-md rounded-md ${isSidebarOpen ? 'max-h-[80vh] w-[350px]' : 'w-0 overflow-hidden'} transition-all`}>
-                <div>
-                    <h3 className="text-2xl font-semibold">Pagination</h3>
-                    <ul className="mt-4 space-y-2">
+            <div
+                className={`p-6 bg-white dark:bg-dark-lite shadow-md rounded-md transition-all ${isSidebarOpen
+                    ? "max-h-[80vh] w-full md:w-[350px] flex flex-row justify-between  md:flex-col overflow-x-auto items-center md:items-start"
+                    : "w-0 overflow-hidden"
+                    }`}
+            >
+                <div className="flex flex-col md:flex-col items-center md:items-start">
+                    <h3 className="text-2xl font-semibold hidden md:block">Pagination</h3>
+                    <ul
+                        className={`mt-4 flex flex-row md:flex-col gap-4 md:gap-2 ${isSidebarOpen ? "space-x-4 md:space-x-0" : ""
+                            }`}
+                    >
                         {/* for user */}
-                        {
-                            role === 'user' && (
-                                <>
-                                    <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to="/dashboard/add-pet">
-                                            <MdOutlinePostAdd />
-                                            <span>Add a pet</span>
-                                        </NavLink>
-                                    </li>
-                                    <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to={'/dashboard/my-add-pets'}>
-                                            <MdPets />
-                                            <span>My added pets</span>
-                                        </NavLink>
-                                    </li>
-                                    <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to={'/dashboard/adoption-request'}>
-                                            <FaCodePullRequest />
-                                            <span>Adoption Request</span>
-                                        </NavLink>
-                                    </li>
-                                    <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to={'/dashboard/create-donation'}>
-                                            <FaDonate />
-                                            <span>Create Donate C...</span>
-                                        </NavLink>
-                                    </li>
-                                    <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to={'/dashboard/my-donation-campaign'}>
-                                            <BiSolidDonateHeart />
-                                            <span>My Donation C...</span>
-                                        </NavLink>
-                                    </li>
-                                    <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to={'/dashboard/my-donations'}>
-                                            <TbBrandMyOppo />
-                                            <span>My Donations</span>
-                                        </NavLink>
-                                    </li>
-                                </>
-                            )
-                        }
+                        {role === "user" && (
+                            <>
+                                <li className="dashboardLink">
+                                    <NavLink className="dashboardIcon" to="/dashboard/add-pet">
+                                        <MdOutlinePostAdd />
+                                        <span className="hidden md:inline">Add a pet</span>
+                                    </NavLink>
+                                </li>
+                                <li className="dashboardLink">
+                                    <NavLink className="dashboardIcon" to={"/dashboard/my-add-pets"}>
+                                        <MdPets />
+                                        <span className="hidden md:inline">My added pets</span>
+                                    </NavLink>
+                                </li>
+                                <li className="dashboardLink">
+                                    <NavLink className="dashboardIcon" to={"/dashboard/adoption-request"}>
+                                        <FaCodePullRequest />
+                                        <span className="hidden md:inline">Adoption Request</span>
+                                    </NavLink>
+                                </li>
+                                <li className="dashboardLink">
+                                    <NavLink className="dashboardIcon" to={"/dashboard/create-donation"}>
+                                        <FaDonate />
+                                        <span className="hidden md:inline">Create Donate C...</span>
+                                    </NavLink>
+                                </li>
+                                <li className="dashboardLink">
+                                    <NavLink className="dashboardIcon" to={"/dashboard/my-donation-campaign"}>
+                                        <BiSolidDonateHeart />
+                                        <span className="hidden md:inline">My Donation C...</span>
+                                    </NavLink>
+                                </li>
+                                <li className="dashboardLink">
+                                    <NavLink className="dashboardIcon" to={"/dashboard/my-donations"}>
+                                        <TbBrandMyOppo />
+                                        <span className="hidden md:inline">My Donations</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        )}
 
                         {/* for admin */}
-                        {
-                            role === 'admin' && (
-                                <>
-                                    <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to={'/dashboard/all-users'}>
-                                            <FaUsers />
-                                            <span>All Users</span>
-                                        </NavLink>
-                                    </li>
-                                    <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to={'/dashboard/all-pets'}>
-                                            <MdOutlinePets />
-                                            <span>All Pets</span>
-                                        </NavLink>
-                                    </li>
-                                    <li className="dashboardLink">
-                                        <NavLink className={`dashboardIcon`} to={'/dashboard/all-donation'}>
-                                            <FaDonate />
-                                            <span>All Donation</span>
-                                        </NavLink>
-                                    </li>
-                                </>
-                            )
-                        }
-
+                        {role === "admin" && (
+                            <>
+                                <li className="dashboardLink">
+                                    <NavLink className="dashboardIcon" to={"/dashboard/all-users"}>
+                                        <FaUsers />
+                                        <span className="hidden md:inline">All Users</span>
+                                    </NavLink>
+                                </li>
+                                <li className="dashboardLink">
+                                    <NavLink className="dashboardIcon" to={"/dashboard/all-pets"}>
+                                        <MdOutlinePets />
+                                        <span className="hidden md:inline">All Pets</span>
+                                    </NavLink>
+                                </li>
+                                <li className="dashboardLink">
+                                    <NavLink className="dashboardIcon" to={"/dashboard/all-donation"}>
+                                        <FaDonate />
+                                        <span className="hidden md:inline">All Donation</span>
+                                    </NavLink>
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
                 <div>
-                    <ul className="space-y-2">
+                    <ul className="flex flex-row md:flex-col gap-4 md:gap-2 items-center md:items-start">
                         <li className="dashboardLink">
-                            <NavLink className={`dashboardIcon`} to="/dashboard/setting">
+                            <NavLink className="dashboardIcon" to="/dashboard/setting">
                                 <IoSettings />
-                                <span>Setting</span>
+                                <span className="hidden md:inline">Setting</span>
                             </NavLink>
                         </li>
                         <li
                             onClick={() => logOutUser()}
-                            className="dashboardLink dashboardIcon">
+                            className="dashboardLink dashboardIcon"
+                        >
                             <HiOutlineLogout />
-                            <span>Logout</span>
+                            <span className="hidden md:inline">Logout</span>
                         </li>
                     </ul>
                 </div>
@@ -120,12 +124,12 @@ const Dashboard = () => {
                     onClick={toggleSidebar}
                     className="p-2 bg-gray-700 text-white rounded-md"
                 >
-                    {isSidebarOpen ? 'Close' : 'Open'} Sidebar
+                    {isSidebarOpen ? "Close" : "Open"} Sidebar
                 </button>
             </div>
 
             {/* Main Content */}
-            <div className="sm:m-4 w-full min-h-screen">
+            <div className="sm:m-4 w-full overflow-hidden min-h-screen">
                 <Outlet />
             </div>
         </div>
