@@ -7,6 +7,7 @@ import { LineProgress, LineProgressBar, LineProgressText, Modal, ModalAction, Mo
 import { BiSolidDonateHeart } from "react-icons/bi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const MyDonationCampaign = () => {
     const axiosSecure = useAxiosSecure();
@@ -20,6 +21,10 @@ const MyDonationCampaign = () => {
             return data;
         },
     });
+
+    useEffect(() => {
+        document.title = 'My Donation Campaign || Kutto'
+    }, []);
 
     if (isLoading) {
         return <Skeleton height={100} count={5} />;

@@ -1,7 +1,7 @@
 import useAuth from "@/Hook/useAuth";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useReactTable, getCoreRowModel, getPaginationRowModel, flexRender } from "@tanstack/react-table";
 import Skeleton from "react-loading-skeleton";
 import toast from "react-hot-toast";
@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 const MyDonations = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
+
     const { data: myDonations = [], isLoading, refetch } = useQuery({
         queryKey: ["myDonatioHistory", user?.email],
         queryFn: async () => {
@@ -16,6 +17,10 @@ const MyDonations = () => {
             return data;
         },
     });
+
+    useEffect(() => {
+        document.title = 'My Donations || Kutto'
+    }, []);
 
     const [pagination, setPagination] = useState({
         pageIndex: 0,

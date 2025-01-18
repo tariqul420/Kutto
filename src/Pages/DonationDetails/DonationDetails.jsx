@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "@/Hook/useAxiosPublic";
 import DOMPurify from 'dompurify';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import CheckoutForm from '../Payment/CheckoutForm';
@@ -42,6 +42,10 @@ const DonationDetails = () => {
             return data;
         },
     });
+
+    useEffect(() => {
+        document.title = 'Donation Details || Kutto'
+    }, []);
 
     const handleDonateNowClick = () => {
         if (user) {

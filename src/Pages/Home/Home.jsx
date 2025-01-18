@@ -4,8 +4,14 @@ import CallToAction from "@/Components/Home/CallToAction/CallToAction";
 import FAQ from "@/Components/Home/FAQ/FAQ";
 import PetCategory from "@/Components/Home/PetCategory/PetCategory";
 import Testimonials from "@/Components/Home/Testimonials/Testimonials";
+import { useEffect } from "react";
 
 const Home = () => {
+
+    useEffect(() => {
+        document.title = 'Kutto'
+    }, []);
+
     return (
         <div>
             <Banner />

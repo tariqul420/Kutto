@@ -34,6 +34,10 @@ const PetListing = () => {
     });
 
     useEffect(() => {
+        document.title = 'Pet Listing || Kutto'
+    }, []);
+
+    useEffect(() => {
         if (inView && hasNextPage) {
             fetchNextPage();
         }

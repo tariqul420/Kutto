@@ -22,7 +22,7 @@ const Dashboard = () => {
             {/* Sidebar */}
             <div
                 className={`p-6 bg-white dark:bg-dark-lite shadow-md rounded-md transition-all ${isSidebarOpen
-                    ? "max-h-[80vh] w-full md:w-[350px] flex flex-row justify-between  md:flex-col overflow-x-auto items-center md:items-start"
+                    ? "max-h-[80vh] w-full md:w-[350px] flex flex-row justify-between gap-8  md:flex-col overflow-x-auto items-center md:items-start"
                     : "w-0 overflow-hidden"
                     }`}
             >

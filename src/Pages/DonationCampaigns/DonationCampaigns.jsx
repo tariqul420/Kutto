@@ -32,6 +32,10 @@ const DonationCampaigns = () => {
     });
 
     useEffect(() => {
+        document.title = 'Donation Campaign || Kutto'
+    }, []);
+
+    useEffect(() => {
         if (inView && hasNextPage) {
             fetchNextPage();
         }

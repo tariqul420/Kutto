@@ -30,6 +30,12 @@ const PetCategories = () => {
     });
 
     useEffect(() => {
+        const formattedName = category.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+
+        document.title = `${formattedName} || Kutto`
+    }, [category]);
+
+    useEffect(() => {
         if (inView && hasNextPage) {
             fetchNextPage();
         }

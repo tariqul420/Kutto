@@ -8,7 +8,7 @@ import DOMPurify from 'dompurify';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '@/Hook/useAxiosSecure';
 import toast from 'react-hot-toast';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const PetDetails = () => {
     const { user } = useAuth();
@@ -17,7 +17,6 @@ const PetDetails = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     const location = useLocation()
-
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -29,6 +28,10 @@ const PetDetails = () => {
             return data;
         },
     });
+
+    useEffect(() => {
+        document.title = 'Pet Details || Kutto'
+    }, []);
 
     const handleAdoptClick = () => {
         if (user) {

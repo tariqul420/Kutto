@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Skeleton from 'react-loading-skeleton'
 import toast from "react-hot-toast";
 import useAuth from "@/Hook/useAuth";
+import { useEffect } from "react";
 
 const AdoptionRequest = () => {
     const axiosSecure = useAxiosSecure();
@@ -15,6 +16,10 @@ const AdoptionRequest = () => {
             return data;
         },
     });
+
+    useEffect(() => {
+        document.title = 'Adoption Request || Kutto'
+    }, []);
 
     const handleAdopt = async (id, status) => {
         try {

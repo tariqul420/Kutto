@@ -1,6 +1,6 @@
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel, flexRender } from "@tanstack/react-table";
 import Skeleton from "react-loading-skeleton";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,10 @@ const AllPets = () => {
             return data;
         },
     });
+
+    useEffect(() => {
+        document.title = 'All Pets || Kutto'
+    }, []);
 
     const [sorting, setSorting] = useState([]);
     const [pagination, setPagination] = useState({

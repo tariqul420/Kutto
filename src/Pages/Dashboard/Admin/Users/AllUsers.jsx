@@ -2,6 +2,7 @@ import useAxiosSecure from "@/Hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Skeleton from 'react-loading-skeleton'
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -13,6 +14,10 @@ const AllUsers = () => {
             return data;
         },
     });
+
+    useEffect(() => {
+        document.title = 'All Users || Kutto'
+    }, []);
 
     const handelAdmin = async (email) => {
         try {
