@@ -94,13 +94,13 @@ const Navbar = () => {
                         } lg:hidden bg-gray-200 dark:bg-dark-lite boxShadow p-4 text-center absolute top-[65px] right-0 w-full md:w-4/12 rounded-md transition-all duration-300`}
                 >
                     <ul className="flex flex-col justify-center items-center gap-[20px] text-[1rem] lg:flex">
-                        <li className="navBarLink">
+                        <li onClick={() => setMobileSidebarOpen(false)} className="navBarLink">
                             <NavLink to="/">Home</NavLink>
                         </li>
-                        <li className="navBarLink">
+                        <li onClick={() => setMobileSidebarOpen(false)} className="navBarLink">
                             <NavLink to="/pet-listing">Pet Listing</NavLink>
                         </li>
-                        <li className="navBarLink">
+                        <li onClick={() => setMobileSidebarOpen(false)} className="navBarLink">
                             <NavLink to="/donation-campaigns">Donation Campaigns</NavLink>
                         </li>
                     </ul>

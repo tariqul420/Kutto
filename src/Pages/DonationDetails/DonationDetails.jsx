@@ -76,7 +76,17 @@ const DonationDetails = () => {
         <section>
             {/* Banner Section */}
             <div className="relative flex items-center h-[30vh] bg-cover bg-center"
-                style={{ backgroundImage: `url(https://img.freepik.com/premium-photo/silhouette-dog-looking-away-field-against-sky_1048944-17766562.jpg?w=740` }}></div>
+                style={{ backgroundImage: `url(https://img.freepik.com/premium-photo/silhouette-dog-looking-away-field-against-sky_1048944-17766562.jpg?w=740)` }}>
+                <div className="relative w-11/12 text-center text-white z-10">
+                    <h1 className="font-bold text-5xl">
+                        Donation
+                        <span className="relative inline-block mx-2 text-white">
+                            <span className="absolute inset-0 bg-color-accent clip-trapezoid"></span>
+                            <span className="relative px-4 py-1">Details</span>
+                        </span>
+                    </h1>
+                </div>
+            </div>
 
             {/* donation Details Section */}
             <div className="donation-details w-11/12 mx-auto flex flex-col lg:flex-row gap-8 my-16">
