@@ -96,19 +96,19 @@ nav a.active:hover {
 
 @layer components {
   .navBarLink {
-    @apply before:w-0 hover:before:w-full before:bg-color-accent before:dark:bg-color-accent-d before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-color-accent hover:dark:text-color-accent-d transition-all duration-300 before:left-0 cursor-pointer capitalize;
+    @apply before:w-0 hover:before:w-full before:bg-color-accent before:dark:bg-color-accent before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-color-accent hover:dark:text-color-accent transition-all duration-300 before:left-0 cursor-pointer capitalize;
   }
 
   .inputField {
-    @apply py-3 dark:bg-color-primary-d font-medium px-4 border focus:outline-color-accent focus:dark:outline-color-accent-d border-gray-300 rounded-lg w-full;
+    @apply py-3 dark:bg-color-text font-medium px-4 border focus:outline-color-accent focus:dark:outline-color-accent border-gray-300 rounded-lg w-full;
   }
 
   .inputButton {
-    @apply w-full py-3 px-4 bg-color-accent dark:bg-color-accent-d text-white border-none font-bold outline-none rounded-lg mt-3;
+    @apply w-full py-3 px-4 bg-color-accent dark:bg-color-accent text-white border-none font-bold outline-none rounded-lg mt-3;
   }
 
   .dashboardLink {
-    @apply hover:bg-color-primary-d/10 rounded-md transition-all duration-300 cursor-pointer dark:hover:bg-color-primary-d;
+    @apply hover:bg-color-text/10 rounded-md transition-all duration-300 cursor-pointer dark:hover:bg-color-text;
   }
 
   .dashboardIcon {

@@ -215,7 +215,7 @@ const AllDonation = () => {
 
             <div className="flex justify-between items-center mt-4 flex-wrap">
                 <button
-                    className="bg-color-accent-d px-2 py-1 rounded-md text-white disabled:cursor-not-allowed disabled:bg-gray-600"
+                    className="bg-color-accent px-2 py-1 rounded-md text-white disabled:cursor-not-allowed disabled:bg-gray-600"
                     onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                 >
@@ -227,7 +227,7 @@ const AllDonation = () => {
                 </span>
 
                 <button
-                    className="bg-color-accent-d px-2 py-1 rounded-md text-white disabled:cursor-not-allowed disabled:bg-gray-600"
+                    className="bg-color-accent px-2 py-1 rounded-md text-white disabled:cursor-not-allowed disabled:bg-gray-600"
                     onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                 >

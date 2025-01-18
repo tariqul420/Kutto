@@ -185,7 +185,7 @@ const PetDetails = () => {
             </div>
 
             <div className="w-11/12 mx-auto my-20">
-                <p className="text-2xl text-color-accent-d font-semibold border-b-2 border-color-accent inline">Details More</p>
+                <p className="text-2xl text-color-accent font-semibold border-b-2 border-color-accent inline">Details More</p>
                 <div
                     className="pet-description text-base md:text-lg leading-relaxed mt-8"
                     dangerouslySetInnerHTML={{ __html: sanitizedDescription }}

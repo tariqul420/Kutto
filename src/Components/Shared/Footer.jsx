@@ -1,6 +1,6 @@
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
+import { MdOutlinePets } from "react-icons/md";
 import { Link } from "react-router-dom"
 
 const Footer = () => {
@@ -8,7 +8,11 @@ const Footer = () => {
         <div className="pt-4 w-full bg-gray-100 dark:bg-dark-lite">
             <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-8">
                 <div className="space-y-4">
-                    <h2 className="font-extrabold text-2xl">Kutto</h2>
+                    <h2 className="font-extrabold text-2xl flex gap-2 items-center">
+                        <span>Kutto</span>
+                        <span className="text-color-accent">
+                            <MdOutlinePets />
+                        </span></h2>
                     <p className="font-medium text-xl">Subscribe</p>
                     <div>
                         <p className="font-medium mb-2">Get 10% off your order</p>
@@ -16,7 +20,7 @@ const Footer = () => {
                             <input
                                 type='email'
                                 placeholder='Enter Your Email'
-                                className='border bg-color-primary-d border-solid outline-none placeholder:text-white/80 border-white py-3 pl-4 pr-[50px]  w-full rounded-md' />
+                                className='border bg-color-text border-solid outline-none placeholder:text-white/80 border-white py-3 pl-4 pr-[50px]  w-full rounded-md' />
 
                             <span className='absolute top-0 right-0 h-full px-5 flex items-center justify-center rounded-r-md cursor-pointer text-white'>
                                 <IoSend />
@@ -57,14 +61,22 @@ const Footer = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-between mt-10">
-                        <FaFacebookF size={25} />
-                        <FaXTwitter size={25} />
-                        <FaInstagram size={25} />
-                        <FaLinkedinIn size={25} />
+                        <a target="_blank" href="https://www.facebook.com/tariqul.islam.fb">
+                            <FaFacebookF size={25} />
+                        </a>
+                        <a target="_blank" href="https://github.com/tariqul420">
+                            <FaGithub size={25} />
+                        </a>
+                        <a target="_blank" href="https://www.instagram.com/tariqul.islam.fb">
+                            <FaInstagram size={25} />
+                        </a>
+                        <a target="_blank" href="https://www.linkedin.com/">
+                            <FaLinkedinIn size={25} />
+                        </a>
                     </div>
                 </div>
             </div>
-            <p className="dark:text-white/70 text-center py-4 border-t border-solid border-color-primary-d dark:border-white">&copy; Copyright Kutto {new Date().getFullYear()}. All Right Reserved</p>
+            <p className="dark:text-white/70 text-center py-4 border-t border-solid border-color-text dark:border-white">&copy; Copyright Kutto {new Date().getFullYear()}. All Right Reserved</p>
         </div>
     );
 };

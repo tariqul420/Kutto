@@ -181,7 +181,7 @@ const DonationDetails = () => {
             </div>
 
             <div className="w-11/12 mx-auto my-20">
-                <h3 className="text-2xl text-color-accent-d font-semibold border-b-2 border-color-accent inline">Details More</h3>
+                <h3 className="text-2xl text-color-accent font-semibold border-b-2 border-color-accent inline">Details More</h3>
                 <div
                     className="donation-description leading-relaxed mt-8"
                     dangerouslySetInnerHTML={{ __html: sanitizedDescription }}
@@ -189,7 +189,7 @@ const DonationDetails = () => {
             </div>
 
             <div className='w-11/12 mx-auto mb-20'>
-                <h3 className="text-2xl text-color-accent-d font-semibold border-b-2 border-color-accent inline">Suggestion</h3>
+                <h3 className="text-2xl text-color-accent font-semibold border-b-2 border-color-accent inline">Suggestion</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
                     {isLoadingSuggested ? (
                         Array(3).fill().map((_, index) => (

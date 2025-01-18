@@ -149,7 +149,7 @@ const AccountSettings = () => {
                     </form>
                 </div>
                 <div className="mt-4 md:mt-0 flex items-center justify-center flex-col gap-4">
-                    <img className="w-52 h-52 border-2 border-solid border-color-accent-d rounded-full p-1 object-cover" src={user?.photoURL} alt="profile photo" />
+                    <img className="w-52 h-52 border-2 border-solid border-color-accent rounded-full p-1 object-cover" src={user?.photoURL} alt="profile photo" />
 
                     <p className="bg-color-accent px-3 rounded-lg text-white">{role}</p>
                 </div>
