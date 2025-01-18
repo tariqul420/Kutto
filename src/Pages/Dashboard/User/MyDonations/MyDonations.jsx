@@ -145,7 +145,7 @@ const MyDonations = () => {
     return (
         <div className="overflow-x-auto">
             <table className="table-auto w-full border-collapse border border-gray-300">
-                <thead>
+                <thead className="">
                     {table.getHeaderGroups().map((headerGroup) => (
                         <tr key={headerGroup.id}>
                             {headerGroup.headers.map((header) => (
