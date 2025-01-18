@@ -35,7 +35,7 @@ const DonationDetails = () => {
     });
 
     // Fetch suggested donation campaigns
-    const { data: suggestedDonation = [], isLoading: isLoadingSuggested } = useQuery({
+    const { data: suggestedDonation = [], isLoading: isLoadingSuggested, refetch: isRefetchSuggested } = useQuery({
         queryKey: ["suggestionDonationCampaign"],
         queryFn: async () => {
             const { data } = await axiosPublic.get("/suggestion-donation-campaign");
@@ -177,7 +177,7 @@ const DonationDetails = () => {
                         ))
                     ) : (
                         suggestedDonation?.map((donation) => (
-                            <DonationCard key={donation?._id} donation={donation} />
+                            <DonationCard key={donation?._id} donation={donation} isRefetchSuggested={isRefetchSuggested} />
                         ))
                     )}
                 </div>
