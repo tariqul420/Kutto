@@ -143,19 +143,19 @@ const AddPet = () => {
     });
 
     return (
-        <section className="w-11/12 mx-auto h-auto flex flex-col-reverse lg:flex-row my-0 dark:bg-dark-lite rounded-md bg-white">
-            {/* Register Form */}
+        <section className="w-full mx-auto h-auto flex flex-col lg:flex-row my-0 dark:bg-dark-lite bg-white rounded-md">
+            {/* Add Pet Form */}
             <div className="shadow-md backdrop-blur-3xl rounded-lg sm:py-6 sm:px-8 p-4 flex flex-col gap-5 flex-1">
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-5">
-                    <h3 className="text-[3rem] font-[700] text-center">Add a Pet</h3>
+                    <h3 className="text-2xl lg:text-4xl font-bold text-center">Add a Pet</h3>
 
-                    <div className="flex gap-4">
+                    <div className="flex flex-col lg:flex-row gap-4">
                         {/* Pet Name */}
                         <div className="flex-1">
                             <input
                                 type="text"
                                 placeholder="Pet Name"
-                                className="inputField"
+                                className="inputField w-full"
                                 {...register("petName", { required: "Pet name is required." })}
                             />
                             {errors.petName && (
@@ -167,12 +167,11 @@ const AddPet = () => {
 
                         {/* Pet Age */}
                         <div className="flex gap-4 flex-1">
-                            {/* Numeric Input for Age */}
                             <div className="flex-1">
                                 <input
                                     type="number"
                                     placeholder="Pet Age"
-                                    className="inputField"
+                                    className="inputField w-full"
                                     {...register("petAge.value", { required: "Pet age is required." })}
                                 />
                                 {errors.petAge?.value && (
@@ -182,10 +181,9 @@ const AddPet = () => {
                                 )}
                             </div>
 
-                            {/* Dropdown for Months/Years */}
                             <div>
                                 <select
-                                    className="inputField"
+                                    className="inputField w-full"
                                     {...register("petAge.unit", { required: "Pet age unit is required." })}
                                 >
                                     <option value="">Select Unit</option>
@@ -201,13 +199,13 @@ const AddPet = () => {
                         </div>
                     </div>
 
-                    <div className="flex gap-4">
+                    <div className="flex flex-col lg:flex-row gap-4">
                         {/* Pet Location */}
                         <div className="flex-1">
                             <input
                                 type="text"
                                 placeholder="Pet Location"
-                                className="inputField"
+                                className="inputField w-full"
                                 {...register("petLocation", { required: "Pet location is required." })}
                             />
                             {errors.petLocation && (
@@ -247,19 +245,17 @@ const AddPet = () => {
                     </div>
 
                     {/* Short Description */}
-                    <div>
-                        <textarea
-                            rows={2}
-                            placeholder="Short Description"
-                            className="inputField w-full"
-                            {...register("shortDescription", { required: "Short description is required." })}
-                        />
-                        {errors.shortDescription && (
-                            <p className="flex text-red-500 gap-1 items-center">
-                                <MdError /> {errors.shortDescription.message}
-                            </p>
-                        )}
-                    </div>
+                    <textarea
+                        rows={2}
+                        placeholder="Short Description"
+                        className="inputField w-full"
+                        {...register("shortDescription", { required: "Short description is required." })}
+                    />
+                    {errors.shortDescription && (
+                        <p className="flex text-red-500 gap-1 items-center">
+                            <MdError /> {errors.shortDescription.message}
+                        </p>
+                    )}
 
                     {/* Long Description */}
                     <div>
@@ -267,7 +263,7 @@ const AddPet = () => {
                             theme="snow"
                             value={longDesc}
                             onChange={setLongDesc}
-                            className={longDescError ? "border border-red-500" : ""}
+                            className={`border ${longDescError ? "border-red-500" : ""}`}
                         />
                         {longDescError && (
                             <p className="flex text-red-500 gap-1 items-center mt-1">
@@ -277,46 +273,48 @@ const AddPet = () => {
                     </div>
 
                     {/* Pet Photo */}
-                    <div>
-                        <label
-                            htmlFor="petImage"
-                            className="flex items-center justify-center w-full h-16 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-color-accent transition-all"
-                        >
-                            <span className="text-gray-500 flex items-center gap-2">
-                                <MdCloudUpload className="text-xl" /> Upload Photo
-                            </span>
-                            {photoPreview && (
-                                <img
-                                    src={photoPreview}
-                                    alt="Preview"
-                                    className="w-14 h-14 object-cover rounded-md border border-gray-300 ml-4"
-                                />
-                            )}
-                            <input
-                                id="petImage"
-                                type="file"
-                                accept="image/*"
-                                className="hidden"
-                                {...register("petImage", {
-                                    required: "Photo is required.",
-                                    onChange: (e) => {
-                                        const file = e.target.files[0];
-                                        if (file) {
-                                            setPhotoPreview(URL.createObjectURL(file));
-                                        }
-                                    },
-                                })}
+                    <label
+                        htmlFor="petImage"
+                        className="flex items-center justify-center w-full h-16 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-color-accent transition-all"
+                    >
+                        <span className="text-gray-500 flex items-center gap-2">
+                            <MdCloudUpload className="text-xl" /> Upload Photo
+                        </span>
+                        {photoPreview && (
+                            <img
+                                src={photoPreview}
+                                alt="Preview"
+                                className="w-14 h-14 object-cover rounded-md border border-gray-300 ml-4"
                             />
-                        </label>
-                        {errors.petImage && (
-                            <p className="flex text-red-500 gap-1 items-center mt-1">
-                                <MdError /> {errors.petImage.message}
-                            </p>
                         )}
-                    </div>
+                        <input
+                            id="petImage"
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            {...register("petImage", {
+                                required: "Photo is required.",
+                                onChange: (e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                        setPhotoPreview(URL.createObjectURL(file));
+                                    }
+                                },
+                            })}
+                        />
+                    </label>
+                    {errors.petImage && (
+                        <p className="flex text-red-500 gap-1 items-center mt-1">
+                            <MdError /> {errors.petImage.message}
+                        </p>
+                    )}
 
+                    {/* Submit Button */}
                     <div className="w-full flex items-center justify-center">
-                        <button type="submit" className="inputButton">
+                        <button
+                            type="submit"
+                            className="inputButton w-full lg:w-1/2"
+                        >
                             {isPending ? "Adding..." : "Add Pet"}
                         </button>
                     </div>
