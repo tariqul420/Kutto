@@ -3,12 +3,11 @@ import { MdCalendarToday, MdCloudUpload, MdError } from "react-icons/md";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import ImageUpload from "@/Api/ImageUpload";
 import ReactQuill from "react-quill";
 import DatePicker from "react-datepicker";
-import useRole from "@/Hook/useRole";
 
 const UpdateDonationCampaign = () => {
     const [photoPreview, setPhotoPreview] = useState("");
@@ -19,7 +18,7 @@ const UpdateDonationCampaign = () => {
     const { id } = useParams();
     const queryClient = useQueryClient()
     const navigate = useNavigate()
-    const [role] = useRole()
+    const location = useLocation()
 
     useEffect(() => {
         document.title = "Update a Donation || Kutto";
@@ -32,8 +31,7 @@ const UpdateDonationCampaign = () => {
         onSuccess: () => {
             toast.success("Data Updated Successfully!!!");
             queryClient.invalidateQueries(["myDonationCamp"]);
-            navigate(role === 'admin' ? '/dashboard/all-donation' : '/dashboard/my-donation-campaign');
-            reset()
+            navigate(location?.state?.from ? location?.state?.from : '/dashboard/my-donation-campaign', { replace: true })
         },
         onError: (error) => {
             toast.error(error.message || "Failed to update pet data.");

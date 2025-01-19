@@ -3,13 +3,12 @@ import { MdCloudUpload, MdError } from "react-icons/md";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import Select from "react-select";
 import useTheme from "@/Hook/useTheme";
 import ImageUpload from "@/Api/ImageUpload";
 import ReactQuill from "react-quill";
-import useRole from "@/Hook/useRole";
 
 const options = [
     { value: "dog", label: "Dog" },
@@ -35,7 +34,7 @@ const UpdatePet = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [longDesc, setLongDesc] = useState("");
     const [photoPreview, setPhotoPreview] = useState("");
-    const [role] = useRole()
+    const location = useLocation()
 
     useEffect(() => {
         document.title = "Update Pet || Kutto";
@@ -48,7 +47,7 @@ const UpdatePet = () => {
         onSuccess: () => {
             toast.success("Data Updated Successfully!!!");
             queryClient.invalidateQueries(["myPets"]);
-            navigate(role === 'admin' ? '/dashboard/all-pets' : '/dashboard/my-add-pets');
+            navigate(location?.state?.from ? location?.state?.from : '/dashboard/my-add-pets', { replace: true })
         },
         onError: (error) => {
             toast.error(error.message || "Failed to update pet data.");

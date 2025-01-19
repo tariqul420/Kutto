@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel, flexRender } from "@tanstack/react-table";
 import Skeleton from "react-loading-skeleton";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { MdOutlineEditCalendar } from "react-icons/md";
 import { RiDeleteBin5Fill } from "react-icons/ri";
@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 const AllPets = () => {
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const { data: myPets = [], isLoading, refetch } = useQuery({
         queryKey: ["allPets"],
@@ -116,7 +117,7 @@ const AllPets = () => {
                     <div className="flex gap-2 flex-wrap justify-center">
                         <button
                             className="bg-orange-600 p-1 rounded-md text-white"
-                            onClick={() => navigate(`/dashboard/update-pet/${info.row.original._id}`)}
+                            onClick={() => navigate(`/dashboard/update-pet/${info.row.original._id}`, { state: { from: location.pathname }, replace: true })}
                         >
                             <MdOutlineEditCalendar />
                         </button>

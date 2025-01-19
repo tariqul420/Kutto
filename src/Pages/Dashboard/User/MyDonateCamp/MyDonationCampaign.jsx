@@ -6,7 +6,7 @@ import { LineProgress, LineProgressBar, LineProgressText, Modal, ModalAction, Mo
 'use client'
 import { BiSolidDonateHeart } from "react-icons/bi";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel, flexRender } from "@tanstack/react-table";
 
@@ -14,6 +14,7 @@ const MyDonationCampaign = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth()
     const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(() => {
         document.title = 'My Donation Campaign || Kutto'
@@ -109,7 +110,7 @@ const MyDonationCampaign = () => {
                             {info.row.original.status === "Complete" ? "Completed" : info.row.original.status === "Running" ? "Pause" : "Running"}
                         </button>
                         <button
-                            onClick={() => navigate(`/dashboard/update-donation-campaign/${info.row.original._id}`)}
+                            onClick={() => navigate(`/dashboard/update-donation-campaign/${info.row.original._id}`, { state: { from: location.pathname }, replace: true })}
                             className="px-2 py-0 rounded-md bg-red-500 text-white">
                             Update
                         </button>
