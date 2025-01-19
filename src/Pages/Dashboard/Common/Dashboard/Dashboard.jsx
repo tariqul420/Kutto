@@ -3,7 +3,6 @@ import { MdOutlinePets, MdOutlinePostAdd, MdPets } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../../../../Hook/useAuth";
-import { useState } from "react";
 import { FaCodePullRequest } from "react-icons/fa6";
 import { FaDonate, FaUsers } from "react-icons/fa";
 import { BiSolidDonateHeart } from "react-icons/bi";
@@ -13,19 +12,15 @@ import { Divider } from "keep-react";
 
 const Dashboard = () => {
     const { logOutUser } = useAuth();
-    const [isSidebarOpen, setSidebarOpen] = useState(true);
     const [role] = useRole();
 
-    const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
+    // const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
 
     return (
         <div className="flex flex-col md:flex-row gap-6 dashboard overflow-hidden">
             {/* Sidebar */}
             <div
-                className={`p-6 md:m-4 bg-white dark:bg-dark-lite shadow-md rounded-md transition-all ${isSidebarOpen
-                    ? "max-h-[100vh] w-full md:w-[350px] flex flex-row justify-between gap-8  md:flex-col overflow-x-auto items-center md:items-start"
-                    : "w-0 overflow-hidden"
-                    }`}
+                className={`p-6 m-2 md:m-4 bg-white dark:bg-dark-lite shadow-md rounded-md transition-all max-h-[100vh] w-full md:w-[350px] flex justify-between items-center gap-8  md:flex-col overflow-x-auto md:items-start`}
             >
                 <div className="flex flex-col md:flex-col items-center md:items-start">
                     <h3 className="text-2xl font-semibold hidden md:block">
@@ -35,8 +30,7 @@ const Dashboard = () => {
                         </span>
                     </h3>
                     <ul
-                        className={`mt-4 flex flex-row md:flex-col gap-4 md:gap-2 ${isSidebarOpen ? "space-x-4 md:space-x-0" : ""
-                            }`}
+                        className={`md:mt-4 flex flex-row md:flex-col gap-4 md:gap-2 max-sm:space-x-2`}
                     >
                         {/* for admin */}
                         {role === "admin" && (
@@ -60,7 +54,9 @@ const Dashboard = () => {
                                     </NavLink>
                                 </li>
 
-                                <Divider className="font-bold text-color-accent dark:text-color-accent" variant="center">OR</Divider>
+                                <li>
+                                    <Divider className="font-bold text-color-accent dark:text-color-accent" variant="center">OR</Divider>
+                                </li>
                             </>
                         )}
 
@@ -103,7 +99,7 @@ const Dashboard = () => {
                     </ul>
                 </div>
                 <div>
-                    <ul className="flex flex-row md:flex-col gap-4 md:gap-2 items-center md:items-start">
+                    <ul className="flex flex-row md:flex-col gap-4 md:gap-2 items-center md:items-start max-sm:space-x-2 max-sm:border-l-2 max-sm:pl-6 max-sm:border-color-accent">
                         <li className="dashboardLink">
                             <NavLink className="dashboardIcon" to="/dashboard/setting">
                                 <IoSettings />
@@ -119,16 +115,6 @@ const Dashboard = () => {
                         </li>
                     </ul>
                 </div>
-            </div>
-
-            {/* Mobile Toggle Button */}
-            <div className="md:hidden absolute top-6 right-6 z-20">
-                <button
-                    onClick={toggleSidebar}
-                    className="p-2 bg-gray-700 text-white rounded-md"
-                >
-                    {isSidebarOpen ? "Close" : "Open"} Sidebar
-                </button>
             </div>
 
             {/* Main Content */}

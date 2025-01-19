@@ -74,15 +74,6 @@ nav a.active:hover {
   color: #F04335;
 }
 
-.no-scrollbar {
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
 .react-datepicker-wrapper {
   width: 100%;
 }
