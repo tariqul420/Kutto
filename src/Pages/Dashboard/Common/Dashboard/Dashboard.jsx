@@ -10,7 +10,7 @@ const Dashboard = () => {
 
             <div
                 onClick={() => setDashboardOpen(true)}
-                className="inline-flex fixed items-center top-[92px] left-0 md:hidden">
+                className="inline-flex fixed items-center top-[92px] left-0 md:hidden z-[9999]">
                 <span className="flex pl-10 p-1 pr-4 items-center justify-center rounded-r-full bg-metal-900 text-heading-6 font-semibold text-white dark:bg-metal-800">
                     K.
                 </span>

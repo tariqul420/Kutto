@@ -27,6 +27,10 @@ nav a.active {
   color: #ffffff !important;
 }
 
+.dark\:bg-black:is(.dark *) {
+  background-color: transparent !important;
+}
+
 nav a.active::before {
   content: '';
   width: 100%;
@@ -78,6 +82,16 @@ nav a.active:hover {
   border: 1px solid #d1d5db;
   border-radius: 0.375rem;
 }
+
+.sidebar-scrollable {
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sidebar-scrollable {
+  scroll-behavior: smooth;
+}
+
 
 @layer components {
   .navBarLink {

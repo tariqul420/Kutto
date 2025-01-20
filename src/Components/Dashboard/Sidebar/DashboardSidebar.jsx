@@ -28,8 +28,8 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
     };
 
     return (
-        <Sidebar className="max-h-[100vh] h-full md:m-2 overflow-auto w-ful">
-            <SidebarBody>
+        <Sidebar className="max-h-[100vh] h-full md:m-2 overflow-auto w-full">
+            <SidebarBody className='sidebar-scrollable'>
                 <div className='flex justify-between'>
                     <div className="inline-flex items-center">
                         <span className="flex h-11 w-11 items-center justify-center rounded-md bg-metal-900 text-heading-6 font-semibold text-white dark:bg-metal-800">
