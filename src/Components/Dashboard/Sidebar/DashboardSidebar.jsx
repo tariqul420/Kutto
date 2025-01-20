@@ -12,23 +12,35 @@ import {
     SidebarItem,
     SidebarList,
 } from 'keep-react';
-import { Bird, HandHeart, ListPlus, PawPrint, PiggyBank, Users, Wrench } from 'lucide-react';
+import { Bird, HandHeart, ListPlus, PawPrint, PiggyBank, Users, Wrench, XCircle } from 'lucide-react';
 import { PiTipJar } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
 import useAuth from '@/Hook/useAuth';
 import useRole from '@/Hook/useRole';
+import PropTypes from 'prop-types';
 
-export const DashboardSidebar = () => {
-    const { user } = useAuth()
-    const [role] = useRole()
+const DashboardSidebar = ({ setDashboardOpen }) => {
+    const { user } = useAuth();
+    const [role] = useRole();
+
+    const handleLinkClick = () => {
+        setDashboardOpen(false);
+    };
 
     return (
-        <Sidebar className="max-h-[100vh] h-full m-2 overflow-auto">
+        <Sidebar className="max-h-[100vh] h-full md:m-2 overflow-auto w-ful">
             <SidebarBody>
-                <div className="inline-flex items-center">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-md bg-metal-900 text-heading-6 font-semibold text-white dark:bg-metal-800">
-                        K.
-                    </span>
+                <div className='flex justify-between'>
+                    <div className="inline-flex items-center">
+                        <span className="flex h-11 w-11 items-center justify-center rounded-md bg-metal-900 text-heading-6 font-semibold text-white dark:bg-metal-800">
+                            K.
+                        </span>
+                    </div>
+                    <div
+                        onClick={handleLinkClick}
+                        className='md:hidden'>
+                        <XCircle size={24} />
+                    </div>
                 </div>
 
                 <fieldset className="relative">
@@ -42,25 +54,19 @@ export const DashboardSidebar = () => {
                     {
                         role === 'admin' && (
                             <>
-                                <NavLink
-                                    to="/dashboard/all-users"
-                                >
+                                <NavLink to="/dashboard/all-users" onClick={handleLinkClick}>
                                     <SidebarItem>
                                         <Users size={20} />
                                         All Users
                                     </SidebarItem>
                                 </NavLink>
-                                <NavLink
-                                    to="/dashboard/all-pets"
-                                >
+                                <NavLink to="/dashboard/all-pets" onClick={handleLinkClick}>
                                     <SidebarItem>
                                         <PawPrint size={20} />
                                         All Pets
                                     </SidebarItem>
                                 </NavLink>
-                                <NavLink
-                                    to="/dashboard/all-donations"
-                                >
+                                <NavLink to="/dashboard/all-donations" onClick={handleLinkClick}>
                                     <SidebarItem>
                                         <HandHeart size={20} />
                                         All Donations
@@ -69,57 +75,43 @@ export const DashboardSidebar = () => {
                             </>
                         )
                     }
-                    <NavLink
-                        to="/dashboard/add-pet"
-                    >
+                    <NavLink to="/dashboard/add-pet" onClick={handleLinkClick}>
                         <SidebarItem>
                             <ListPlus size={20} />
                             Add Pet
                         </SidebarItem>
                     </NavLink>
-                    <NavLink
-                        to="/dashboard/my-added-pets"
-                    >
+                    <NavLink to="/dashboard/my-added-pets" onClick={handleLinkClick}>
                         <SidebarItem>
                             <Bird size={20} />
                             My Added Pets
                         </SidebarItem>
                     </NavLink>
-                    <NavLink
-                        to="/dashboard/adoption-request"
-                    >
+                    <NavLink to="/dashboard/adoption-request" onClick={handleLinkClick}>
                         <SidebarItem>
                             <Wrench size={20} />
                             Adoption Request
                         </SidebarItem>
                     </NavLink>
-                    <NavLink
-                        to="/dashboard/create-donation"
-                    >
+                    <NavLink to="/dashboard/create-donation" onClick={handleLinkClick}>
                         <SidebarItem>
                             <FolderSimplePlus size={20} />
                             Create Donation
                         </SidebarItem>
                     </NavLink>
-                    <NavLink
-                        to="/dashboard/my-donation-campaign"
-                    >
+                    <NavLink to="/dashboard/my-donation-campaign" onClick={handleLinkClick}>
                         <SidebarItem>
                             <PiTipJar size={20} />
                             My Donation
                         </SidebarItem>
                     </NavLink>
-                    <NavLink
-                        to="/dashboard/my-donate"
-                    >
+                    <NavLink to="/dashboard/my-donate" onClick={handleLinkClick}>
                         <SidebarItem>
                             <PiggyBank size={20} />
                             My Donate
                         </SidebarItem>
                     </NavLink>
-                    <NavLink
-                        to="/dashboard/settings"
-                    >
+                    <NavLink to="/dashboard/settings" onClick={handleLinkClick}>
                         <SidebarItem>
                             <UserCircleGear size={20} />
                             Settings
@@ -159,3 +151,9 @@ export const DashboardSidebar = () => {
         </Sidebar>
     );
 };
+
+DashboardSidebar.propTypes = {
+    setDashboardOpen: PropTypes.func.isRequired,
+};
+
+export default DashboardSidebar
