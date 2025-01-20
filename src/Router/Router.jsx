@@ -77,7 +77,7 @@ const router = createBrowserRouter([
                 ),
                 children: [
                     {
-                        path: 'setting',
+                        path: 'settings',
                         element: <Settings />
                     },
                     {
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
                         element: <AddPet />
                     },
                     {
-                        path: 'my-add-pets',
+                        path: 'my-added-pets',
                         element: <MyAddedPets />
                     },
                     {
@@ -105,7 +105,7 @@ const router = createBrowserRouter([
                         element: <UpdateDonationCampaign />
                     },
                     {
-                        path: '/dashboard/my-donations',
+                        path: '/dashboard/my-donate',
                         element: <MyDonations />
                     },
 
@@ -130,7 +130,7 @@ const router = createBrowserRouter([
                         )
                     },
                     {
-                        path: '/dashboard/all-donation',
+                        path: '/dashboard/all-donations',
                         element: (
                             <AdminRoute>
                                 <AllDonation />

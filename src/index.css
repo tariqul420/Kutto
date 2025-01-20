@@ -12,25 +12,19 @@ nav a.active {
   transition: all 0.3s ease;
 }
 
-.dashboard a.active {
-  color: #F04335;
-  background-color: rgba(9, 16, 26, 0.1);
-  padding-left: 8px;
-  padding-right: 8px;
-  border-radius: 6px;
-}
-
 .clip-trapezoid {
   clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%);
   border-radius: 30px;
 }
 
+.dashboard a.active {
+  background: #f0f3f9 !important;
+  color: #1c222b !important;
+}
+
 .dark .dashboard a.active {
-  color: #F04335;
-  background-color: #09101a;
-  padding-left: 8px;
-  padding-right: 8px;
-  border-radius: 6px;
+  background: #2d3643 !important;
+  color: #ffffff !important;
 }
 
 nav a.active::before {
@@ -96,14 +90,6 @@ nav a.active:hover {
 
   .inputButton {
     @apply w-full py-3 px-4 bg-color-accent dark:bg-color-accent text-white border-none font-bold outline-none rounded-lg mt-3;
-  }
-
-  .dashboardLink {
-    @apply hover:bg-color-text/10 rounded-md transition-all duration-300 cursor-pointer dark:hover:bg-color-text;
-  }
-
-  .dashboardIcon {
-    @apply flex items-center gap-1 text-lg font-medium;
   }
 }
 
