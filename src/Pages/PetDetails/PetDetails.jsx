@@ -107,8 +107,9 @@ const PetDetails = () => {
                     <Modal open={isModalOpen} onOpenChange={setIsModalOpen}>
                         <ModalAction asChild>
                             <Button
+                                disabled={user?.email === pet?.petOwner?.email}
                                 onClick={handleAdoptClick}
-                                className="bg-color-accent hover:bg-color-accent">
+                                className="bg-color-accent hover:bg-color-accent disabled:cursor-not-allowed">
                                 Adopt
                             </Button>
                         </ModalAction>

@@ -143,7 +143,7 @@ const DonationDetails = () => {
                                     disabled={
                                         donation?.status === 'Pause' ||
                                         donation?.maxAmount === donation?.totalDonateAmount ||
-                                        new Date() > new Date(donation?.lastDate)
+                                        new Date() > new Date(donation?.lastDate) || user?.email === donation?.donationOwner?.email
                                     }
                                     onClick={handleDonateNowClick}
                                     className="bg-color-accent hover:bg-color-accent disabled:cursor-not-allowed"
