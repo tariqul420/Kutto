@@ -15,12 +15,15 @@ import {
 import { Bird, HandHeart, ListPlus, PawPrint, PiggyBank, Users, Wrench } from 'lucide-react';
 import { PiTipJar } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
+import useAuth from '@/Hook/useAuth';
 
 export const DashboardSidebar = () => {
+    const { user } = useAuth()
+
     return (
         <Sidebar className="max-h-[100vh] h-full m-2 overflow-auto">
             <SidebarBody>
-                <div href="/" className="inline-flex items-center">
+                <div className="inline-flex items-center">
                     <span className="flex h-11 w-11 items-center justify-center rounded-md bg-metal-900 text-heading-6 font-semibold text-white dark:bg-metal-800">
                         K.
                     </span>
@@ -120,12 +123,28 @@ export const DashboardSidebar = () => {
             <SidebarFooter>
                 <div className="flex items-center gap-2">
                     <Avatar>
-                        <AvatarImage src="/images/avatar/avatar-1.png" alt="avatar" />
-                        <AvatarFallback>KR</AvatarFallback>
+                        {user?.photoUrl ? (
+                            <AvatarImage
+                                referrerPolicy="no-referrer"
+                                src={user.photoUrl}
+                                alt="avatar"
+                            />
+                        ) : (
+                            <AvatarFallback>
+                                {user?.displayName ? user.displayName.slice(0, 2).toUpperCase() : "NA"}
+                            </AvatarFallback>
+                        )}
                     </Avatar>
                     <div>
-                        <p className="text-body-4 font-medium text-metal-400">Enzo Farnandez</p>
-                        <p className="text-body-4 font-normal text-metal-300">enzo123@gmail.com</p>
+                        <p className="text-body-4 font-medium text-metal-400">
+                            {user?.displayName?.length < 14
+                                ? user.displayName
+                                : user.displayName.substring(0, 11) + '...'}
+                        </p>
+                        <p className="text-body-4 font-normal text-metal-300">
+                            {user?.email?.length < 17
+                                ? user.email
+                                : user.email.substring(0, 14) + '...'}</p>
                     </div>
                 </div>
             </SidebarFooter>

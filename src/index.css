@@ -17,12 +17,12 @@ nav a.active {
   border-radius: 30px;
 }
 
-.dashboard a.active {
+.dashboard a.active li {
   background: #f0f3f9 !important;
   color: #1c222b !important;
 }
 
-.dark .dashboard a.active {
+.dark .dashboard a.active li {
   background: #2d3643 !important;
   color: #ffffff !important;
 }
