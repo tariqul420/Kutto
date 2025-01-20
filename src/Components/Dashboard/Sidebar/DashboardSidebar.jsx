@@ -14,10 +14,11 @@ import {
 } from 'keep-react';
 import { Bird, HandHeart, ListPlus, PawPrint, PiggyBank, Users, Wrench, XCircle } from 'lucide-react';
 import { PiTipJar } from 'react-icons/pi';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '@/Hook/useAuth';
 import useRole from '@/Hook/useRole';
 import PropTypes from 'prop-types';
+import { MdPets } from 'react-icons/md';
 
 const DashboardSidebar = ({ setDashboardOpen }) => {
     const { user } = useAuth();
@@ -31,11 +32,13 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
         <Sidebar className="max-h-[100vh] h-full md:m-2 overflow-auto w-full">
             <SidebarBody className='sidebar-scrollable'>
                 <div className='flex justify-between'>
-                    <div className="inline-flex items-center">
-                        <span className="flex h-11 w-11 items-center justify-center rounded-md bg-metal-900 text-heading-6 font-semibold text-white dark:bg-metal-800">
-                            K.
-                        </span>
-                    </div>
+                    <Link to={'/'}>
+                        <div className="inline-flex items-center">
+                            <span className="flex h-11 w-11 items-center justify-center rounded-md bg-metal-900 text-heading-6 font-semibold text-white dark:bg-metal-800">
+                                <MdPets />
+                            </span>
+                        </div>
+                    </Link>
                     <div
                         onClick={handleLinkClick}
                         className='md:hidden'>
@@ -123,10 +126,10 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
             <SidebarFooter>
                 <div className="flex items-center gap-2">
                     <Avatar>
-                        {user?.photoUrl ? (
+                        {user?.photoURL ? (
                             <AvatarImage
                                 referrerPolicy="no-referrer"
-                                src={user.photoUrl}
+                                src={user.photoURL}
                                 alt="avatar"
                             />
                         ) : (
