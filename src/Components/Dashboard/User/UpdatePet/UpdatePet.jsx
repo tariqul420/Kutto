@@ -47,7 +47,7 @@ const UpdatePet = () => {
         onSuccess: () => {
             toast.success("Data Updated Successfully!!!");
             queryClient.invalidateQueries(["myPets"]);
-            navigate(location?.state?.from ? location?.state?.from : 'dashboard/my-added-pets', { replace: true })
+            navigate(location?.state?.from ? location?.state?.from : '/dashboard/my-added-pets', { replace: true })
         },
         onError: (error) => {
             toast.error(error.message || "Failed to update pet data.");
