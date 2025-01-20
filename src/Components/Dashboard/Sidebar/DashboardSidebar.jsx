@@ -16,9 +16,11 @@ import { Bird, HandHeart, ListPlus, PawPrint, PiggyBank, Users, Wrench } from 'l
 import { PiTipJar } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
 import useAuth from '@/Hook/useAuth';
+import useRole from '@/Hook/useRole';
 
 export const DashboardSidebar = () => {
     const { user } = useAuth()
+    const [role] = useRole()
 
     return (
         <Sidebar className="max-h-[100vh] h-full m-2 overflow-auto">
@@ -37,30 +39,36 @@ export const DashboardSidebar = () => {
                 </fieldset>
 
                 <SidebarList className="space-y-0.5 dashboard">
-                    <NavLink
-                        to="/dashboard/all-users"
-                    >
-                        <SidebarItem>
-                            <Users size={20} />
-                            All Users
-                        </SidebarItem>
-                    </NavLink>
-                    <NavLink
-                        to="/dashboard/all-pets"
-                    >
-                        <SidebarItem>
-                            <PawPrint size={20} />
-                            All Pets
-                        </SidebarItem>
-                    </NavLink>
-                    <NavLink
-                        to="/dashboard/all-donations"
-                    >
-                        <SidebarItem>
-                            <HandHeart size={20} />
-                            All Donations
-                        </SidebarItem>
-                    </NavLink>
+                    {
+                        role === 'admin' && (
+                            <>
+                                <NavLink
+                                    to="/dashboard/all-users"
+                                >
+                                    <SidebarItem>
+                                        <Users size={20} />
+                                        All Users
+                                    </SidebarItem>
+                                </NavLink>
+                                <NavLink
+                                    to="/dashboard/all-pets"
+                                >
+                                    <SidebarItem>
+                                        <PawPrint size={20} />
+                                        All Pets
+                                    </SidebarItem>
+                                </NavLink>
+                                <NavLink
+                                    to="/dashboard/all-donations"
+                                >
+                                    <SidebarItem>
+                                        <HandHeart size={20} />
+                                        All Donations
+                                    </SidebarItem>
+                                </NavLink>
+                            </>
+                        )
+                    }
                     <NavLink
                         to="/dashboard/add-pet"
                     >

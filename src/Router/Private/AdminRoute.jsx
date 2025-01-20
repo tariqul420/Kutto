@@ -18,7 +18,7 @@ const AdminRoute = ({ children }) => {
         return children;
     }
 
-    return <Navigate to={'/dashboard/my-add-pets'} replace={true} />
+    return <Navigate to={'dashboard/my-added-pets'} replace={true} />
 };
 
 AdminRoute.propTypes = {

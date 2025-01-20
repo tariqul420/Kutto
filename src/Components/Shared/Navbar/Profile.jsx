@@ -32,7 +32,7 @@ const Profile = () => {
             <div
                 className={`${accountMenuOpen ? "translate-y-0 opacity-100 z-[1000]" : "translate-y-[10px] opacity-0 z-[-1] hidden"} bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px] dark:bg-gray-700 shadow-md`}>
                 <p
-                    onClick={() => navigate(`${role === "admin" ? '/dashboard/all-users' : 'dashboard/my-add-pets'}`)}
+                    onClick={() => navigate(`${role === "admin" ? '/dashboard/all-users' : 'dashboard/my-added-pets'}`)}
                     className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] hover:bg-gray-50 dark:hover:bg-gray-600/30">
                     <MdDashboard />
                     Dashboard
