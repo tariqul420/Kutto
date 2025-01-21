@@ -22,8 +22,8 @@ Welcome to **Kutto**, a modern web application designed to facilitate the adopti
 
 ## 🚀 Live Links
 
-- **Client Repo:** [_github/tariqul420/kutto-client_](https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-tariqul420.git)
-- **Server Repo:** [_github/tariqul420/kutto-server_](https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-tariqul420.git)
+- **Client Repo:** This repository serves as the main `Kutto` platform and includes the `frontend` setup.
+- **Server Repo:** [_github/tariqul420/Kutto-Server_](https://github.com/tariqul420/Kutto-Server.git)
 - **Live Site:** [_Kutto.com_](https://kutto-0.web.app)
 - **Alternate Live Site:** [_Kutto-2.com_](https://kutto-0.firebaseapp.com)
 
@@ -64,8 +64,6 @@ Welcome to **Kutto**, a modern web application designed to facilitate the adopti
 - **MongoDB**
 
 ---
-
-## ✨ Features
 
 ## ✨ Features
 
@@ -146,8 +144,8 @@ Welcome to **Kutto**, a modern web application designed to facilitate the adopti
 1. Clone the client-side repository:
 
    ```bash
-   git clone https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-tariqul420.git
-   cd b10a12-client-side-tariqul420
+   git clone https://github.com/tariqul420/Kutto.git
+   cd Kutto
    ```
 
 2. Install dependencies:
@@ -184,8 +182,8 @@ Welcome to **Kutto**, a modern web application designed to facilitate the adopti
 1. Clone the client-side repository:
 
    ```bash
-   git clone https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-tariqul420.git
-   cd b10a12-server-side-tariqul420
+   git clone https://github.com/tariqul420/Kutto-Server.git
+   cd Kutto-Server
    ```
 
 2. Install dependencies:
