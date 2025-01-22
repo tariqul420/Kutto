@@ -40,8 +40,8 @@ const AccountSettings = () => {
             }));
 
             await axiosSecure.patch(`/users/${user?.email}`, {
-                displayName: fullName,
-                photoURL: photoUrl,
+                name: fullName,
+                image: photoUrl,
             })
 
             toast.success("Profile Updated Successfully");
