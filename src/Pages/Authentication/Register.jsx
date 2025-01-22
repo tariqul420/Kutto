@@ -7,10 +7,10 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import spaceRegister from '../../assets/Lottie/space_register.json'
 import toast from "react-hot-toast";
-import ImageUpload from "../../Api/ImageUpload";
 import SocialBtn from "../../Components/Auth/SocialBtn";
 import { ImSpinner9 } from "react-icons/im";
 import saveUser from "@/Api/saveUser";
+import imgUpCloud from "@/Api/ImageUploadCloud";
 
 const Register = () => {
     const [isEyeOpen, setIsEyeOpen] = useState(false);
@@ -26,7 +26,7 @@ const Register = () => {
 
         setLoading(true)
 
-        const photoUrl = await ImageUpload(photoFile)
+        const photoUrl = await imgUpCloud(photoFile)
 
         // Register with email and password
         try {

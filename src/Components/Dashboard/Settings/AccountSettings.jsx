@@ -5,15 +5,15 @@ import { MdCloudUpload, MdError } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../../../Hook/useAuth";
-import ImageUpload from "../../../Api/ImageUpload";
-import useAxiosPublic from "../../../Hook/useAxiosPublic";
 import useRole from "@/Hook/useRole";
+import ImageUploadCloud from "@/Api/ImageUploadCloud";
+import useAxiosSecure from "@/Hook/useAxiosSecure";
 
 const AccountSettings = () => {
     const { updateUserProfile, user, setUser, loading, setLoading } = useAuth();
     const [photoPreview, setPhotoPreview] = useState(user?.photoURL || "");
     const navigate = useNavigate();
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure();
     const [role] = useRole()
 
     const { register, handleSubmit, reset, control, setValue, formState: { errors } } = useForm();
@@ -28,7 +28,7 @@ const AccountSettings = () => {
     const onSubmit = async ({ fullName, photo }) => {
         const photoFile = photo[0];
 
-        const photoUrl = await ImageUpload(photoFile);
+        const photoUrl = await ImageUploadCloud(photoFile);
 
         // Update User Profile
         try {
@@ -39,7 +39,7 @@ const AccountSettings = () => {
                 photoURL: photoUrl,
             }));
 
-            await axiosPublic.patch(`/users/${user?.email}`, {
+            await axiosSecure.patch(`/users/${user?.email}`, {
                 displayName: fullName,
                 photoURL: photoUrl,
             })

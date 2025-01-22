@@ -1,15 +1,15 @@
-import { Controller, useForm } from "react-hook-form";
-import { MdCloudUpload, MdError } from "react-icons/md";
-import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import ImageUploadCloud from "@/Api/ImageUploadCloud";
 import useAuth from "@/Hook/useAuth";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
-import Select from "react-select";
 import useTheme from "@/Hook/useTheme";
-import ImageUpload from "@/Api/ImageUpload";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { MdCloudUpload, MdError } from "react-icons/md";
 import ReactQuill from "react-quill";
+import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 const options = [
     { value: "dog", label: "Dog" },
@@ -71,7 +71,7 @@ const AddPet = () => {
         }
 
         try {
-            const imgUrl = await ImageUpload(photoFile);
+            const imgUrl = await ImageUploadCloud(photoFile);
 
             const petData = {
                 petImage: imgUrl,

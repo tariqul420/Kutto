@@ -1,14 +1,14 @@
-import { useForm } from "react-hook-form";
-import { MdCalendarToday, MdCloudUpload, MdError } from "react-icons/md";
-import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import ImageUploadCloud from "@/Api/ImageUploadCloud";
 import useAuth from "@/Hook/useAuth";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
-import ImageUpload from "@/Api/ImageUpload";
-import ReactQuill from "react-quill";
+import { useMutation } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { MdCalendarToday, MdCloudUpload, MdError } from "react-icons/md";
+import ReactQuill from "react-quill";
+import { useNavigate } from "react-router-dom";
 
 const CreateDonationCampaign = () => {
     const [photoPreview, setPhotoPreview] = useState("");
@@ -60,7 +60,7 @@ const CreateDonationCampaign = () => {
         }
 
         try {
-            const imgUrl = await ImageUpload(photoFile);
+            const imgUrl = await ImageUploadCloud(photoFile);
 
             const donationData = {
                 donationImage: imgUrl,
