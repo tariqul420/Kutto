@@ -222,3 +222,9 @@ Welcome to **Kutto**, a modern web application designed to facilitate the adopti
 - Tariqul Islam (Lead Developer)
 - Lead Developer & Maintainer
 - Connect with me on [_GitHub_](https://github.com/tariqul420) & [_Facebook_](https://www.facebook.com/tariqul.islam.fb)
+
+## 📸 Screenshots
+
+### 1. Home Page
+
+![Home Page](https://github.com/tariqul420/Film-Fusion/blob/main/src/assets/Images/Screenshot%202025-01-07%20232920.png)
