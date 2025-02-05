@@ -227,4 +227,16 @@ Welcome to **Kutto**, a modern web application designed to facilitate the adopti
 
 ### 1. Home Page
 
-![Home Page](https://github.com/tariqul420/Film-Fusion/blob/main/src/assets/Images/Screenshot%202025-01-07%20232920.png)
+![Home Page](https://github.com/tariqul420/Kutto/blob/main/src/assets/Screenshots/home.png)
+
+### 2. Dashboard
+
+![Dashboard](https://github.com/tariqul420/Kutto/blob/main/src/assets/Screenshots/dashboard.png)
+
+### 3. Pet Listing Page
+
+![Pet Listing Page](https://github.com/tariqul420/Kutto/blob/main/src/assets/Screenshots/pet-listing.png)
+
+### 4. Donation Campaign Page
+
+![Donation Campaign Page](https://github.com/tariqul420/Kutto/blob/main/src/assets/Screenshots/all-donation.png)
