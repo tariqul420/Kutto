@@ -52,47 +52,49 @@ const Dashboard = () => {
             </div>
 
             {/* Main Content */}
-            <div className="sm:m-2 rounded-md w-full overflow-hidden min-h-screen">
-                <nav className="w-full sticky top-0 z-[50] bg-white dark:bg-dark-lite transition-transform duration-300 mb-2 py-1">
+            <div className="sm:m-2 rounded-md w-full overflow-x-hidden max-h-screen overflow-auto">
+                <div className="sidebar-scrollable">
+                    <nav className="w-full sticky top-0 z-[50] bg-white dark:bg-dark-lite transition-transform duration-300 mb-2 py-1">
 
-                    <div className="w-11/12 mx-auto flex items-center justify-between">
+                        <div className="w-11/12 mx-auto flex items-center justify-between">
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Search by name..."
+                                    className="inputField p-2 w-full "
+                                />
+                            </div>
+
+                            <div className="items-center gap-[15px] flex">
+                                <button
+                                    onClick={toggleTheme}
+                                    className="p-2 rounded-full bg-white dark:bg-gray-700"
+                                >
+                                    {theme === "dark" ? (
+                                        <IoMdSunny size={20} color="#F04335" />
+                                    ) : (
+                                        <MdDarkMode size={20} color="#1E1E1E" />
+                                    )}
+                                </button>
+
+                                <Profile />
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div className="min-h-[calc(100vh-82px)]">
+                        <Outlet />
+                    </div>
+
+                    <footer className="bg-gray-100 dark:bg-dark-lite flex items-center justify-between px-4 py-2 mt-4 rounded-md">
                         <div>
-                            <input
-                                type="text"
-                                placeholder="Search by name..."
-                                className="inputField p-2 w-full "
-                            />
+                            <p>Copyright {new Date().getFullYear()} © Kutto by Tariqul</p>
                         </div>
-
-                        <div className="items-center gap-[15px] flex">
-                            <button
-                                onClick={toggleTheme}
-                                className="p-2 rounded-full bg-white dark:bg-gray-700"
-                            >
-                                {theme === "dark" ? (
-                                    <IoMdSunny size={20} color="#F04335" />
-                                ) : (
-                                    <MdDarkMode size={20} color="#1E1E1E" />
-                                )}
-                            </button>
-
-                            <Profile />
+                        <div>
+                            <span><FaHeart size={20} className="text-red-500" /></span>
                         </div>
-                    </div>
-                </nav>
-
-                <div className="min-h-[calc(100vh-82px)]">
-                    <Outlet />
+                    </footer>
                 </div>
-
-                <footer className="bg-gray-100 dark:bg-dark-lite flex items-center justify-between px-4 py-2 mt-4 rounded-md">
-                    <div>
-                        <p>Copyright {new Date().getFullYear()} © Kutto by Tariqul</p>
-                    </div>
-                    <div>
-                        <span><FaHeart size={20} className="text-red-500" /></span>
-                    </div>
-                </footer>
             </div>
         </div>
     );

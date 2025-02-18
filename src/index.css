@@ -85,11 +85,12 @@ nav a.active:hover {
 
 .sidebar-scrollable {
   overflow-y: auto;
-  scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
-.sidebar-scrollable {
-  scroll-behavior: smooth;
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 
