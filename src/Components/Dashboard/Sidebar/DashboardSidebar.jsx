@@ -27,7 +27,7 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
     };
 
     return (
-        <Sidebar className="mt-2 max-h-[100vh] h-full overflow-auto w-full">
+        <Sidebar className="mt-2 max-h-[112vh] h-full overflow-auto w-full">
             <SidebarBody className='sidebar-scrollable'>
                 <div className='flex justify-between'>
                     <Link to={'/'}>

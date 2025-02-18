@@ -52,7 +52,7 @@ const Dashboard = () => {
             </div>
 
             {/* Main Content */}
-            <div className="sm:m-2 w-full overflow-hidden min-h-screen">
+            <div className="sm:m-2 rounded-md w-full overflow-hidden min-h-screen">
                 <nav className="w-full sticky top-0 z-[50] bg-white dark:bg-dark-lite transition-transform duration-300 mb-2 py-1">
 
                     <div className="w-11/12 mx-auto flex items-center justify-between">
@@ -81,7 +81,9 @@ const Dashboard = () => {
                     </div>
                 </nav>
 
-                <Outlet />
+                <div className="min-h-[calc(100vh-82px)]">
+                    <Outlet />
+                </div>
 
                 <footer className="bg-gray-100 dark:bg-dark-lite flex items-center justify-between px-4 py-2 mt-4 rounded-md">
                     <div>
