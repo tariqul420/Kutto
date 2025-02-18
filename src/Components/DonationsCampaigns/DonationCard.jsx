@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { AiFillDollarCircle } from "react-icons/ai";
-import { FaLocationDot } from "react-icons/fa6";
+import { BsFillPiggyBankFill } from "react-icons/bs";
 import { MdAddReaction } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -27,29 +27,25 @@ const DonationCard = ({ donation = {}, isRefetchSuggested }) => {
                 className="h-56 w-full rounded-md object-cover"
             />
 
-            <div className="mt-3">
+            <div className="mt-2">
                 <dl>
                     <div>
                         <dd className="font-medium">{donationName}</dd>
                     </div>
                 </dl>
 
-                <div className="mt-6 flex items-center gap-8 text-xs">
-                    <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                        <AiFillDollarCircle size={14} />
-
+                <div className="mt-1 flex items-center justify-between text-xs">
+                    <div className="sm:inline-flex sm:shrink-0 sm:items-start sm:gap-1">
                         <div className="mt-1.5 sm:mt-0">
-                            <p className="text-gray-500">Max Amount</p>
+                            <p className="flex gap-1"><AiFillDollarCircle size={14} /> <span className="text-gray-500">Max</span></p>
 
                             <p className="font-medium"> $ {maxAmount}</p>
                         </div>
                     </div>
 
                     <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                        <FaLocationDot size={14} />
-
                         <div className="mt-1.5 sm:mt-0">
-                            <p className="text-gray-500">Donated Amount</p>
+                            <p className="flex gap-1"><BsFillPiggyBankFill size={14} /> <span className="text-gray-500">Donated</span></p>
 
                             <p className="font-medium">
                                 $ {totalDonateAmount}
@@ -58,10 +54,8 @@ const DonationCard = ({ donation = {}, isRefetchSuggested }) => {
                     </div>
 
                     <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                        <MdAddReaction size={14} />
-
                         <div className="mt-1.5 sm:mt-0">
-                            <p className="text-gray-500">Action</p>
+                            <p className="flex gap-1"><MdAddReaction size={14} /> <span className="text-gray-500">Action</span></p>
 
                             <button
                                 onClick={handelNavigateRefetch}

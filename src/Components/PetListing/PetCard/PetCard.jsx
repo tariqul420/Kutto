@@ -16,39 +16,33 @@ const PetCard = ({ pet = {} }) => {
                     className="h-56 w-full rounded-md object-cover"
                 />
 
-                <div className="mt-3">
+                <div className="mt-2">
                     <dl>
                         <div>
                             <dd className="font-medium">{petName}</dd>
                         </div>
                     </dl>
 
-                    <div className="mt-6 flex items-center gap-8 text-xs">
+                    <div className="mt-1 flex items-center justify-between gap-4 text-xs">
                         <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                            <FaGetPocket size={14} />
-
                             <div className="mt-1.5 sm:mt-0">
-                                <p className="text-gray-500">Age</p>
+                                <p className="flex gap-1"><FaGetPocket size={14} /> <span className="text-gray-500">Age</span></p>
 
                                 <p className="font-medium"> {petAge?.value} {petAge?.unit}</p>
                             </div>
                         </div>
 
                         <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                            <FaLocationDot size={14} />
-
                             <div className="mt-1.5 sm:mt-0">
-                                <p className="text-gray-500">Location</p>
+                                <p className="flex gap-1"><FaLocationDot size={14} /> <span className="text-gray-500">Location</span></p>
 
                                 <p className="font-medium">{petLocation?.length < 10 ? petLocation : `${petLocation?.slice(0, 7)}...`}</p>
                             </div>
                         </div>
 
                         <div className="sm:inline-flex sm:shrink-0 sm:items-center sm:gap-2">
-                            <MdAddReaction size={14} />
-
                             <div className="mt-1.5 sm:mt-0">
-                                <p className="text-gray-500">Action</p>
+                                <p className="flex gap-1"><MdAddReaction size={14} /> <span className="text-gray-500">Action</span></p>
 
                                 <Link to={`/pet-details/${_id}`} className="font-medium underline">Details</Link>
                             </div>
