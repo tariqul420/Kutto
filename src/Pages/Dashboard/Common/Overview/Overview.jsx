@@ -1,20 +1,20 @@
+import OverviewCards from "@/Components/Dashboard/Overview/OverviewCards";
 import useAuth from "@/Hook/useAuth";
 import useAxiosSecure from "@/Hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { MdOutlinePets } from "react-icons/md";
 import { Bar, BarChart, Cell, Legend, Pie, PieChart, Tooltip, XAxis, YAxis } from "recharts";
 
 const Overview = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
 
-    const { data: overview = [], isLoading } = useQuery({
-        queryKey: ['overview', user?.email],
-        queryFn: () => {
-            const { data } = axiosSecure.get(`/overview-details?email=${user?.email}`)
-            return data
-        }
-    })
+    const { data: overview = {}, isLoading } = useQuery({
+        queryKey: ["overview-details", user?.email],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/overview-details?email=${user.email}`);
+            return data;
+        },
+    });
 
     console.log(overview);
 
@@ -52,19 +52,7 @@ const Overview = () => {
             <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
 
             {/* Summary Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mb-6">
-                <div className="dark:bg-dark-lite bg-white flex justify-between p-4 rounded-md shadow-md">
-                    <div className="space-y-2">
-                        <p>Total User</p>
-                        <p className="text-2xl font-bold">256</p>
-                    </div>
-                    <div className="">
-                        <span className="flex items-center justify-center w-10 h-10 p-1 bg-[#e354d4] rounded-full">
-                            <MdOutlinePets size={24} />
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <OverviewCards overview={overview} />
 
             {/* Charts */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
