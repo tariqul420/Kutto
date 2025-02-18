@@ -5,13 +5,14 @@ import {
     Avatar,
     AvatarFallback,
     AvatarImage,
+    Divider,
     Sidebar,
     SidebarBody,
     SidebarFooter,
     SidebarItem,
     SidebarList
 } from 'keep-react';
-import { Bird, HandHeart, ListPlus, PawPrint, PiggyBank, Users, Wrench, XCircle } from 'lucide-react';
+import { Bird, HandHeart, House, ListPlus, PawPrint, PiggyBank, Users, Wrench, XCircle } from 'lucide-react';
 import { FolderSimplePlus } from 'phosphor-react';
 import PropTypes from 'prop-types';
 import { MdPets } from 'react-icons/md';
@@ -106,6 +107,30 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
                             My Donate
                         </SidebarItem>
                     </NavLink>
+
+                    <div className='py-1'>
+                        <Divider size="sm" />
+                    </div>
+
+                    <NavLink to="/" onClick={handleLinkClick}>
+                        <SidebarItem>
+                            <House size={20} />
+                            Home
+                        </SidebarItem>
+                    </NavLink>
+                    <NavLink to="/pet-listing" onClick={handleLinkClick}>
+                        <SidebarItem>
+                            <PawPrint size={20} />
+                            Pet Listing
+                        </SidebarItem>
+                    </NavLink>
+                    <NavLink to="/donation-campaigns" onClick={handleLinkClick}>
+                        <SidebarItem>
+                            <PiggyBank size={20} />
+                            Campaign
+                        </SidebarItem>
+                    </NavLink>
+
                 </SidebarList>
             </SidebarBody>
 
