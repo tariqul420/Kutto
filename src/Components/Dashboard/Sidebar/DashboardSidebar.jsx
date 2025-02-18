@@ -166,7 +166,7 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
                         <p className="text-body-4 font-normal text-metal-300">
                             {user?.email?.length < 17
                                 ? user.email
-                                : user.email.substring(0, 14) + '...'}</p>
+                                : user.email.substring(0, 17) + '...'}</p>
                     </div>
                 </div>
             </SidebarFooter>
