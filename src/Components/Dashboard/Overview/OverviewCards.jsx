@@ -12,30 +12,31 @@ const OverviewCards = ({ overview }) => {
     const overviewData = [
         ...(role === 'admin' ? [
             {
-                title: "Total User",
+                title: "Total Users",
                 icon: <LuUsers size={24} />,
                 data: overview?.allUser,
                 color: '#4a90e2'
             },
             {
-                title: "Total Pet",
+                title: "Total Pets",
                 icon: <PiDog size={24} />,
                 data: overview?.allPet,
                 color: '#f5a623'
             },
             {
                 title: "Total Donation Amount",
-                icon: <BiDonateHeart size={24} />,
+                icon: <FaHandHoldingUsd size={24} />,
                 data: overview?.totalDonation?.[0]?.totalAmount,
                 color: '#7ED321'
             },
             {
-                title: "Total Donator",
+                title: "Total Donators",
                 icon: <BiDonateHeart size={24} />,
                 data: overview?.allDonator,
-                color: '#7ED321'
+                color: '#FF5733'
             }
         ] : []),
+
         {
             title: "My Pets",
             icon: <MdOutlinePets size={24} />,
@@ -43,16 +44,16 @@ const OverviewCards = ({ overview }) => {
             color: '#D0021B'
         },
         {
-            title: "Adoption Request",
+            title: "Adoption Requests",
             icon: <FaHandsHelping size={24} />,
             data: overview?.adoptionRequest,
             color: '#B8E986'
         },
         {
             title: "My Donation Campaigns",
-            icon: <FaHandsHelping size={24} />,
+            icon: <BiDonateHeart size={24} />,
             data: overview?.donationCampaign,
-            color: '#B8E986'
+            color: '#F39C12'
         },
         {
             title: "My Donated Amount",
@@ -60,6 +61,7 @@ const OverviewCards = ({ overview }) => {
             data: overview?.myDonate?.[0]?.totalAmount,
             color: '#9013FE'
         },
+
         ...(role === 'admin' ? [
             {
                 title: "",
