@@ -47,6 +47,13 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
                 </div>
 
                 <SidebarList className="space-y-0.5 dashboard">
+                    <NavLink to="/dashboard/overview" onClick={handleLinkClick}>
+                        <SidebarItem>
+                            <House size={20} />
+                            Overview
+                        </SidebarItem>
+                    </NavLink>
+
                     {
                         role === 'admin' && (
                             <>

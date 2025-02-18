@@ -26,6 +26,7 @@ import PetDetails from "@/Pages/PetDetails/PetDetails";
 import DonationDetails from "@/Pages/DonationDetails/DonationDetails";
 import PetCategories from "@/Pages/PetCategories/PetCategories";
 import UserProfile from "@/Components/Dashboard/Profile/UserProfile";
+import Overview from "@/Pages/Dashboard/Common/Overview/Overview";
 
 const router = createBrowserRouter([
     {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
                     {
                         path: 'profile',
                         element: <UserProfile />
+                    },
+                    {
+                        path: 'overview',
+                        element: <Overview />
                     },
                     {
                         path: 'add-pet',
