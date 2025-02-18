@@ -17,7 +17,12 @@ const Profile = () => {
     const dashboard = location.pathname.startsWith('/dashboard')
 
     const handelLogout = async () => {
-        await logOutUser()
+        if (dashboard) {
+            navigate('/')
+            await logOutUser()
+        } else {
+            await logOutUser()
+        }
     };
 
     return (
