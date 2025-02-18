@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CiMenuFries } from "react-icons/ci";
 import AuthBtn from "./AuthBtn";
@@ -14,6 +14,7 @@ const Navbar = () => {
     const [showNavbar, setShowNavbar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const { theme, toggleTheme } = useTheme()
+    const location = useLocation()
 
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
@@ -36,7 +37,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`w-full py-6 sticky top-0 z-[1000] bg-white dark:bg-dark-lite transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}
+            className={`w-full py-6 sticky top-0 z-[1000] bg-white dark:bg-dark-lite transition-transform duration-300 ${showNavbar ? "translate-y-0" : "-translate-y-full"} ${location.pathname.startsWith('/dashboard') ? 'hidden' : ''}`}
         >
             <div className="w-11/12 mx-auto flex items-center justify-between">
                 <div>

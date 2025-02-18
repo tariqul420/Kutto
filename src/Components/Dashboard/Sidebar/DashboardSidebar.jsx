@@ -1,24 +1,22 @@
 'use client'
-import { FolderSimplePlus, MagnifyingGlass, UserCircleGear } from 'phosphor-react';
+import useAuth from '@/Hook/useAuth';
+import useRole from '@/Hook/useRole';
 import {
     Avatar,
-    AvatarImage,
     AvatarFallback,
-    Input,
-    InputIcon,
+    AvatarImage,
     Sidebar,
     SidebarBody,
     SidebarFooter,
     SidebarItem,
-    SidebarList,
+    SidebarList
 } from 'keep-react';
 import { Bird, HandHeart, ListPlus, PawPrint, PiggyBank, Users, Wrench, XCircle } from 'lucide-react';
-import { PiTipJar } from 'react-icons/pi';
-import { Link, NavLink } from 'react-router-dom';
-import useAuth from '@/Hook/useAuth';
-import useRole from '@/Hook/useRole';
+import { FolderSimplePlus, UserCircleGear } from 'phosphor-react';
 import PropTypes from 'prop-types';
 import { MdPets } from 'react-icons/md';
+import { PiTipJar } from 'react-icons/pi';
+import { Link, NavLink } from 'react-router-dom';
 
 const DashboardSidebar = ({ setDashboardOpen }) => {
     const { user } = useAuth();
@@ -29,7 +27,7 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
     };
 
     return (
-        <Sidebar className="max-h-[100vh] h-full md:m-2 overflow-auto w-full">
+        <Sidebar className="mt-2 max-h-[100vh] h-full overflow-auto w-full">
             <SidebarBody className='sidebar-scrollable'>
                 <div className='flex justify-between'>
                     <Link to={'/'}>
@@ -45,13 +43,6 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
                         <XCircle size={24} />
                     </div>
                 </div>
-
-                <fieldset className="relative">
-                    <Input placeholder="Search" className="ps-11" />
-                    <InputIcon>
-                        <MagnifyingGlass size={19} color="#AFBACA" />
-                    </InputIcon>
-                </fieldset>
 
                 <SidebarList className="space-y-0.5 dashboard">
                     {
