@@ -1,11 +1,13 @@
 import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { MdOutlinePets } from "react-icons/md";
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 const Footer = () => {
+    const location = useLocation()
+
     return (
-        <div className="pt-4 w-full bg-gray-100 dark:bg-dark-lite">
+        <div className={`${location.pathname.startsWith('/dashboard') ? 'hidden' : ''} pt-4 w-full bg-gray-100 dark:bg-dark-lite`}>
             <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-8">
                 <div className="space-y-4">
                     <h2 className="font-extrabold text-2xl flex gap-2 items-center">

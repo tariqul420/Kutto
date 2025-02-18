@@ -12,7 +12,7 @@ import {
     SidebarList
 } from 'keep-react';
 import { Bird, HandHeart, ListPlus, PawPrint, PiggyBank, Users, Wrench, XCircle } from 'lucide-react';
-import { FolderSimplePlus, UserCircleGear } from 'phosphor-react';
+import { FolderSimplePlus } from 'phosphor-react';
 import PropTypes from 'prop-types';
 import { MdPets } from 'react-icons/md';
 import { PiTipJar } from 'react-icons/pi';
@@ -31,10 +31,11 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
             <SidebarBody className='sidebar-scrollable'>
                 <div className='flex justify-between'>
                     <Link to={'/'}>
-                        <div className="inline-flex items-center">
+                        <div className="flex items-center">
                             <span className="flex h-11 w-11 items-center justify-center rounded-md bg-metal-900 text-heading-6 font-semibold text-white dark:bg-metal-800">
                                 <MdPets />
                             </span>
+                            <span className='ml-2 text-xl'>Kutto</span>
                         </div>
                     </Link>
                     <div
@@ -103,12 +104,6 @@ const DashboardSidebar = ({ setDashboardOpen }) => {
                         <SidebarItem>
                             <PiggyBank size={20} />
                             My Donate
-                        </SidebarItem>
-                    </NavLink>
-                    <NavLink to="/dashboard/settings" onClick={handleLinkClick}>
-                        <SidebarItem>
-                            <UserCircleGear size={20} />
-                            Settings
                         </SidebarItem>
                     </NavLink>
                 </SidebarList>
