@@ -3,6 +3,7 @@ import { Banner } from "@/Components/Home/Banner/Banner";
 import CallToAction from "@/Components/Home/CallToAction/CallToAction";
 import FAQ from "@/Components/Home/FAQ/FAQ";
 import PetCategory from "@/Components/Home/PetCategory/PetCategory";
+import RecentPets from "@/Components/Home/RecentPets/RecentPets";
 import Testimonials from "@/Components/Home/Testimonials/Testimonials";
 import { useEffect } from "react";
 
@@ -17,6 +18,7 @@ const Home = () => {
             <Banner />
             <PetCategory />
             <CallToAction />
+            <RecentPets />
             <AboutUs />
             <FAQ />
             <Testimonials />
