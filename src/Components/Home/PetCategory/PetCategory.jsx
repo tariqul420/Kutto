@@ -19,7 +19,7 @@ const PetCategory = () => {
     ];
 
     return (
-        <div className="w-full py-16">
+        <section className="w-full py-16">
             <h2 className="text-3xl font-bold text-center mb-8">Explore Pet Categories</h2>
             <div className="flex flex-wrap justify-center gap-6">
                 {petCategories.map((category) => (
@@ -35,7 +35,7 @@ const PetCategory = () => {
                     </Link>
                 ))}
             </div>
-        </div>
+        </section>
     );
 };
 

@@ -17,7 +17,7 @@ const RecentPets = () => {
     })
 
     return (
-        <div className="my-16 w-11/12 mx-auto ">
+        <section className="my-16 w-11/12 mx-auto ">
             <h2 className="text-3xl font-bold text-center mb-8">Recent Pets</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {isLoading
@@ -37,7 +37,7 @@ const RecentPets = () => {
                 onClick={() => navigate('/pet-listing')} className="bg-color-accent text-white p-3 px-4 mt-8 mx-auto block rounded-md">
                 Show More
             </button>
-        </div>
+        </section>
     );
 };
 
