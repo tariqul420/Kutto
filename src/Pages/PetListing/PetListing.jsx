@@ -23,13 +23,13 @@ const PetListing = () => {
                     category,
                     sort,
                     page: pageParam,
-                    limit: 6,
+                    limit: 8,
                 },
             });
             return data;
         },
         getNextPageParam: (lastPage, allPages) => {
-            return lastPage.length === 6 ? allPages.length + 1 : undefined;
+            return lastPage.length === 8 ? allPages.length + 1 : undefined;
         },
     });
 
@@ -104,7 +104,7 @@ const PetListing = () => {
                 {/* Pet Cards or Skeleton */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {isLoading
-                        ? Array.from({ length: 6 }).map((_, index) => (
+                        ? Array.from({ length: 8 }).map((_, index) => (
                             <div key={index} className="p-4">
                                 <Skeleton height={200} />
                                 <Skeleton height={20} width="80%" className="mt-2" />
