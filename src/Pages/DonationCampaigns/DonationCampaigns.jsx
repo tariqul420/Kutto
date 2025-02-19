@@ -64,10 +64,13 @@ const DonationCampaigns = () => {
                         value={sort}
                         onChange={handelSortChange}
                     >
-                        <option value="">Sort by date</option>
+                        <option value="">Sort by</option>
                         <option value="new">New Date</option>
                         <option value="old">Old Date</option>
+                        <option value="asc">Price: Low to High</option>
+                        <option value="desc">Price: High to Low</option>
                     </select>
+
                 </div>
 
                 {/* Donation Cards or Skeleton */}

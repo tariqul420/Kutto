@@ -1,17 +1,15 @@
 import { useState } from "react";
-import useAuth from "../../../Hook/useAuth";
-import { useLocation, useNavigate } from "react-router-dom";
-import { TbLogout2 } from "react-icons/tb";
+import { CgProfile } from "react-icons/cg";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdDashboard, MdOutlineSettings } from "react-icons/md";
-import useRole from "@/Hook/useRole";
-import { CgProfile } from "react-icons/cg";
+import { TbLogout2 } from "react-icons/tb";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../../Hook/useAuth";
 
 const Profile = () => {
     const [accountMenuOpen, setAccountMenuOpen] = useState(false)
     const navigate = useNavigate()
     const { user, logOutUser } = useAuth()
-    const [role] = useRole()
     const location = useLocation()
 
     const dashboard = location.pathname.startsWith('/dashboard')
@@ -47,7 +45,7 @@ const Profile = () => {
                     <div
                         className={`${accountMenuOpen ? "translate-y-0 opacity-100 z-[1000]" : "translate-y-[10px] opacity-0 z-[-1] hidden"} bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px] dark:bg-gray-700 shadow-md`}>
                         <p
-                            onClick={() => navigate(`${role === "admin" ? '/dashboard/all-users' : 'dashboard/my-added-pets'}`)}
+                            onClick={() => navigate(`/dashboard/overview`)}
                             className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] hover:bg-gray-50 dark:hover:bg-gray-600/30">
                             <MdDashboard />
                             Dashboard
