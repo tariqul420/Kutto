@@ -1,98 +1,85 @@
-import { useState } from "react";
-import { CgProfile } from "react-icons/cg";
-import { IoIosArrowUp } from "react-icons/io";
-import { MdDashboard, MdOutlineSettings } from "react-icons/md";
-import { TbLogout2 } from "react-icons/tb";
-import { useLocation, useNavigate } from "react-router-dom";
-import useAuth from "../../../Hook/useAuth";
+import { useState } from 'react';
+import { CgProfile } from 'react-icons/cg';
+import { IoIosArrowUp } from 'react-icons/io';
+import { MdDashboard, MdOutlineSettings } from 'react-icons/md';
+import { TbLogout2 } from 'react-icons/tb';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAuth from '../../../Hook/useAuth';
 
 const Profile = () => {
-    const [accountMenuOpen, setAccountMenuOpen] = useState(false)
-    const navigate = useNavigate()
-    const { user, logOutUser } = useAuth()
-    const location = useLocation()
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const { user, logOutUser } = useAuth();
+  const location = useLocation();
 
-    const dashboard = location.pathname.startsWith('/dashboard')
+  const dashboard = location.pathname.startsWith('/dashboard');
 
-    const handelLogout = async () => {
-        if (dashboard) {
-            navigate('/')
-            await logOutUser()
-        } else {
-            await logOutUser()
-        }
-    };
+  const handelLogout = async () => {
+    if (dashboard) {
+      navigate('/');
+      await logOutUser();
+    } else {
+      await logOutUser();
+    }
+  };
 
-    return (
-        <div className="flex items-center gap-[10px] cursor-pointer relative"
-            onClick={() => setAccountMenuOpen(!accountMenuOpen)}>
-            <div className="relative">
-                <img
-                    referrerPolicy="no-referrer"
-                    src={user?.photoURL || "https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"}
-                    alt="avatar" className={` ${dashboard ? 'w-[30px] h-[30px]' : 'w-[40px] h-[40px]'} rounded-full object-cover border-2 border-solid border-[#3B82F6]`} />
-                <div className="w-[10px] h-[10px] rounded-full bg-green-500 absolute bottom-[0px] right-0 border-2 border-white"></div>
-            </div>
+  return (
+    <div className="flex items-center gap-[10px] cursor-pointer relative" onClick={() => setAccountMenuOpen(!accountMenuOpen)}>
+      <div className="relative">
+        <img
+          referrerPolicy="no-referrer"
+          src={user?.photoURL || 'https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png'}
+          alt="avatar"
+          className={` ${dashboard ? 'w-[30px] h-[30px]' : 'w-[40px] h-[40px]'} rounded-full object-cover border-2 border-solid border-[#3B82F6]`}
+        />
+        <div className="w-[10px] h-[10px] rounded-full bg-green-500 absolute bottom-[0px] right-0 border-2 border-white"></div>
+      </div>
 
-            {
-                !dashboard && (
-                    <h1 className="text-[1.2rem] font-[700] sm:block hidden">{user?.displayName?.substring(0, 10)}!</h1>
-                )
-            }
+      {!dashboard && <h1 className="text-[1.2rem] font-[700] sm:block hidden">{user?.displayName?.substring(0, 10)}!</h1>}
 
-            {
-                !dashboard ? (
-                    <div
-                        className={`${accountMenuOpen ? "translate-y-0 opacity-100 z-[1000]" : "translate-y-[10px] opacity-0 z-[-1] hidden"} bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px] dark:bg-gray-700 shadow-md`}>
-                        <p
-                            onClick={() => navigate(`/dashboard/overview`)}
-                            className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] hover:bg-gray-50 dark:hover:bg-gray-600/30">
-                            <MdDashboard />
-                            Dashboard
-                        </p>
+      {!dashboard ? (
+        <div
+          className={`${
+            accountMenuOpen ? 'translate-y-0 opacity-100 z-[1000]' : 'translate-y-[10px] opacity-0 z-[-1] hidden'
+          } bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px] dark:bg-gray-700 shadow-md`}>
+          <p onClick={() => navigate(`/dashboard/overview`)} className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] hover:bg-gray-50 dark:hover:bg-gray-600/30">
+            <MdDashboard />
+            Dashboard
+          </p>
 
-                        <div className="mt-3 border-t border-gray-200 pt-[5px]">
-                            <p
-                                onClick={handelLogout}
-                                className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-red-500 hover:bg-red-50">
-                                <TbLogout2 />
-                                Logout
-                            </p>
-                        </div>
-                    </div>
-                ) : (
-                    <div
-                        className={`${accountMenuOpen ? "translate-y-0 opacity-100 z-[1000]" : "translate-y-[10px] opacity-0 z-[-1] hidden"} bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px] dark:bg-gray-700 shadow-md`}>
-                        <p
-                            onClick={() => navigate(`/dashboard/profile`)}
-                            className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] hover:bg-gray-50 dark:hover:bg-gray-600/30">
-                            <CgProfile />
-                            Profile
-                        </p>
-                        <p
-                            onClick={() => navigate(`/dashboard/settings`)}
-                            className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] hover:bg-gray-50 dark:hover:bg-gray-600/30">
-                            <MdOutlineSettings />
-                            Settings
-                        </p>
-
-                        <div className="mt-3 border-t border-gray-200 pt-[5px]">
-                            <p
-                                onClick={handelLogout}
-                                className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-red-500 hover:bg-red-50">
-                                <TbLogout2 />
-                                Logout
-                            </p>
-                        </div>
-                    </div>
-                )
-            }
-
-            <IoIosArrowUp
-                className={`${accountMenuOpen ? "rotate-0" : "rotate-[180deg]"} transition-all duration-300 sm:block hidden`} />
-
+          <div className="mt-3 border-t border-gray-200 pt-[5px]">
+            <p onClick={handelLogout} className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-red-500 hover:bg-red-50">
+              <TbLogout2 />
+              Logout
+            </p>
+          </div>
         </div>
-    );
+      ) : (
+        <div
+          className={`${
+            accountMenuOpen ? 'translate-y-0 opacity-100 z-[1000]' : 'translate-y-[10px] opacity-0 z-[-1] hidden'
+          } bg-white w-max rounded-md boxShadow absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px] dark:bg-gray-700 shadow-md`}>
+          <p onClick={() => navigate(`/dashboard/profile`)} className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] hover:bg-gray-50 dark:hover:bg-gray-600/30">
+            <CgProfile />
+            Profile
+          </p>
+          <p onClick={() => navigate(`/dashboard/settings`)} className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] hover:bg-gray-50 dark:hover:bg-gray-600/30">
+            <MdOutlineSettings />
+            Settings
+          </p>
+
+          <div className="mt-3 border-t border-gray-200 pt-[5px]">
+            <p onClick={handelLogout} className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-red-500 hover:bg-red-50">
+              <TbLogout2 />
+              Logout
+            </p>
+          </div>
+        </div>
+      )}
+
+      <IoIosArrowUp className={`${accountMenuOpen ? 'rotate-0' : 'rotate-[180deg]'} transition-all duration-300 sm:block hidden`} />
+    </div>
+  );
 };
 
 export default Profile;
