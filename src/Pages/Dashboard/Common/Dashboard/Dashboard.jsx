@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { IoMdSunny } from 'react-icons/io';
 import { MdDarkMode, MdPets } from 'react-icons/md';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
   const [dashboardOpen, setDashboardOpen] = useState(false);
@@ -76,7 +76,9 @@ const Dashboard = () => {
 
           <footer className="bg-gray-100 dark:bg-dark-lite flex items-center justify-between px-4 py-2 mt-4 rounded-md">
             <div>
-              <p>Copyright {new Date().getFullYear()} © Kutto by Tariqul</p>
+              <p>
+                Copyright {new Date().getFullYear()} © <Link to={`/`}>Kutto</Link> by Tariqul
+              </p>
             </div>
             <div>
               <span>
