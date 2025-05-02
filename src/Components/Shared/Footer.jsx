@@ -87,7 +87,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="dark:text-white/70 text-center py-4 border-t border-solid border-color-text dark:border-white">&copy; Copyright Kutto {new Date().getFullYear()}. All Right Reserved</p>
+      <p className="dark:text-white/70 text-center py-4 border-t border-solid border-color-text dark:border-white">
+        &copy; Copyright <Link to={`/`}>Kutto</Link> {new Date().getFullYear()}. All Right Reserved
+      </p>
     </div>
   );
 };
