@@ -2,6 +2,8 @@ import OverviewCards from '@/Components/Dashboard/Overview/OverviewCards';
 import useAuth from '@/Hook/useAuth';
 import useAxiosSecure from '@/Hook/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { Bar, BarChart, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 const Overview = () => {
@@ -31,18 +33,31 @@ const Overview = () => {
 
   const COLORS = ['#4CAF50', '#FF9800'];
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="p-6 min-h-screen">
+        {/* Skeleton for Title */}
+        <Skeleton height={32} width="25%" className="mb-6" />
+        {/* Skeleton for Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <Skeleton height={96} />
+          <Skeleton height={96} />
+          <Skeleton height={96} />
+        </div>
+        {/* Skeleton for Charts */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Skeleton height={320} />
+          <Skeleton height={320} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 min-h-screen">
       <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
-
-      {/* Summary Cards */}
       <OverviewCards overview={overview} />
-
-      {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Bar Chart */}
         <div className="bg-dark-lite p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">Donations Over Time</h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -54,8 +69,6 @@ const Overview = () => {
             </BarChart>
           </ResponsiveContainer>
         </div>
-
-        {/* Pie Chart */}
         <div className="bg-dark-lite p-4 rounded-lg shadow-md">
           <h2 className="text-xl font-semibold mb-4">My Pets Overview</h2>
           <ResponsiveContainer width="100%" height={300}>
