@@ -1,67 +1,50 @@
-import Lottie from "lottie-react";
-import useAuth from "../../Hook/useAuth";
-import forgotPassword from '../../assets/Lottie/forgot_password.json'
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { ImSpinner9 } from "react-icons/im";
+import Lottie from 'lottie-react';
+import toast from 'react-hot-toast';
+import { ImSpinner9 } from 'react-icons/im';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../Hook/useAuth';
+import forgotPassword from '../../assets/Lottie/forgot_password.json';
 
 const ForgotPassword = () => {
-    const navigate = useNavigate()
-    const { email, setEmail, resetPassword, loading, setLoading } = useAuth()
+  const navigate = useNavigate();
+  const { email, setEmail, resetPassword, loading, setLoading } = useAuth();
 
-    const handelSendEmail = async (e) => {
-        e.preventDefault()
-        const email = e.target.email.value
+  const handelSendEmail = async (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
 
-        // Reset Password
-        try {
-            await resetPassword(email)
-            toast.success('Reset password link sent to your email')
-            setEmail('')
-            navigate('/login')
-        } catch (error) {
-            toast.error(error.code)
-        } finally {
-            setLoading(false)
-        }
+    // Reset Password
+    try {
+      await resetPassword(email);
+      toast.success('Reset password link sent to your email');
+      setEmail('');
+      navigate('/login');
+    } catch (error) {
+      toast.error(error.code);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    return (
-        <section className="w-10/12 mx-auto h-auto flex items-center my-12 justify-center gap-12">
-            <div className="w-full sm:w-[40%] rounded-lg sm:py-6 sm:px-8 p-4 flex flex-col gap-5 shadow-md flex-1 dark:bg-dark-lite">
+  return (
+    <section className="w-10/12 mx-auto h-auto flex items-center my-12 justify-center gap-12">
+      <div className="w-full sm:w-[40%] rounded-lg sm:py-6 sm:px-8 p-4 flex flex-col gap-5 shadow-md flex-1 dark:bg-dark-lite">
+        {/* Forgot Password Form */}
+        <form onSubmit={handelSendEmail} className="w-full flex flex-col gap-5">
+          <h3 className="text-[1.8rem] font-[700] text-center">Forget password</h3>
 
-                {/* Forgot Password Form */}
-                <form onSubmit={handelSendEmail} className="w-full flex flex-col gap-5">
-                    <h3 className="text-[1.8rem] font-[700] text-center">
-                        Forget password
-                    </h3>
+          <input required onChange={(e) => setEmail(e.target.value)} type="email" name="email" value={email ? email : ''} placeholder="Email" className="inputField" />
 
-                    <input
-                        required
-                        onChange={(e) => setEmail(e.target.value)}
-                        type="email"
-                        name="email"
-                        value={email ? email : ''}
-                        placeholder="Email"
-                        className="inputField"
-                    />
-
-                    <button
-                        disabled={loading}
-                        type="submit"
-                        className="inputButton disabled:cursor-not-allowed"
-                    >
-                        {
-                            loading ? <ImSpinner9 size={24} className="animate-spin m-auto" /> : 'Forgot Password'
-                        }
-                    </button>
-                </form>
-            </div>
-            <div className="flex-1">
-                <Lottie animationData={forgotPassword} />
-            </div>
-        </section>
-    );
+          <button disabled={loading} type="submit" className="inputButton disabled:cursor-not-allowed">
+            {loading ? <ImSpinner9 size={24} className="animate-spin m-auto" /> : 'Forgot Password'}
+          </button>
+        </form>
+      </div>
+      <div className="flex-1">
+        <Lottie animationData={forgotPassword} />
+      </div>
+    </section>
+  );
 };
 
 export default ForgotPassword;
